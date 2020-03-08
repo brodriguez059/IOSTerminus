@@ -1,0 +1,3 @@
+We are supposed to create a file that will contain the information about the tutorial.
+I created this as a placeholder of the real tutorial file.
+ATT: Baldwin
