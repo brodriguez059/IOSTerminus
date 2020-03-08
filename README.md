@@ -1,15 +1,15 @@
-#Introduction to Operating System
+# Introduction to Operating System
 
-##Terminus game
+## Terminus game
 
 
-*Alex
+* Alex
 
-*Baldwin
+* Baldwin
 
-*Jon
+* Jon
 
-*Modestas
+* Modestas
 
-*Yoon
+* Yoon
 
