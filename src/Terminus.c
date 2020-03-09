@@ -7,14 +7,19 @@
 #include <string.h>
 #include <errno.h>
 
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #define error(a) {perror(a); exit(1);};
 #define MAXLINE 200
 #define MAXARGS 20
 
-#define cmdPath "./src/"
-#define cmdPathLength 6
-#define gamePath "./bin/home/"
-#define gamePathLength 11
+static const char* mainPath;
+static int mainPathLength;
+static const char* cmdPath;
+static int cmdPathLength;
+static const char* gamePath;
+static int gamePathLength;
 
 /////////// reading commands:
 
@@ -71,6 +76,8 @@ int execute(int argc, char *argv[])
 {
    int pid, wpid;
 
+   //printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
+
    pid = fork();
 
    if(pid < 0){
@@ -78,6 +85,9 @@ int execute(int argc, char *argv[])
       error("There was an error during the fork");
    }else if(pid == 0){
       //If fork returned 0, then we are in the child process.
+
+      //printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
+      //In order for this to work, we need pipes.
       char path[cmdPathLength+strlen(argv[0])];
       strcpy(path,cmdPath);
       strcat(path,argv[0]);
@@ -90,13 +100,40 @@ int execute(int argc, char *argv[])
    }else{
       //If fork returned a positive number, then we are in the parent process
       //and pid is the process id of the child.
-      wait(pid);
+      int* wstatus;
+      int option = 0;
+      //TODO add error handling
+      waitpid(pid, wstatus, option);
    }
 }
 
+static int initializePaths(){
+   mainPath = getcwd(NULL,0);
+   mainPathLength = strlen(mainPath);
+   //printf("%s + %d\n",mainPath,mainPathLength);
+
+   char cmdTemp[mainPathLength + 14];
+   cmdPathLength = mainPathLength + 14;
+   strcpy(cmdTemp, mainPath);
+   strcat(cmdTemp,"/bin/commands/");
+   cmdPath = cmdTemp;
+   //printf("%s + %d\n",cmdPath,cmdPathLength);
+
+   char gameTmp[mainPathLength+11];
+   gamePathLength = mainPathLength + 11;
+   strcpy(gameTmp, mainPath);
+   strcat(gameTmp,"/data/home/");
+   gamePath = gameTmp;
+   //printf("%s + %d\n",gamePath,gamePathLength);
+}
+
+
 int main ()
 {
-   chdir("./..");
+   initializePaths();
+
+   chdir(gamePath);
+
    char * Prompt = "myShell0> ";
    int eof= 0;
    int argc;

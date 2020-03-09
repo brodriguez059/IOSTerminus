@@ -1,1 +1,0 @@
-gcc -I../includes $1.c -o $1

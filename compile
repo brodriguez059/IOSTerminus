@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo Compilling $1
+if [ "$1" = "Terminus" ]; then
+    gcc -Iincludes src/$1.c -o $1
+    echo stored in current directory. It was the terminus shell.
+else
+    gcc -Iincludes src/$1.c -o bin/commands/$1
+    echo stored in bin/commands/
+fi
