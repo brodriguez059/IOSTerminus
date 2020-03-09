@@ -1,0 +1,9 @@
+Commands ready to use:
+
+ls-> List  information  about  the FILEs (the current directory by default).
+
+cd-> Change the working directory of the current shell by execution environment by executing the following steps in sequence.
+
+pwd-> Print the full filename of the current working directory.
+
+help-> Print a short definition of commands integrated.
