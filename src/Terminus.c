@@ -11,6 +11,11 @@
 #define MAXLINE 200
 #define MAXARGS 20
 
+#define cmdPath "./src/"
+#define cmdPathLength 6
+#define gamePath "./bin/home/"
+#define gamePathLength 11
+
 /////////// reading commands:
 
 int read_args(int* argcp, char* args[], int max, int* eofp)
@@ -32,7 +37,7 @@ int read_args(int* argcp, char* args[], int max, int* eofp)
    }
    switch (ret)
    {
-     case 1 : cmd[i+1]='\0';    // correct reading 
+     case 1 : cmd[i+1]='\0';    // correct reading
               break;
      case 0 : *eofp = 1;        // end of file
               return 0;
@@ -73,9 +78,12 @@ int execute(int argc, char *argv[])
       error("There was an error during the fork");
    }else if(pid == 0){
       //If fork returned 0, then we are in the child process.
+      char path[cmdPathLength+strlen(argv[0])];
+      strcpy(path,cmdPath);
+      strcat(path,argv[0]);
 
       //This works for default system commands. Doesn't work for user defined commands.
-      if(execvp(argv[0], argv) < 0){
+      if(execv(path, argv) < 0){
       //if(execvp(argv[0], argv) < 0){
          error("There was an error during the execution of the command");
       }
@@ -88,6 +96,7 @@ int execute(int argc, char *argv[])
 
 int main ()
 {
+   chdir("./..");
    char * Prompt = "myShell0> ";
    int eof= 0;
    int argc;
