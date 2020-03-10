@@ -14,11 +14,12 @@
 #define MAXLINE 200
 #define MAXARGS 20
 
-static const char* mainPath;
+static const char* mainPath = NULL;
 static int mainPathLength;
-static const char* cmdPath;
+static const char* cmdPath = NULL;
 static int cmdPathLength;
-static const char* gamePath;
+
+static const char* gamePath = NULL;
 static int gamePathLength;
 
 /////////// reading commands:
@@ -74,9 +75,9 @@ int read_args(int* argcp, char* args[], int max, int* eofp)
 
 int execute(int argc, char *argv[])
 {
-   int pid, wpid;
+   int pid;
 
-   //printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
+   printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
 
    pid = fork();
 
@@ -85,10 +86,11 @@ int execute(int argc, char *argv[])
       error("There was an error during the fork");
    }else if(pid == 0){
       //If fork returned 0, then we are in the child process.
+      chdir(gamePath);
 
-      //printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
-      //In order for this to work, we need pipes.
-      char path[cmdPathLength+strlen(argv[0])];
+      printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
+      //Main shell always in IOSTerminus/, when entering in child chdir() to current gameDirectory.
+      char path[cmdPathLength+((long unsigned int) strlen(argv[0]))];
       strcpy(path,cmdPath);
       strcat(path,argv[0]);
 
@@ -100,39 +102,40 @@ int execute(int argc, char *argv[])
    }else{
       //If fork returned a positive number, then we are in the parent process
       //and pid is the process id of the child.
-      int* wstatus;
+      int* wstatus = NULL;
       int option = 0;
       //TODO add error handling
       waitpid(pid, wstatus, option);
    }
+   chdir(mainPath);
+   return 0;
 }
 
-static int initializePaths(){
+int initializePaths(){
    mainPath = getcwd(NULL,0);
    mainPathLength = strlen(mainPath);
-   //printf("%s + %d\n",mainPath,mainPathLength);
+   printf("%s + %d\n",mainPath,mainPathLength);
 
    char cmdTemp[mainPathLength + 14];
    cmdPathLength = mainPathLength + 14;
    strcpy(cmdTemp, mainPath);
    strcat(cmdTemp,"/bin/commands/");
    cmdPath = cmdTemp;
-   //printf("%s + %d\n",cmdPath,cmdPathLength);
+   printf("%s + %d\n",cmdPath,cmdPathLength);
 
    char gameTmp[mainPathLength+11];
    gamePathLength = mainPathLength + 11;
    strcpy(gameTmp, mainPath);
    strcat(gameTmp,"/data/home/");
    gamePath = gameTmp;
-   //printf("%s + %d\n",gamePath,gamePathLength);
+   printf("%s + %d\n",gamePath,gamePathLength);
+   return 0;
 }
 
 
 int main ()
 {
    initializePaths();
-
-   chdir(gamePath);
 
    char * Prompt = "myShell0> ";
    int eof= 0;
