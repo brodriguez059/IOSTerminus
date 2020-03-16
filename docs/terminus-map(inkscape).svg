@@ -14,13 +14,41 @@
    viewBox="0 0 300 299.99999"
    version="1.1"
    id="svg8"
-   sodipodi:docname="IOS proyect map.svg"
+   sodipodi:docname="terminus-map(inkscape).svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   inkscape:export-filename="E:\Documentos\Escritorio\Terminnus map.png"
+   inkscape:export-filename="E:\Documentos\Escritorio\git\IOSTerminus\docs\terminus-map.png"
    inkscape:export-xdpi="99.991333"
    inkscape:export-ydpi="99.991333">
   <defs
      id="defs2">
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker11833"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path11383"
+         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(7.4, 1)" />
+    </marker>
+    <marker
+       inkscape:stockid="SemiCircleOut"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="SemiCircleOut"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path11503"
+         d="M -2.5,-0.80913858 C -2.5,1.9508614 -4.7400000,4.1908614 -7.5,4.1908614 L -7.5,-5.8091386 C -4.7400000,-5.8091386 -2.5,-3.5691386 -2.5,-0.80913858 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.6) translate(7.125493,0.763446)" />
+    </marker>
     <marker
        inkscape:stockid="Arrow2Lend"
        orient="auto"
@@ -362,7 +390,7 @@
       <path
          id="path4889"
          d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
          transform="matrix(0.8,0,0,0.8,5.92,0.8)"
          inkscape:connector-curvature="0" />
     </marker>
@@ -561,6 +589,21 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker9339-4-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path9337-8-7"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -569,9 +612,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="408.81171"
-     inkscape:cy="520.54709"
+     inkscape:zoom="0.7"
+     inkscape:cx="418.03952"
+     inkscape:cy="597.84243"
      inkscape:document-units="mm"
      inkscape:current-layer="layer4"
      showgrid="false"
@@ -642,7 +685,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1321,9 +1364,9 @@
        id="path5518"
        inkscape:connector-curvature="0" />
     <path
-       sodipodi:nodetypes="cccc"
+       sodipodi:nodetypes="ccccc"
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-4);marker-end:url(#marker5512-8)"
-       d="M 28.218407,90.659142 V 83.715333 H 131.84393 v 6.994906"
+       d="M 9.3028646,94.14492 H 4.7655064 l 0,-10.429587 H 131.84393 v 6.994906"
        id="path5498-7"
        inkscape:connector-curvature="0" />
     <path
@@ -1368,7 +1411,7 @@
        id="path13483"
        inkscape:connector-curvature="0" />
     <path
-       style="display:inline;fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.05833327, 1.05833327;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker11415)"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker11415);fill-opacity:1"
        d="M 62.318976,161.49437 H 47.436931"
        id="path11411"
        inkscape:connector-curvature="0"
@@ -1390,7 +1433,13 @@
        inkscape:connector-curvature="0"
        id="path9335-1-4-8"
        d="m 129.77218,245.63312 v 17.0325"
-       style="display:inline;fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.79499996, 0.79499996;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker9339-4-5-3)" />
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker9339-4-5-3);fill-opacity:1" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path9335-1-0"
+       d="m 149.65954,0.60092678 0,10.35732622"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker11833);marker-end:url(#marker9339-4-2)" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1492,7 +1541,7 @@
            height="124.28571"
            x="208.57143"
            y="373.85828" /></flowRegion><flowPara
-         id="flowPara4724"></flowPara></flowRoot>    <text
+         id="flowPara4724" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="169.09779"
@@ -1550,5 +1599,16 @@
          y="257.93997"
          style="font-size:4.58611107px;stroke-width:0.26458332"
          id="tspan14236-8">  - whoami</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:0.5;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="55.171257"
+       y="88.737282"
+       id="text1190-0-6"><tspan
+         sodipodi:role="line"
+         x="55.171257"
+         y="88.737282"
+         style="font-size:4.58611107px;line-height:1.25;text-align:center;text-anchor:middle;stroke-width:0.26458332"
+         id="tspan1711">concat spell required</tspan></text>
   </g>
 </svg>
