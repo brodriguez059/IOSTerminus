@@ -1,10 +1,17 @@
 #!/bin/bash
+FILE=$1
 
-echo Compilling $1
-if [ "$1" = "Terminus" ]; then
-    gcc -Iincludes -Wall src/$1.c -o $1
-    echo Stored in current directory. It was the terminus shell.
+if [ ! -f src/$FILE.c ]; then
+    echo "Cannot compile $FILE, file src/$FILE.c was not found"
+    exit 1
+    return
+fi
+
+echo Compilling $FILE...
+if [ "$FILE" = "terminus" ]; then
+    gcc -Iincludes -Wall src/$FILE.c -o Terminus
+    echo "Stored in ./Terminus (terminus shell)"
 else
-    gcc -Iincludes -Wall src/$1.c -o bin/commands/$1
-    echo Stored in bin/commands/
+    gcc -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE
+    echo Stored in bin/commands/$FILE
 fi
