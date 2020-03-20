@@ -8,10 +8,10 @@ if [ ! -f src/$FILE.c ]; then
 fi
 
 echo Compilling $FILE...
-if [ "$FILE" = "terminus" ]; then
-    gcc -Iincludes -Wall src/$FILE.c -o Terminus
-    echo "Stored in ./Terminus (terminus shell)"
+if [ "$FILE" = "main" ]; then
+    gcc -g -Iincludes -Wall src/$FILE.c -o main
+    echo "Stored in ./main (main executable)"
 else
-    gcc -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE
+    gcc -g -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE
     echo Stored in bin/commands/$FILE
 fi

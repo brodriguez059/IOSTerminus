@@ -10,17 +10,17 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include "defines.h"
+
 #define error(a) {perror(a); exit(1);};
 #define MAXLINE 200
 #define MAXARGS 20
 
-static const char* mainPath = NULL;
-static int mainPathLength;
-static const char* cmdPath = NULL;
-static int cmdPathLength;
+//Global variables
+char* mainDir;
+char cmdDir[1024];
+char gameDir[1024];
 
-static const char* gamePath = NULL;
-static int gamePathLength;
 
 /////////// reading commands:
 
@@ -77,8 +77,6 @@ int execute(int argc, char *argv[])
 {
    int pid;
 
-   printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
-
    pid = fork();
 
    if(pid < 0){
@@ -86,13 +84,12 @@ int execute(int argc, char *argv[])
       error("There was an error during the fork");
    }else if(pid == 0){
       //If fork returned 0, then we are in the child process.
-      chdir(gamePath);
-
-      printf("%s + %d| %s + %d\n",cmdPath,cmdPathLength,argv[0],strlen(argv[0]));
+      
       //Main shell always in IOSTerminus/, when entering in child chdir() to current gameDirectory.
-      char path[cmdPathLength+((long unsigned int) strlen(argv[0]))];
-      strcpy(path,cmdPath);
-      strcat(path,argv[0]);
+      char path[16 + strlen(argv[0])];
+      strcpy(path, "./bin/commands/");
+      strcat(path, argv[0]);
+      printf("Command to be executed: %s\n",path);
 
       //This works for default system commands. Doesn't work for user defined commands.
       if(execv(path, argv) < 0){
@@ -107,40 +104,21 @@ int execute(int argc, char *argv[])
       //TODO add error handling
       waitpid(pid, wstatus, option);
    }
-   chdir(mainPath);
+
    return 0;
 }
-
-int initializePaths(){
-   mainPath = getcwd(NULL,0);
-   mainPathLength = strlen(mainPath);
-   printf("%s + %d\n",mainPath,mainPathLength);
-
-   char cmdTemp[mainPathLength + 14];
-   cmdPathLength = mainPathLength + 14;
-   strcpy(cmdTemp, mainPath);
-   strcat(cmdTemp,"/bin/commands/");
-   cmdPath = cmdTemp;
-   printf("%s + %d\n",cmdPath,cmdPathLength);
-
-   char gameTmp[mainPathLength+11];
-   gamePathLength = mainPathLength + 11;
-   strcpy(gameTmp, mainPath);
-   strcat(gameTmp,"/data/home/");
-   gamePath = gameTmp;
-   printf("%s + %d\n",gamePath,gamePathLength);
-   return 0;
-}
-
 
 int main ()
 {
-   initializePaths();
+   printf("%s\n", mainDir);
+   printf("%s\n", gameDir);
+   printf("%s\n", cmdDir);
 
-   char * Prompt = "myShell0> ";
+   char * Prompt = "Terminus> ";
    int eof= 0;
    int argc;
    char *args[MAXARGS];
+   printf("%s\n", gameDir);
 
    while (1) {
       write(0,Prompt, strlen(Prompt));
@@ -150,4 +128,3 @@ int main ()
       if (eof) exit(0);
    }
 }
-
