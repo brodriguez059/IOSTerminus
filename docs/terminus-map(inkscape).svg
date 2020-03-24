@@ -610,13 +610,13 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="418.03952"
-     inkscape:cy="597.84243"
+     inkscape:cx="620.18238"
+     inkscape:cy="587.84243"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
@@ -627,7 +627,8 @@
      inkscape:guide-bbox="true"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0"
-     units="cm">
+     units="cm"
+     inkscape:pagecheckerboard="true">
     <inkscape:grid
        type="xygrid"
        id="grid995" />
@@ -685,23 +686,10 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     inkscape:groupmode="layer"
-     id="layer4"
-     inkscape:label="background"
-     style="display:none">
-    <rect
-       style="opacity:1;fill:#ffffff;fill-opacity:0.97989951;fill-rule:nonzero;stroke:#000000;stroke-width:0.20998095;stroke-miterlimit:4;stroke-dasharray:0.83992381, 0.83992381;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect14280"
-       width="299.66373"
-       height="300.13144"
-       x="0.23996916"
-       y="0.4303807" />
-  </g>
   <g
      inkscape:label="cards"
      inkscape:groupmode="layer"
