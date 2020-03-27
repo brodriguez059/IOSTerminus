@@ -9,7 +9,7 @@ fi
 
 echo Compilling $FILE...
 if [ "$FILE" = "main" ]; then
-    gcc -g -Iincludes -Wall src/$FILE.c -o main
+    gcc -g -Iincludes -Wall src/obj/cd.o -et_main src/$FILE.c -o main
     echo "Stored in ./main (main executable)"
 else
     gcc -g -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE

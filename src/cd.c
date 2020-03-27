@@ -4,6 +4,8 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 
+#include "cd.h"
+
 #define BUF_SIZE 1024
 #define PATH_LIMIT 512
 #define NO_SUCH_DIRECTORY "There is no room called "
@@ -14,7 +16,7 @@ void cd(char *path);
 
 int main(int argc, char *argv[]) //test run 
 {
-	char buf[BUF_SIZE] = { 0 };
+	//char buf[BUF_SIZE] = { 0 };
 	char currentPath[PATH_LIMIT];
 	getcwd(currentPath, PATH_LIMIT);
 	write(OUTPUT, "Current directory:", 18);

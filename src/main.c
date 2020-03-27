@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include "cd.h"
 #include "defines.h"
 
 #define error(a) {perror(a); exit(1);};
@@ -150,7 +151,7 @@ void initialize(){
 }
 
 
-int main ()
+int t_main ()
 {
    initialize();
 
@@ -162,7 +163,11 @@ int main ()
    while (1) {
       write(0,Prompt, strlen(Prompt));
       if (read_args(&argc, args, MAXARGS, &eof) && argc > 0) {
-         execute(argc, args);
+         if(strcmp(args[0], "cd") == 0){
+            cd(".");
+         }else{
+            execute(argc, args);
+         }
       }
       if (eof) exit(0);
    }
