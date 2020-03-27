@@ -44,15 +44,33 @@ int getCurrentWorkingDirectory(char *buf, size_t size) {
 int main(int argc, char *argv[]) {
     char cwd[PATH_MAX];
     int rCode = getCurrentWorkingDirectory(cwd, sizeof(cwd));
-    char out[strlen(cwd)];
-    strcpy(out, cwd);
-    strcat(out, "\n");
 
     if (rCode == 0) {
-        write(STDOUT, out, strlen(out));
+        const char *sep = "/";
+
+        char *dirname = strtok(cwd, sep);
+        char lastDirname[strlen(cwd)];
+
+        while(dirname) {
+            strcpy(lastDirname, dirname);
+            dirname = strtok(NULL, sep);
+        }
+
+        const char *phraseStart = "You're currently in \"";
+        const char *phraseEnd = "\".\n";
+
+        write(STDOUT, phraseStart, strlen(phraseStart));
+        write(STDOUT, lastDirname, strlen(lastDirname));
+        write(STDOUT, phraseEnd, strlen(phraseEnd));
+
     } else {
-        char *prefix = "[ERROR] ";
+        const char *prefix = "[ERROR] ";
         write(STDERR, prefix, strlen(prefix));
+
+        char out[strlen(cwd)];
+        strcpy(out, cwd);
+        strcat(out, "\n");
+
         write(STDERR, out, strlen(out));
     }
 }
