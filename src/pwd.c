@@ -73,4 +73,6 @@ int main(int argc, char *argv[]) {
 
         write(STDERR, out, strlen(out));
     }
+
+    return rCode;
 }

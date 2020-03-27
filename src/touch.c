@@ -12,7 +12,8 @@ int main(int argc, char* argv[]) {
     if (argc == 1) {
         char *buf = "Usage: touch <file name>\n";
         write(STDERR, buf, strlen(buf));
-        exit(1);
+        
+        return 1;
     }
 
     char *filename = argv[1];
@@ -90,10 +91,12 @@ int main(int argc, char* argv[]) {
         write(STDERR, prefix, strlen(prefix));
         write(STDERR, error, strlen(error));
         write(STDERR, "\n", strlen("\n"));
-        exit(2);
+
+        return 2;
     }
 
     char *buf = "File created\n";
-    write(STDERR, buf, strlen(buf));
+    write(STDOUT, buf, strlen(buf));
 
+    return 0;
 }
