@@ -14,9 +14,9 @@
    viewBox="0 0 210 210"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="process-diagram(inkscape).svg"
-   inkscape:export-filename="E:\Documentos\Escritorio\git\IOSTerminus\docs\process-diagram.png"
+   inkscape:export-filename="D:\Desktop\Repo\IOSTerminus\docs\process-diagram.png"
    inkscape:export-xdpi="119.98476"
    inkscape:export-ydpi="119.98476">
   <defs
@@ -247,11 +247,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="308.76209"
-     inkscape:cy="407.75657"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="674.58795"
+     inkscape:cy="324.39978"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g4641"
      showgrid="false"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0"
@@ -280,7 +280,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -369,20 +369,14 @@
            sodipodi:role="line">Terminus</tspan></text>
       <text
          id="text903"
-         y="184.127"
-         x="81.128052"
-         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         y="189.5392"
+         x="80.125793"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
          xml:space="preserve"><tspan
-           style="line-height:1;text-align:center;text-anchor:middle;stroke-width:0.26458332"
-           y="184.127"
-           x="81.128052"
-           id="tspan901"
-           sodipodi:role="line">cd</tspan><tspan
-           id="tspan905"
-           style="line-height:1;text-align:center;text-anchor:middle;stroke-width:0.26458332"
-           y="194.71033"
-           x="81.128052"
-           sodipodi:role="line">ls</tspan></text>
+           sodipodi:role="line"
+           id="tspan4792"
+           x="80.125793"
+           y="189.5392">cd</tspan></text>
       <g
          transform="translate(0.20045214)"
          id="g915">
@@ -697,7 +691,7 @@
                height="86.428574"
                x="550"
                y="598.52222" /></flowRegion><flowPara
-             id="flowPara6057"></flowPara></flowRoot>      </g>
+             id="flowPara6057" /></flowRoot>      </g>
     </g>
   </g>
 </svg>
