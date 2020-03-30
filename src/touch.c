@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
     if (argc == 1) {
         char *buf = "Usage: touch <file name>\n";
         write(STDERR, buf, strlen(buf));
-        
+
         return 1;
     }
 
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
                 error = "WOW! You triggered a Linux kernel bug, WP.";
                 break;
             case ENOENT:
-                error = "A symbolic link that was part of the path has died.";
+                error = "A directory component of the given path does not exist.";
                 break;
             case ENOMEM:
                 error = "Insufficient kernel memory was available.";
