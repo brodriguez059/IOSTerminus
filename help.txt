@@ -7,6 +7,3 @@ cd-> Change the working directory of the current shell by execution environment 
 pwd-> Print the full filename of the current working directory.
 
 help-> Print a short definition of commands integrated.
-
-
-Test
