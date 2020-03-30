@@ -1,5 +1,0 @@
-#!/bin/bash
-cd src/obj
-gcc -g -I../../includes -Wall -c ../*.c 
-echo "Stored in ./src/obj"
-

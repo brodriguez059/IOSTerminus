@@ -1,5 +1,7 @@
 #!/bin/bash
 
+initWd=$PWD
+
 for i in $@
 do
     FILE=${i}
@@ -8,8 +10,16 @@ do
     else
         echo Compilling $FILE...
         if [ "$FILE" = "main" ]; then
+            cd src/obj
+            echo "Objetifying, changed $PWD"
+
+            gcc -g -I../../includes -Wall -c ../*.c
+
+            echo "Objetified, coming back to $initWd"
+            cd ../..
+
             gcc -g -Iincludes -Wall src/obj/cd.o -et_main src/$FILE.c -o main
-            echo "Stored in ./main (main executable)"
+            echo "Stored in $PWD/main (main executable)"
         else
             gcc -g -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE
             echo Stored in bin/commands/$FILE
