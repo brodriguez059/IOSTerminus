@@ -1,0 +1,143 @@
+#!/bin/bash
+
+# Website used to generate the random names:
+# https://www.fantasynamegenerators.com
+
+basePath="$PWD/data/home"
+descriptionFile=".description"
+
+createGameDirectory() {
+    echo "Deleting $basePath and all its content..."
+    rm -R $basePath
+
+    echo "Recreating..."
+    mkdir -p $basePath
+
+    cd $basePath
+    # bed
+    echo "Seems comfy but I have rest enough for today... Maybe I should explore the surroundings" > "bed"
+    # diary
+    echo "`date --date="yesterday" +"%A, %dth %B %Y"`:" >> "diary"
+    echo "It's been some days since the last entry..." >> "diary"
+    echo "`date --date="7 days ago" +"%A, %dth %B %Y"`:" >> "diary"
+    echo "Today is my birthday! Grandma has done a cheese cake specially for me it tasted tremendously good. I have to ask her the recipe and learn to make it as she makes, best cake ever!!!" >> "diary"
+    echo "`date --date="8 days ago" +"%A, %dth %B %Y"`:" >> "diary"
+    echo "Tomorrow is my birthday, I'm so excited! Grandma told me that she has prepared a special present for the occasion. Worst thing is she has not given me any clue. I don't have any idea what could it be. Also it's been long since the last time I saw her, I think it's been over a month ago..." >> "diary"
+    echo "" >> "diary"
+    echo "* Closes the diary... *" >> "diary"
+    echo "It continues several pages, I don't feel to know more about myself now." >> "diary"
+
+    mkdir "$basePath/valley"
+    cd "$basePath/valley"
+    echo "TODO" > $descriptionFile
+    # ancient sign
+    echo "There are instructions to discover new places written in it." > "ancient sign"
+    # flower
+    echo "A beautiful tulip, there are bees in it. I am not gonna risk in taking it as they might sting me." > "flower"
+
+    mkdir "$basePath/forest"
+    cd "$basePath/forest"
+    echo "TODO" > $descriptionFile
+    # sign
+    echo "At the left a bog at the right the town and in the middle lake were sometimes a liquid that's not water is found." >> "sign"
+    echo "If the magic book you must find, first the boat you'll have to repair." >> "sign"
+
+    mkdir "$basePath/forest/bog"
+    cd "$basePath/forest/bog"
+    echo "TODO" > $descriptionFile
+
+    mkdir "$basePath/forest/small lake"
+    cd "$basePath/forest/small lake"
+    echo "TODO" > $descriptionFile
+    # broken boat
+    echo "It's broken. Only if I could connect it with something else..." > "Broken boat"
+
+    mkdir "$basePath/forest/small lake/small island"
+    cd "$basePath/forest/small lake/small island"
+    echo "TODO" > $descriptionFile
+    # spell book
+    echo "It has some writtings in it, maybe they could be learnt in a Study Room..." > "spell book"
+
+    mkdir "$basePath/forest/town"
+    cd "$basePath/forest/town"
+    echo "TODO" > $descriptionFile
+    # sign
+    echo "Welcome to Blisey: where everyone knows magic but no one will admit it." >> "sign"
+    echo "" >> "sign"
+    echo "Students please go directly to the Magic Tower after unpacking all your belongings. Lessons start everyday at 7 am in the 'Lesson' room, you have a 24/7 room available for any needs you can find. Feel free to join it with any other students in the 'Study room'." >> "sign"
+    # Townspeople, each file is a different person
+    echo "Who are you?" > "Hronar"
+    echo "I'm late for todays classes" > "Hidi"
+    echo "Welcome new traveller! Feel free to join one of the classes on the 'Magic tower' whenever you fill ready to learn new powers" > "Siraye Arazana"
+    echo "Welcome to our humble town traveller" > "Zemra"
+
+    mkdir "$basePath/forest/town/mountain"
+    cd "$basePath/forest/town/mountain"
+    echo "TODO" > $descriptionFile
+    # boulder
+    echo "Seems granite, but I'm not a gemmologist so it could be any other type..." > "boulder"
+
+    mkdir "$basePath/forest/town/mountain/cliff"
+    cd "$basePath/forest/town/mountain/cliff"
+    touch ".gitkeep"
+
+    mkdir "$basePath/forest/town/mountain/cave entrance"
+    cd "$basePath/forest/town/mountain/cave entrance"
+    echo "TODO" >> $descriptionFile
+
+    mkdir "$basePath/forest/town/mountain/cave entrance/cave (west)"
+    cd "$basePath/forest/town/mountain/cave entrance/cave (west)"
+    echo "TODO" > $descriptionFile
+    # foul goblin
+    echo "It really complies the definition of foul..." > "foul goblin"
+
+    mkdir "$basePath/forest/town/mountain/cave entrance/cave (east)"
+    cd "$basePath/forest/town/mountain/cave entrance/cave (east)"
+    echo "TODO" > $descriptionFile
+    # big ork
+    echo "I cannot defeat him by me alone, I'll have to trick him into something in order to defeat him..." > "big ork"
+
+    mkdir "$basePath/forest/town/mountain/cave entrance/cave (east)/big hole"
+    cd "$basePath/forest/town/mountain/cave entrance/cave (east)/big hole"
+    touch ".gitkeep"
+
+    mkdir "$basePath/forest/town/magic tower"
+    echo "TODO" > $descriptionFile
+
+    mkdir "$basePath/forest/town/magic tower/lesson"
+    cd "$basePath/forest/town/magic tower/lesson"
+    echo "TODO" > $descriptionFile
+
+    mkdir "$basePath/forest/town/magic tower/study room"
+    cd "$basePath/forest/town/magic tower/study room"
+    echo "TODO" > $descriptionFile
+
+    echo "Done!"
+}
+
+if [ $# -ne 1 ]
+then
+    read -p "This will delete the directory $basePath and all its content, do you wish to continue? [y/n] " yn
+    echo
+    echo "TIP: you can also pass the confirmation as a parameter to bypass the request, example of confirmation:"
+    echo "   $ ./$0 y"
+    echo
+else
+    yn=$1
+fi
+
+while true
+do
+    case $yn in
+        [Yy]* )
+        createGameDirectory
+        exit
+        ;;
+        [Nn]* )
+        echo "Canceled, exiting..."
+        exit
+        ;;
+        * )
+        read -p "Please answer with y (yes) or n (no). [y/n] " yn
+    esac
+done
