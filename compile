@@ -13,12 +13,12 @@ do
             cd src/obj
             echo "Objetifying, changed $PWD"
 
-            gcc -g -I../../includes -Wall -c ../*.c
+            gcc -g -I../../includes -Wall -Wextra -c ../*.c
 
             echo "Objetified, coming back to $initWd"
             cd ../..
 
-            gcc -g -Iincludes -Wall src/obj/cd.o -et_main src/$FILE.c -o main
+            gcc -g -Iincludes -Wall -Wextra src/obj/cd.o -et_main src/$FILE.c -o main
             echo "Stored in $PWD/main (main executable)"
         else
             gcc -g -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE

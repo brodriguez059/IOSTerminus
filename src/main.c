@@ -23,6 +23,40 @@
 //Global variables
 DirInfo gameDirs[3];
 
+//Signatures:
+int read_args(int* argcp, char* args[], int max, int* eofp);
+
+int execute(int argc, char *argv[]);
+
+int initialize();
+
+//Implementation
+
+/**
+ *Instead of using the typical main, we have had to rename it to "t_main". The reason for this is that it implements the code of cd.c and
+ *that code already has a "main". Therefore, instead of having to redesign everything, we just decided to change the entry point of the main
+ *executable (which can be done during compilation). 
+ */
+int t_main (){
+   initialize();
+
+   char * Prompt = "Terminus> ";
+   int eof= 0;
+   int argc;
+   char *args[MAXARGS];
+
+   while (1) {
+      write(0,Prompt, strlen(Prompt));
+      if (read_args(&argc, args, MAXARGS, &eof) && argc > 0) {
+         if(strcmp(args[0], "cd") == 0){
+            cd("."); //This is temporal. Later we will write here cd(argv[1]) to change directory.
+         }else{
+            execute(argc, args);
+         }
+      }
+      if (eof) exit(0);
+   }
+}
 
 /////////// reading commands:
 
@@ -124,8 +158,11 @@ int execute(int argc, char *argv[])
    return 0;
 }
 
-void initialize(){
+int initialize(){
    
+   //We will use "execl" to execute the bash command. We will first fork though.
+   //execl("/bin/sh", "sh", "-c", command, (char *) NULL);
+
    char* root = getcwd(NULL,0);
    int rootLength = strlen(root);
 
@@ -148,27 +185,5 @@ void initialize(){
       printf("%s : %d \n", gameDirs[i].name, gameDirs[i].length);
    }
    */
-}
-
-
-int t_main ()
-{
-   initialize();
-
-   char * Prompt = "Terminus> ";
-   int eof= 0;
-   int argc;
-   char *args[MAXARGS];
-
-   while (1) {
-      write(0,Prompt, strlen(Prompt));
-      if (read_args(&argc, args, MAXARGS, &eof) && argc > 0) {
-         if(strcmp(args[0], "cd") == 0){
-            cd(".");
-         }else{
-            execute(argc, args);
-         }
-      }
-      if (eof) exit(0);
-   }
+  return 0;
 }
