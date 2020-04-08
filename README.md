@@ -14,5 +14,17 @@
 * Yoon
 
 ## Project related links:
-* https://www.overleaf.com/project/5e70bf19838e720001463c3c
-* https://trello.com/b/nI1zOCLJ/ios-terminus
+* [Project report](https://www.overleaf.com/read/wccmjhhsvgcj)
+* [Project roadmap](https://trello.com/b/nI1zOCLJ/ios-terminus)
+
+### How to compile the files
+
+In order to compile the files, you can make use of the `compile` executable. This file expects the name of the files to be compiled (found under the `src` folder) or the keyword `main` (to compile the main file).
+
+```bash
+# compile only the main file
+$ compile main
+
+# compile cd ls and rm files
+$ compile cd ls rm
+```
