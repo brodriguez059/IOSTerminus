@@ -1,0 +1,12 @@
+Welcome to our Terminus implementation.
+
+If you are a new player:
+
+You can move using the command "cd LOCATION".
+
+You can backtrack using "cd ..".
+
+You can view the places where you can move using "ls".
+
+You can view where you are using "pwd".
+ 

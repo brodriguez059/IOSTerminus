@@ -14,6 +14,7 @@ createGameDirectory() {
     mkdir -p $basePath
 
     cd $basePath
+    echo "TODO" > $descriptionFile
     # bed
     echo "Seems comfy but I have rest enough for today... Maybe I should explore the surroundings" > "bed"
     # diary
