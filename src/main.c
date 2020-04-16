@@ -156,15 +156,40 @@ int initialize(){
    strcpy(welcomePath, gameDirs[DATA].name);
    strcat(welcomePath,"welcome.txt");
 
+   pid_t pid;
+
+   pid = fork();
+
+   if(pid < 0){
+      //If fork returned a negative number, there was an error.
+      error("There was an error during the fork");
+
+   }else if(pid == 0){
+      //If fork returned 0, then we are in the child process.
+      char command[512];
+      strcpy(command,gameDirs[SCRT].name);
+      strcat(command, "createGameDirectory y");
+
+      if(execl("/bin/sh", "sh", "-c", command, (char *) NULL)){
+         error("There was an error during the execution of the command");
+      }
+
+   }else{
+      //If fork returned a positive number, then we are in the parent process
+      //and pid is the process id of the child.
+
+      wait(NULL);
+
+   }
+
    if(chdir(gameDirs[GAME].name) < 0){
       error("There was an error initializing the game");
    };
-   
+   /*
    for(int i = 0; i < DIRNUM; i++){
       printf("%s : %d \n", gameDirs[i].name, gameDirs[i].length);
    }
-   
-  
+   */
   return 0;
 }
 
@@ -200,7 +225,7 @@ int execute(char *argv[])
 
       //close(p[ReadEnd]);
       if(execv(path, argv) < 0){
-         error("There was an error during the execution of the command");
+         error("There was an error during the execution of the generation command");
       }
 
    }else{
@@ -223,6 +248,15 @@ int execute(char *argv[])
 
 int finalize(){
    write(STDOUT,"\nExiting...\n", 12);
+
+   if(chdir(gameDirs[ROOT].name) < 0){
+      error("There was an error exiting the game");
+   };
+
+   if(execl("/bin/sh", "sh", "-c", "rm -r ./data/home", (char *) NULL)){
+      error("There was an error during the execution of the deletion command");
+   }
+
    return 0;
 }
 
