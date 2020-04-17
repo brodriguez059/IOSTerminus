@@ -4,7 +4,7 @@
 # https://www.fantasynamegenerators.com
 
 basePath="$PWD/data/home"
-descriptionFile=".cd"
+descriptionFile=".description"
 
 createGameDirectory() {
     echo "Deleting $basePath and all its content..."
