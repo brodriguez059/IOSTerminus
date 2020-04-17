@@ -45,22 +45,22 @@ void cd(char *path) { // function to be used by parent process
 		if (errno == ENOENT || errno == ENOTDIR) { // if no such file or is not a directory
 			strcpy(buf, NO_SUCH_DIRECTORY);
 			strcat(buf, path);
-			write(OUTPUT, buf, strlen(buf));
-			write(OUTPUT, "\n", 1);
+			write(ERR_OUTPUT, buf, strlen(buf));
+			write(ERR_OUTPUT, "\n", 1);
 		} else {
 			strcpy(buf, strerror(errno));
 			write(ERR_OUTPUT, buf, strlen(buf));
-			write(OUTPUT, "\n", 1);
+			write(ERR_OUTPUT, "\n", 1);
 		}
 	}
 	munmap(currentPath, PATH_LIMIT); // system call to release memory allocated by getcwd
 	memset(buf, '\0', BUF_SIZE); // clean the buffer for file reading and writing, unsure if allowed
-	int fd = open(".cd", O_RDONLY);
+	int fd = open(".description", O_RDONLY);
 	if (fd == -1) {
-		write(OUTPUT, "Error opening File .cd in the folder: ", 38);
+		write(ERR_OUTPUT, "Error opening File .cd in the folder: ", 38);
 		strcpy(buf, strerror(errno));
 		write(ERR_OUTPUT, buf, strlen(buf));
-		write(OUTPUT, "\n", 1);
+		write(ERR_OUTPUT, "\n", 1);
 		return;
 	}
 	for(;;) {
@@ -70,7 +70,7 @@ void cd(char *path) { // function to be used by parent process
 		} else if (res == -1) {
 			strcpy(buf, strerror(errno));
 			write(ERR_OUTPUT, buf, strlen(buf));
-			write(OUTPUT, "\n", 1);
+			write(ERR_OUTPUT, "\n", 1);
 		} else {
 			break;
 		}
