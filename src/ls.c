@@ -69,24 +69,26 @@ int main(int argc, char *argv[])
         }
     }
     
-    strcpy(buf, " Locations:\n");
+    strcpy(buf, "Locations:\n");
     write(1, buf, strlen(buf));
     for (int i = 0; i < dir_quant - 2; i++) {
         strcpy(buf, directories[i]->d_name);
-		if (buf[0] != '.') {
-			write(1, buf, strlen(buf));
-        	write(1, "\n", 1);
-		}
+	if (buf[0] != '.') {
+		write(1, "  ", 2);
+		write(1, buf, strlen(buf));
+		write(1, "\n", 1);
+	}
     }
-    strcpy(buf, " Items:\n");
+    strcpy(buf, "Items:\n");
     write(1, buf, strlen(buf));
     for (int i = 0; i < MAX_FILES; i++) {
         if (files[i] != NULL) {
         	strcpy(buf, files[i]->d_name);
     		if (buf[0] != '.') {
-				write(1, buf, strlen(buf));
+			write(1, "  ", 2);
+			write(1, buf, strlen(buf));
         		write(1, "\n", 1);
-			}
+		}
         } else {
             break;
         }
