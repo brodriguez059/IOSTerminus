@@ -1,12 +1,15 @@
-Welcome to our Terminus implementation.
+A strange voice wakes you up... 
 
-If you are a new player:
+"Welcome! If you are new to the game, try these tips:
 
-You can move using the command "cd LOCATION".
+Look at your surroundings with the command "ls". 
+Move to a new location with the command "cd LOCATION" 
+You can backtrack with the command "cd ..". 
+Interact with things in the world with the command "cat ITEM"
+ 
+If you forget where you are, type "pwd" 
 
-You can backtrack using "cd ..".
+Go ahead, explore. We hope you enjoy what you find. Do ls as your first command."
 
-You can view the places where you can move using "ls".
-
-You can view where you are using "pwd".
+You don't understand what the voice means, so you quickly ignore it. Maybe it was talking to someone else?
  

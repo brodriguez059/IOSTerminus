@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#include <sys/stat.h>
 
 #include "defines.h"
 
@@ -30,7 +31,7 @@ int main(int argc, char const *argv[])
     strcat(dpath, "/");
     strcat(dpath, argv[1]);
 
-    if((destF = open(dpath, O_RDWR | O_CREAT)) < 0){
+    if((destF = open(dpath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)) < 0){
         close(srcF);
         error("There was an error creating the new file to copy the information in");
     }
