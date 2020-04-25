@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 
 #include "cd.h"
-#include "defines.h"
+#include "terminuslib.h"
 
 ///////////////////////////////////////////////////// Definitions:
 
@@ -15,12 +15,8 @@
 #define MAXLINE 200
 #define MAXARGS 20
 
-#define ReadEnd 0
-#define WriteEnd 1
-
 /////////////////////////////////////// Global Variables
-dir_t gameDirs[NUMDIR];
-char welcomePath[512];
+int game_state;
 
 /////////////////////////////////////// Function signatures
 /**
@@ -32,6 +28,7 @@ int sayWelcome();
 /**
  * Before starting the shell, this function is called to generate the game
  * directory and store the paths of the directories that the game uses.
+ * We also need to put the player in the game directory.
  */
 int initialize();
 
@@ -40,7 +37,7 @@ int initialize();
  * user will be executed. If the command is "cd", it will not create another
  * process but will still execute the command.
  */
-int execute(char *argv[]);
+int execute(int argc, char *argv[]);
 
 /**
  * Once the player has decided to finish their session, this function will be
@@ -49,12 +46,16 @@ int execute(char *argv[]);
 int finalize();
 
 /**
+ * Checks whether the command written by the player depends on the current state
+ * of the game or not.
+ */
+int is_state_dependend(char* command);
+
+/**
  * This function separates the arguments written in a line and puts them inside
  * a vector of char*
  */
 int read_args(int* argcp, char* args[], int max, int* eofp);
-
-
 
 ///////////////////////////////////////////////////// Implementation
 
@@ -73,16 +74,39 @@ int t_main (){
    int argc;
    char *args[MAXARGS];
 
-   initialize();
    sayWelcome();
-
+   initialize();
+   
    while (1) {
       write(0,Prompt, strlen(Prompt));
       if (read_args(&argc, args, MAXARGS, &eof) && argc > 0) {
-         if(strcmp(args[0], "cd") == 0){
-            cd(args[1]); //We change directory.
+         //We first check for the state-dependend commands.
+         if(is_state_dependend(args[0])){
+            //We need to specify the path to the event directory and the current state.
+            char* argv[argc+2];
+            int i;
+            for(i=0; i<argc; i++){
+               strcpy(argv[i],args[i]);
+            }
+            strcpy(argv[argc-2], gameDirs[EVTS].name);
+            char string_state = (char)(game_state+'0');
+            strcpy(argv[argc-1], &string_state);
+            argc += 2;
+            execute(argc, argv);
          }else{
-            execute(args);
+            //We need to check if man is the command to be executed to prepare the doc directory.
+            if(strcmp(args[0],"man") == 0){
+               char* argv[argc+1];
+               int i;
+               for(i=0; i<argc; i++){
+                  strcpy(argv[i],args[i]);
+               }
+               strcpy(argv[argc-1], gameDirs[DOCS].name);
+               execute(argc, args);
+            }else{
+               //We don't need to keep checking, the command doesn't depend on anything initialized in the main.
+               execute(argc, args);
+            }
          }
       }
       if (eof){
@@ -95,11 +119,17 @@ int t_main (){
 
 /////////////////////////////////////// Auxiliary functions
 
+
+
 int sayWelcome(){
    int fd;
    char c;
 
-	fd = open(welcomePath, O_RDONLY);
+   //We do this because sayWelcome() executes before initiliaze()
+   //and this last function is the one which puts the player in
+   //the game directory. When this gets executed, we are still
+   //in the project root directory.
+	fd = open("./data/welcome.txt", O_RDONLY);
 	
 	if(fd < 0) {
 		error("There was an error opening the file")
@@ -116,131 +146,36 @@ int sayWelcome(){
 }
 
 int initialize(){
-   
-   //We will use "execl" to execute the bash command. We will first fork though.
-   //execl("/bin/sh", "sh", "-c", command, (char *) NULL);
 
-   char* root = getcwd(NULL,0);
-   int rootLength = strlen(root);
+   init_dirs();
 
-   //Initialize root directory
-   strcpy(gameDirs[ROOT].name, root);
-   gameDirs[ROOT].length = rootLength;
-   
-   //Initialize commands directory
-   strcpy(gameDirs[CMDS].name, root);
-   strcat(gameDirs[CMDS].name, "/bin/commands/");
-   gameDirs[CMDS].length = rootLength + strlen("/bin/commands/");
-
-   //Initialize scripts directory
-   strcpy(gameDirs[SCRT].name, root);
-   strcat(gameDirs[SCRT].name, "/bin/scripts/");
-   gameDirs[SCRT].length = rootLength + strlen("/bin/scripts/");
-
-   //Initialize data directory
-   strcpy(gameDirs[DATA].name, root);
-   strcat(gameDirs[DATA].name, "/data/");
-   gameDirs[DATA].length = rootLength + strlen("/data/");
-
-   //Initialize game directory
-   strcpy(gameDirs[GAME].name, root);
-   strcat(gameDirs[GAME].name, "/data/Home/");
-   gameDirs[GAME].length = rootLength + strlen("/data/Home/");
-
-   //Initialize docs directory
-   strcpy(gameDirs[DOCS].name, root);
-   strcat(gameDirs[DOCS].name, "/data/docs/");
-   gameDirs[DOCS].length = rootLength + strlen("/data/docs/");
-
-   //Initilize the welcome path
-   strcpy(welcomePath, gameDirs[DATA].name);
-   strcat(welcomePath,"welcome.txt");
-
-   pid_t pid;
-
-   pid = fork();
-
-   if(pid < 0){
-      //If fork returned a negative number, there was an error.
-      error("There was an error during the fork");
-
-   }else if(pid == 0){
-      //If fork returned 0, then we are in the child process.
-      char command[512];
-      strcpy(command,gameDirs[SCRT].name);
-      strcat(command, "createGameDirectory y");
-
-      if(execl("/bin/sh", "sh", "-c", command, (char *) NULL)){
-         error("There was an error during the execution of the command");
-      }
-
-   }else{
-      //If fork returned a positive number, then we are in the parent process
-      //and pid is the process id of the child.
-
-      wait(NULL);
-
-   }
+   execute_script(gameDirs[SCRT].name, "createGameDirectory y");
 
    if(chdir(gameDirs[GAME].name) < 0){
       error("There was an error initializing the game");
    };
-   /*
-   for(int i = 0; i < DIRNUM; i++){
-      printf("%s : %d \n", gameDirs[i].name, gameDirs[i].length);
-   }
-   */
+  
+  //For primite debugging.
+  /*
+  int i;
+  for(i = 0; i<NUMDIR; i++ ){
+     printf("Directory: %s | %d \n", gameDirs[i].name, gameDirs[i].length);
+
+  }
+  */
+  //
+
   return 0;
 }
 
-int execute(char *argv[])
+int execute(int argc, char *argv[])
 {
-   //int p[2];
-   //if(pipe(p) < 0) error("There was a problem creating the pipe");
-
-   pid_t pid;
-
-   pid = fork();
-
-   if(pid < 0){
-      //If fork returned a negative number, there was an error.
-      error("There was an error during the fork");
-
-   }else if(pid == 0){
-      //If fork returned 0, then we are in the child process.
-      //close(p[WriteEnd]);
-
-      //dir_t gameDirs[DIRNUM];
-
-      //for(int k = 0; k < DIRNUM; k++){
-      //   if(read(p[ReadEnd], &(gameDirs[k]), sizeof(dir_t)) < 0) error("There was a problem reading from the pipe");
-      //}
-
-      int plen = gameDirs[CMDS].length + strlen(argv[0]);
-      char path[plen];
-
-      strcpy(path, gameDirs[CMDS].name);
-      strcat(path, argv[0]);
-      //printf("Command to be executed: %s\n", path);
-
-      //close(p[ReadEnd]);
-      if(execv(path, argv) < 0){
-         error("There was an error during the execution of the generation command");
-      }
-
+   if(strcmp(argv[0], "cd") == 0){
+      //We change directory. This function is a built-in of the 
+      //shell, so we don't call execute_cmd() to fork and exec.
+      cd(argv[1]); 
    }else{
-      //If fork returned a positive number, then we are in the parent process
-      //and pid is the process id of the child.
-
-      //close(p[ReadEnd]);
-
-      //for(int j = 0; j < 3; j++){
-      //   if(write(p[WriteEnd], &(gameDirs[j]), sizeof(dir_t)) < 0) error("There was a problem writing to the pipe");
-      //}
-      
-      //close(p[WriteEnd]);
-      wait(NULL);
-
+      execute_cmd(argc, argv);
    }
 
    return 0;
@@ -253,11 +188,23 @@ int finalize(){
       error("There was an error exiting the game");
    };
 
-   if(execl("/bin/sh", "sh", "-c", "rm -r ./Home", (char *) NULL)){
-      error("There was an error during the execution of the deletion command");
-   }
+   char deleteCommand[512];
+   strcpy(deleteCommand, "deleteGameDirectory ");
+   strcat(deleteCommand, gameDirs[GAME].name);
+   execute_script(gameDirs[SCRT].name, deleteCommand);
 
    return 0;
+}
+
+int is_state_dependend(char* command){
+   char* cmds[4] = {"cat","concat","mv","rm"};
+   	int i;
+   	for(i=0;i<4;i++){
+    	   if(strcmp(command, cmds[i]) == 0){
+           	return 1;
+         }
+      }
+	return 0;
 }
 
 int read_args(int* argcp, char* args[], int max, int* eofp)

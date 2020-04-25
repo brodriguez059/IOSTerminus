@@ -1,29 +1,10 @@
 #!/bin/bash
-
-initWd=$PWD
-
 for i in $@
 do
-    FILE=${i}
-    if [ ! -f src/$FILE.c ]; then
-        echo "[Error] Cannot compile $FILE, file src/$FILE.c was not found"
+    if [ "$i" = "main" || "$i" = "terminuslib" ]
+    then
+        ./func_compile -cmd "$i"
     else
-        echo Compilling $FILE...
-        if [ "$FILE" = "main" ]; then
-            cd src/obj
-            echo "Objetifying, changed $PWD"
-
-            gcc -g -I../../includes -Wall -Wextra -c ../*.c
-
-            echo "Objetified, coming back to $initWd"
-            cd ../..
-
-            gcc -g -Iincludes -Wall -Wextra src/obj/cd.o -et_main src/$FILE.c -o main
-            echo "Stored in $PWD/main (main executable)"
-        else
-            gcc -g -Iincludes -Wall -Wextra src/$FILE.c -o bin/commands/$FILE
-            echo Stored in bin/commands/$FILE
-        fi
+        ./func_compile "$i"
     fi
-
 done

@@ -5,21 +5,34 @@
 #include <unistd.h>
 #include <errno.h>
 
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 /////////////////////////////////////// Macros
 
+#define NUMDIR 7
+
 #define ROOT 0 //The root directory
-#define CMDS 1 //The directory where the commands executables lie.
-#define SCRT 2 //The directory where the scripts lie.
-#define DATA 3 //The directory where the game data lies.
-#define GAME 4 //The directory where the game directory lies.
-#define DOCS 5 //The directory where the documentation lies.
-
-
-#define DIRNUM 6
+#define CMDS 1 //The directory where the commands executables are.
+#define EVTS 2 //The directory where the events executables are.
+#define SCRT 3 //The directory where the scripts are.
+#define DATA 4 //The directory where the game data is.
+#define GAME 5 //The directory where the game directory is.
+#define DOCS 6 //The directory where the documentation is.
 
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
+
+#define PIPE_READ_END 0
+#define PIPE_WRITE_END 1
+
+#define E_TUTORIAL 0
+#define E_GAME 1
+#define E_MV 2
+#define E_RM 3
+#define E_END 4
 
 #define error(a) {perror(a); exit(1);};
 
@@ -30,6 +43,25 @@ typedef struct {
   int length;
 } dir_t;
 
-/////////////////////////////////////// Global variables
-
-extern dir_t gameDirs[DIRNUM];
+/*
+switch(game_state){
+               case E_TUTORIAL:
+                  if( (strcmp(args[0], "mv") == 0) || (strcmp(args[0],"rm") == 0) ){
+                     int n;
+                     n = write(STDOUT, "Hmmm...?, what are you trying to do?, maybe you should learn", 61);
+                     if(n<0) error("There was an error writing on state E_TUTORIAL");
+                     n = write(STDOUT, " how to use that spell first.\n", 30);
+                     if(n<0) error("There was an error writing on state E_TUTORIAL");
+                  }
+                  break;
+               case E_GAME:
+                  break;
+               case E_MV:
+                  break;
+               case E_RM:
+                  break;
+               case E_END:
+               default:
+                  break;
+               }
+*/

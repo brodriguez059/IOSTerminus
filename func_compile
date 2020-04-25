@@ -1,0 +1,118 @@
+#!/bin/bash
+#This flag can be either  -ev, -cmd or neither.
+FLAG=$1
+FILE=$2
+
+if [ "$FLAG" = "-cmd" ]
+then
+    #Variables
+    SRCDIR="src/commands"
+    OBJDIR="obj/commands"
+    DSTDIR="bin/commands" #Destination directory
+    #Instructions
+    echo "Compiling terminus shell command $FILE"
+    if [ "$FILE" = "rm" ] || [ "$FILE" = "cat" ] || [ "$FILE" = "mv" ] || [ "$FILE" = "concat" ]
+    then
+        COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes ./obj/terminuslib.o"
+        COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
+
+        echo "Compiling $FILE"
+        echo "Compilation options: $COMPILATIONFLAGS"
+        echo "Compilation arguments: $COMPILATIONARGS"
+
+        gcc $COMPILATIONFLAGS -c $SRCDIR/$FILE.c
+        mv $FILE.o $OBJDIR
+
+        gcc $COMPILATIONFLAGS $COMPILATIONARGS
+    elif [ "$FILE" = "cd" ]
+    then
+        COMPILATIONFLAGS="-g -Wall -Wextra -I../../includes"
+        COMPILATIONARGS="-c ../../$SRCDIR/$FILE.c"
+
+        echo "Objectiying $FILE"
+        echo "Compilation options: $COMPILATIONFLAGS"
+        echo "Compilation arguments: $COMPILATIONARGS"
+
+        cd $OBJDIR
+        gcc $COMPILATIONFLAGS $COMPILATIONARGS
+        cd ../..
+    elif [ "$FILE" = "man" ]
+    then
+        COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes"
+        COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
+
+        echo "Compiling $FILE"
+        echo "Compilation options: $COMPILATIONFLAGS"
+        echo "Compilation arguments: $COMPILATIONARGS"
+
+        gcc $COMPILATIONFLAGS -c $SRCDIR/$FILE.c
+        mv $FILE.o $OBJDIR
+
+        gcc $COMPILATIONFLAGS $COMPILATIONARGS
+    else
+        COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes"
+        COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
+
+        echo "Compiling $FILE"
+        echo "Compilation options: $COMPILATIONFLAGS"
+        echo "Compilation arguments: $COMPILATIONARGS"
+
+        gcc $COMPILATIONFLAGS -c $SRCDIR/$FILE.c
+        mv $FILE.o $OBJDIR
+
+        gcc $COMPILATIONFLAGS $COMPILATIONARGS
+    fi
+elif [ "$FLAG" = "-ev" ]
+then
+    #Variables
+    SRCDIR="src/events"
+    OBJDIR="obj/events"
+    DSTDIR="bin/events" #Destination directory
+    #Instructions
+    COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes obj/init_dirs.o"
+    COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
+
+    echo "Compiling $FILE"
+    echo "Compilation options: $COMPILATIONFLAGS"
+    echo "Compilation arguments: $COMPILATIONARGS"
+
+    gcc $COMPILATIONFLAGS $COMPILATIONARGS
+else
+    #Variables
+    FILE=$1
+    SRCDIR="src"
+    OBJDIR="obj"
+    DSTDIR="." #Destination directory
+    #Instructions
+    if [ "$FILE" = "terminuslib" ]
+    then
+        COMPILATIONFLAGS="-g -Wall -Wextra -I../includes"
+        COMPILATIONARGS="-c ../$SRCDIR/$FILE.c"
+
+        echo "Objectifying $FILE"
+        echo "Compilation options: $COMPILATIONFLAGS"
+        echo "Compilation arguments: $COMPILATIONARGS"
+
+        cd $OBJDIR
+        gcc $COMPILATIONFLAGS $COMPILATIONARGS
+        cd ..
+    elif [ "$FILE" = "main" ]
+    then
+        #COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes -nostartfiles $OBJDIR/commands/cat.o $OBJDIR/commands/cd.o $OBJDIR/commands/man.o $OBJDIR/commands/mv.o $OBJDIR/commands/rm.o obj/init_dirs.o -et_main"
+        COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes -nostartfiles $OBJDIR/commands/cd.o obj/terminuslib.o -et_main"
+        COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
+
+        echo "Compiling the $FILE shell executable"
+        echo "Compilation options: $COMPILATIONFLAGS"
+        echo "Compilation arguments: $COMPILATIONARGS"
+
+        gcc $COMPILATIONFLAGS -c src/main.c
+        mv main.o ./obj
+        gcc $COMPILATIONFLAGS $COMPILATIONARGS
+    else
+        echo "No file compiled, maybe you forgot a flag (-ev, -cmd)?"
+        exit
+    fi
+fi
+
+echo "Done"

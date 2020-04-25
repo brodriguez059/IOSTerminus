@@ -3,18 +3,18 @@
 # Website used to generate the random names:
 # https://www.fantasynamegenerators.com
 
-basePath="$PWD/data/home"
+basePath="$PWD/data/Home"
 descriptionFile=".description"
 
 createGameDirectory() {
-    echo "Deleting $basePath and all its content..."
-    rm -R $basePath
+    #echo "Deleting $basePath and all its content..."
+    rm -R $basePath > /dev/null 2>&1
 
-    # home
-    echo "Recreating..."
+    # Home
+    #echo "Recreating..."
     mkdir -p $basePath
     cd $basePath
-    echo "TODO" > $descriptionFile
+    echo "TODO Home" > $descriptionFile
 
     # >bed
     echo "Seems comfy but I have rest enough for today... Maybe I should explore the surroundings" > "bed"
@@ -29,49 +29,50 @@ createGameDirectory() {
     echo "* Closes the diary... *" >> "diary"
     echo "It continues several pages, I don't feel to know more about myself now." >> "diary"
 
-    # valley
-    mkdir "$basePath/valley"
-    cd "$basePath/valley"
-    echo "TODO" > $descriptionFile
+    # Home/Valley
+    mkdir "$basePath/Valley"
+    cd "$basePath/Valley"
+    echo "TODO Valley" > $descriptionFile
 
-    # >ancient sign
-    echo "There are instructions to discover new places written in it." > "ancient sign"
+    # >ancient_sign
+    echo "There are instructions to discover new places written in it." > "ancient_sign"
     # >flower
     echo "A beautiful tulip, there are bees in it. I am not gonna risk in taking it as they might sting me." > "flower"
 
-    # forest
-    mkdir "$basePath/forest"
-    cd "$basePath/forest"
-    echo "TODO" > $descriptionFile
+    # Home/Forest
+    mkdir "$basePath/Forest"
+    cd "$basePath/Forest"
+    echo "TODO Forest" > $descriptionFile
 
     # >sign
-    echo "At the left a bog at the right the town and in the middle lake were sometimes a liquid that's not water is found." >> "sign"
+    echo "At the left a bog at the right the town and in the middle the lake were sometimes a liquid that's not water is found." >> "sign"
     echo "If the magic book you must find, first the boat you'll have to repair." >> "sign"
+    echo "Try not to enter the bog, it smells... funky." >> "sign"
 
-    # bog
-    mkdir "$basePath/forest/bog"
-    cd "$basePath/forest/bog"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Bog
+    mkdir "$basePath/Forest/Bog"
+    cd "$basePath/Forest/Bog"
+    echo "TODO Bog" > $descriptionFile
 
-    # small lake
-    mkdir "$basePath/forest/small lake"
-    cd "$basePath/forest/small lake"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Small_lake
+    mkdir "$basePath/Forest/Small_lake"
+    cd "$basePath/Forest/Small_lake"
+    echo "TODO Small lake" > $descriptionFile
     # >broken boat
-    echo "It's broken. Only if I could connect it with something else..." > "Broken boat"
+    echo "It's broken. Only if I could connect it with something else..." > "broken_boat"
 
-    # small island
-    mkdir "$basePath/forest/small lake/small island"
-    cd "$basePath/forest/small lake/small island"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Small_lake/Small_island
+    mkdir "$basePath/Forest/Small_lake/Small_island"
+    cd "$basePath/Forest/Small_lake/Small_island"
+    echo "TODO Small island" > $descriptionFile
 
-    # >spell book
-    echo "It has some writtings in it, maybe they could be learnt in a Study Room..." > "spell book"
+    # >spell_book
+    echo "It has some writtings in it, maybe they could be learnt in a Study Room..." > "spell_book"
 
-    # town
-    mkdir "$basePath/forest/town"
-    cd "$basePath/forest/town"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/town
+    mkdir "$basePath/Forest/Town"
+    cd "$basePath/Forest/Town"
+    echo "TODO Town" > $descriptionFile
 
     # >sign
     echo "Welcome to Blisey: where everyone knows magic but no one will admit it." >> "sign"
@@ -80,60 +81,60 @@ createGameDirectory() {
     # >Townspeople, each file is a different person
     echo "Who are you?" > "Hronar"
     echo "I'm late for todays classes" > "Hidi"
-    echo "Welcome new traveller! Feel free to join one of the classes on the 'Magic tower' whenever you fill ready to learn new powers" > "Siraye Arazana"
+    echo "Welcome new traveller! Feel free to join one of the classes on the 'Magic tower' whenever you fill ready to learn new powers" > "Siraye_Arazana"
     echo "Welcome to our humble town traveller" > "Zemra"
 
-    # mountain
-    mkdir "$basePath/forest/town/mountain"
-    cd "$basePath/forest/town/mountain"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Town/Mountain
+    mkdir "$basePath/Forest/Town/Mountain"
+    cd "$basePath/Forest/Town/Mountain"
+    echo "TODO Mountain" > $descriptionFile
     # >boulder
     echo "Seems granite, but I'm not a gemmologist so it could be any other type..." > "boulder"
 
-    # cliff
-    mkdir "$basePath/forest/town/mountain/cliff"
-    cd "$basePath/forest/town/mountain/cliff"
+    # Home/Forest/Town/Mountain/Cliff
+    mkdir "$basePath/Forest/Town/Mountain/Cliff"
+    cd "$basePath/Forest/Town/Mountain/Cliff"
     touch ".gitkeep"
 
-    # cave entrance
-    mkdir "$basePath/forest/town/mountain/cave entrance"
-    cd "$basePath/forest/town/mountain/cave entrance"
-    echo "TODO" >> $descriptionFile
+    # Home/Forest/Town/Mountain/Cave_entrance
+    mkdir "$basePath/Forest/Town/Mountain/Cave_entrance"
+    cd "$basePath/Forest/Town/Mountain/Cave_entrance"
+    echo "TODO Cave entrance" >> $descriptionFile
 
-    # cave (west)
-    mkdir "$basePath/forest/town/mountain/cave entrance/cave (west)"
-    cd "$basePath/forest/town/mountain/cave entrance/cave (west)"
-    echo "TODO" > $descriptionFile
-    # >foul goblin
-    echo "It really complies the definition of foul..." > "foul goblin"
+    # Home/Forest/Town/Mountain/Cave_entrance/Cave(west)
+    mkdir "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(west)"
+    cd "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(west)"
+    echo "TODO Cave(west)" > $descriptionFile
+    # >foul_goblin
+    echo "It really complies the definition of foul..." > "foul_goblin"
 
-    # cave (east)
-    mkdir "$basePath/forest/town/mountain/cave entrance/cave (east)"
-    cd "$basePath/forest/town/mountain/cave entrance/cave (east)"
-    echo "TODO" > $descriptionFile
-    # >big orc
-    echo "I cannot defeat him by me alone, I'll have to trick him into something in order to defeat him..." > "big orc"
+    # Home/Forest/Town/Mountain/Cave_entrance/Cave(east)
+    mkdir "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)"
+    cd "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)"
+    echo "TODO Cave(east)" > $descriptionFile
+    # >big_orc
+    echo "I cannot defeat him by me alone, I'll have to trick him into something in order to defeat him..." > "big_orc"
 
-    # big hole
-    mkdir "$basePath/forest/town/mountain/cave entrance/cave (east)/big hole"
-    cd "$basePath/forest/town/mountain/cave entrance/cave (east)/big hole"
+    # Home/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole
+    mkdir "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole"
+    cd "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole"
     touch ".gitkeep"
 
-    # magic tower
-    mkdir "$basePath/forest/town/magic tower"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Town/Magic_tower
+    mkdir "$basePath/Forest/Town/Magic_tower"
+    echo "TODO Magic Tower" > $descriptionFile
 
-    # lesson room
-    mkdir "$basePath/forest/town/magic tower/lesson room"
-    cd "$basePath/forest/town/magic tower/lesson room"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Town/Magic_tower/Lesson_room
+    mkdir "$basePath/Forest/Town/Magic_tower/Lesson_room"
+    cd "$basePath/Forest/Town/Magic_tower/Lesson_room"
+    echo "TODO Lesson Room" > $descriptionFile
 
-    # study room
-    mkdir "$basePath/forest/town/magic tower/study room"
-    cd "$basePath/forest/town/magic tower/study room"
-    echo "TODO" > $descriptionFile
+    # Home/Forest/Town/Magic_tower/Study_Room
+    mkdir "$basePath/Forest/Town/Magic_tower/Study_Room"
+    cd "$basePath/Forest/Town/Magic_tower/Study_Room"
+    echo "TODO Study Room" > $descriptionFile
 
-    echo "Done!"
+    #echo "Done!"
 }
 
 if [ $# -ne 1 ]
