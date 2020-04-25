@@ -19,7 +19,7 @@
 
 #define STDIN 0
 #define STDOUT 1
-#define STERR 2
+#define STDERR 2
 
 #define error(a) {perror(a); exit(1);};
 
