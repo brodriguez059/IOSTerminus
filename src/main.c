@@ -19,7 +19,7 @@
 #define WriteEnd 1
 
 /////////////////////////////////////// Global Variables
-dir_t gameDirs[DIRNUM];
+dir_t gameDirs[NUMDIR];
 char welcomePath[512];
 
 /////////////////////////////////////// Function signatures
@@ -105,7 +105,7 @@ int sayWelcome(){
 		error("There was an error opening the file")
 	}
 
-	while(read(fd, &c,sizeof(c)!=0)){
+	while(read(fd, &c, sizeof(c)) > 0){
 		if(write(STDIN, &c, sizeof(c)) < 0){
 			error("There was an error reading the file")
 		}
@@ -144,8 +144,8 @@ int initialize(){
 
    //Initialize game directory
    strcpy(gameDirs[GAME].name, root);
-   strcat(gameDirs[GAME].name, "/data/home/");
-   gameDirs[GAME].length = rootLength + strlen("/data/home/");
+   strcat(gameDirs[GAME].name, "/data/Home/");
+   gameDirs[GAME].length = rootLength + strlen("/data/Home/");
 
    //Initialize docs directory
    strcpy(gameDirs[DOCS].name, root);
@@ -249,11 +249,11 @@ int execute(char *argv[])
 int finalize(){
    write(STDOUT,"\nExiting...\n", 12);
 
-   if(chdir(gameDirs[ROOT].name) < 0){
+   if(chdir(gameDirs[DATA].name) < 0){
       error("There was an error exiting the game");
    };
 
-   if(execl("/bin/sh", "sh", "-c", "rm -r ./data/home", (char *) NULL)){
+   if(execl("/bin/sh", "sh", "-c", "rm -r ./Home", (char *) NULL)){
       error("There was an error during the execution of the deletion command");
    }
 

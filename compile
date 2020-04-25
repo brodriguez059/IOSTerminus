@@ -21,7 +21,7 @@ do
             gcc -g -Iincludes -Wall -Wextra src/obj/cd.o -et_main src/$FILE.c -o main
             echo "Stored in $PWD/main (main executable)"
         else
-            gcc -g -Iincludes -Wall src/$FILE.c -o bin/commands/$FILE
+            gcc -g -Iincludes -Wall -Wextra src/$FILE.c -o bin/commands/$FILE
             echo Stored in bin/commands/$FILE
         fi
     fi

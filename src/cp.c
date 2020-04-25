@@ -1,7 +1,8 @@
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <errno.h>
-#include <string.h>
  
 #define BUFF_SIZE 1024
 #define OUTPUT 1 
