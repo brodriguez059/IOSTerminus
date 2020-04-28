@@ -8,6 +8,21 @@
 #define STDOUT 1
 #define STDERR 2
 
+/*
+// event listener
+void fileCreated(char *filename) {
+    write(STDOUT, "File ", strlen("File "));
+    write(STDOUT, filename, strlen(filename));
+    write(STDOUT, " created\n", strlen(" created\n"));
+}
+
+int main(int argc, char* argv[]) {
+    mainReal(argc, argv, fileCreated);
+    // mainReal(argc, argv, NULL);
+}
+int mainReal(int argc, char* argv[], void fileCreated(char*)) {
+*/
+
 int main(int argc, char* argv[]) {
     if (argc == 1) {
         char *buf = "Usage: touch <file name>\n";
@@ -94,6 +109,15 @@ int main(int argc, char* argv[]) {
 
         return 2;
     }
+
+    /*
+    // execute event
+    if (fileCreated != NULL) {
+        fileCreated(filename);
+
+        return 0;
+    }
+    */
 
     char *buf = "File created\n";
     write(STDOUT, buf, strlen(buf));
