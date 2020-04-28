@@ -3,8 +3,8 @@ for i in $@
 do
     if [ "$i" = "main" || "$i" = "terminuslib" ]
     then
-        ./func_compile -cmd "$i"
-    else
         ./func_compile "$i"
+    else
+        ./func_compile -cmd "$i"
     fi
 done
