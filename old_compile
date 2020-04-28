@@ -5,23 +5,30 @@ initWd=$PWD
 for i in $@
 do
     FILE=${i}
-    if [ ! -f src/$FILE.c ]; then
-        echo "[Error] Cannot compile $FILE, file src/$FILE.c was not found"
+
+    fileLocation="src/commands"
+
+    if [ "$FILE" = "main" ]; then
+        fileLocation="src"
+    fi
+
+    if [ ! -f $fileLocation/$FILE.c ]; then
+        echo "[Error] Cannot compile $FILE, file $fileLocation/$FILE.c was not found"
     else
         echo Compilling $FILE...
         if [ "$FILE" = "main" ]; then
-            cd src/obj
+            cd obj/commands
             echo "Objetifying, changed $PWD"
 
-            gcc -g -I../../includes -Wall -Wextra -c ../*.c
+            gcc -g -I../../includes -Wall -Wextra -c ../../src/commands/*.c
 
             echo "Objetified, coming back to $initWd"
             cd ../..
 
-            gcc -g -Iincludes -Wall -Wextra src/obj/cd.o -et_main src/$FILE.c -o main
+            gcc -g -Iincludes -Wall -Wextra obj/commands/cd.o -et_main src/$FILE.c -o main
             echo "Stored in $PWD/main (main executable)"
         else
-            gcc -g -Iincludes -Wall -Wextra src/$FILE.c -o bin/commands/$FILE
+            gcc -g -Iincludes -Wall -Wextra src/commands/$FILE.c -o bin/commands/$FILE
             echo Stored in bin/commands/$FILE
         fi
     fi
