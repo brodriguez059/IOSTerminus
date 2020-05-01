@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="terminus-map(inkscape).svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    inkscape:export-filename="/home/monsterdoggo/Desktop/Repositorios/IOSTerminus/docs/terminus-map.png"
    inkscape:export-xdpi="99.991333"
    inkscape:export-ydpi="99.991333"
@@ -685,8 +685,8 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="-306.12184"
-     inkscape:cy="357.25859"
+     inkscape:cx="249.39118"
+     inkscape:cy="517.59015"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1131,7 +1131,8 @@
              id="rect839-4-87-2-7" /></flowRegion><flowPara
            id="flowPara15345">- Secretary</flowPara></flowRoot>    </g>
     <g
-       id="g15695">
+       id="g15695"
+       transform="translate(0.37417734,2.80633)">
       <rect
          y="216.30511"
          x="161.89107"
@@ -1169,45 +1170,6 @@
              width="805.40564"
              id="rect839-4-87-2-7-4" /></flowRegion><flowPara
            id="flowPara15685">- Desk (to learn rm spell after finding it)</flowPara></flowRoot>    </g>
-    <g
-       id="g15705">
-      <rect
-         y="190.9507"
-         x="191.84494"
-         height="14.849623"
-         width="76.561981"
-         id="rect815-5-6-6-0-8-2"
-         style="opacity:1;fill:none;fill-opacity:0.5929648;fill-rule:nonzero;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path817-43-1-6-3-4-6"
-         d="m 191.85301,196.80339 h 76.55485"
-         style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <text
-         id="text833-9-0-5-6-8-0"
-         y="195.44135"
-         x="215.48067"
-         style="font-style:normal;font-weight:normal;font-size:4.6051755px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11512939"
-         xml:space="preserve"><tspan
-           style="fill:#000000;fill-opacity:1;stroke-width:0.11512939"
-           y="195.44135"
-           x="215.48067"
-           sodipodi:role="line"
-           id="tspan299">Lesson room</tspan></text>
-      <flowRoot
-         transform="matrix(0.11512939,0,0,0.11512939,182.24949,184.83074)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:39.99987411px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-         id="flowRoot835-9-8-6-4-5-2"
-         xml:space="preserve"><flowRegion
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:39.99987411px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-           id="flowRegion837-52-45-7-4-5-6"><rect
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:39.99987411px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             y="121.09111"
-             x="97.85714"
-             height="51.933578"
-             width="830.19971"
-             id="rect839-4-87-2-7-4-5" /></flowRegion><flowPara
-           id="flowPara15347">- Teacher (to learn the mv spell)</flowPara></flowRoot>    </g>
     <g
        id="g15739">
       <rect
@@ -1360,6 +1322,45 @@
            id="tspan831-3-6-2-4-6-4"
            sodipodi:role="line">Big hole</tspan></text>
     </g>
+    <g
+       id="g1703">
+      <rect
+         y="190.96959"
+         x="191.86383"
+         height="19.395512"
+         width="76.5242"
+         id="rect815-5-6-6-0-8-2"
+         style="opacity:1;fill:none;fill-opacity:0.5929648;fill-rule:nonzero;stroke:#000000;stroke-width:0.30278307;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path817-43-1-6-3-4-6"
+         d="m 191.85301,196.80339 h 76.55485"
+         style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text833-9-0-5-6-8-0"
+         y="195.44135"
+         x="215.48067"
+         style="font-style:normal;font-weight:normal;font-size:4.6051755px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11512939"
+         xml:space="preserve"><tspan
+           style="fill:#000000;fill-opacity:1;stroke-width:0.11512939"
+           y="195.44135"
+           x="215.48067"
+           sodipodi:role="line"
+           id="tspan299">Lesson room</tspan></text>
+      <flowRoot
+         transform="matrix(0.26458333,0,0,0.26458333,2.3336619,-2.0645413)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33333397px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+         id="flowRoot1683"
+         xml:space="preserve"><flowRegion
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33333397px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start"
+           id="flowRegion1685"><rect
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.33333397px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start"
+             y="755.16235"
+             x="725.11371"
+             height="46.660641"
+             width="271.23502"
+             id="rect1687" /></flowRegion><flowPara
+           id="flowPara1691">- Teacher (to learn the mv and touch spell)</flowPara></flowRoot>    </g>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1417,13 +1418,13 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <g
-       id="g15955">
+       id="g1865">
       <path
          sodipodi:nodetypes="cccc"
          inkscape:connector-curvature="0"
          id="path13866"
-         d="m 181.74325,173.65056 v 37.4223 h 29.53331 v 4.70756"
-         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker13888)" />
+         d="m 181.75659,173.63664 v 39.99585 h 29.50761 v 5.0313"
+         style="fill:none;stroke:#000000;stroke-width:0.2734108px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker13888)" />
       <path
          sodipodi:nodetypes="ccc"
          inkscape:connector-curvature="0"
@@ -1606,15 +1607,15 @@
            y="246.52869"
            x="238.71561"
            id="tspan15997"
-           sodipodi:role="line">- rm</tspan><tspan
+           sodipodi:role="line">- cat</tspan><tspan
            y="252.26132"
            x="238.71561"
-           id="tspan15999"
-           sodipodi:role="line">- mv</tspan><tspan
+           sodipodi:role="line"
+           id="tspan1873">- mv</tspan><tspan
            y="257.99396"
            x="238.71561"
            id="tspan16001"
-           sodipodi:role="line">- concat</tspan><tspan
+           sodipodi:role="line">- rm</tspan><tspan
            y="263.72659"
            x="238.71561"
            id="tspan16003"
@@ -1642,28 +1643,28 @@
          xml:space="preserve"><tspan
            y="247.18033"
            x="268.63806"
-           id="tspan16009"
-           sodipodi:role="line">- cat</tspan><tspan
-           y="252.91296"
-           x="268.63806"
            id="tspan16011"
            sodipodi:role="line">- cd</tspan><tspan
-           y="258.6456"
+           y="252.91296"
            x="268.63806"
            id="tspan16013"
            sodipodi:role="line">- cp</tspan><tspan
-           y="264.37823"
+           y="258.6456"
            x="268.63806"
            id="tspan16015"
            sodipodi:role="line">- grep</tspan><tspan
-           y="270.11087"
+           y="264.37823"
            x="268.63806"
            id="tspan16017"
            sodipodi:role="line">- man</tspan><tspan
-           y="275.84354"
+           y="270.11087"
            x="268.63806"
            id="tspan16019"
            sodipodi:role="line">- ls</tspan><tspan
+           y="275.84354"
+           x="268.63806"
+           sodipodi:role="line"
+           id="tspan1869">- less</tspan><tspan
            y="281.57617"
            x="268.63806"
            id="tspan16021"
