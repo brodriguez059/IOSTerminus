@@ -3,15 +3,13 @@
 ## Terminus game
 
 
-* Alex
+* Alex Bergareche
 
-* Baldwin
+* Baldwin Rodríguez
 
-* Jon
+* Jon Rubio
 
-* Modestas
-
-* Yoon
+* Modestas Jucevicius
 
 ## Project related links:
 * [Project report](https://www.overleaf.com/read/wccmjhhsvgcj)

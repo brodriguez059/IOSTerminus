@@ -4,7 +4,7 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 
-#include "cd.h"
+#include "built-ins.h"
 
 #define BUF_SIZE 1024
 #define PATH_LIMIT 512

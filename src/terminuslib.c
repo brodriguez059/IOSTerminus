@@ -1,6 +1,6 @@
 #include "defines.h"
 
-int game_state = E_TUTORIAL;
+int game_state = S_TUTORIAL;
 
 dir_t gameDirs[NUMDIR];
 char welcomePath[512];

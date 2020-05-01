@@ -28,11 +28,11 @@
 #define PIPE_READ_END 0
 #define PIPE_WRITE_END 1
 
-#define E_TUTORIAL 0
-#define E_GAME 1
-#define E_MV 2
-#define E_RM 3
-#define E_END 4
+#define S_TUTORIAL 0
+#define S_GAME 1
+#define S_MV 2
+#define S_RM 3
+#define S_END 4
 
 #define error(a) {perror(a); exit(1);};
 
@@ -42,6 +42,12 @@ typedef struct {
   char name[512];
   int length;
 } dir_t;
+
+
+/* define function poiter type */
+typedef int(*t_func_event)(int, char**);
+
+typedef struct { char *key; t_func_event ev; } t_mapfunc;
 
 /*
 switch(game_state){

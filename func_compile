@@ -11,7 +11,7 @@ then
     DSTDIR="bin/commands" #Destination directory
     #Instructions
     echo "Compiling terminus shell command $FILE"
-    if [ "$FILE" = "rm" ] || [ "$FILE" = "cat" ] || [ "$FILE" = "mv" ] || [ "$FILE" = "concat" ]
+    if [ "$FILE" = "rm" ] || [ "$FILE" = "less" ] || [ "$FILE" = "mv" ] || [ "$FILE" = "cat" ] || [ "$FILE" = "touch" ]
     then
         COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes ./obj/terminuslib.o"
         COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
@@ -69,7 +69,7 @@ then
     OBJDIR="obj/events"
     DSTDIR="bin/events" #Destination directory
     #Instructions
-    COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes obj/init_dirs.o"
+    COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes obj/terminuslib.o"
     COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
 
     echo "Compiling $FILE"

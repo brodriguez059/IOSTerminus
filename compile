@@ -1,9 +1,12 @@
 #!/bin/bash
 for i in $@
 do
-    if [ "$i" = "main" || "$i" = "terminuslib" ]
+    if [ "$i" = "main" ] || [ "$i" = "terminuslib" ]
     then
         ./func_compile "$i"
+    elif [ "$i" = "ev_cat" ] || ["$i" = "ev_less"] || ["$i" = "ev_rm"] || ["$i" = "ev_mv"] || ["$i" = "ev_touch"]
+    then
+        ./func_compile -ev "$i"
     else
         ./func_compile -cmd "$i"
     fi

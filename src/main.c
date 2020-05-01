@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "cd.h"
+#include "built-ins.h"
 #include "terminuslib.h"
 
 ///////////////////////////////////////////////////// Definitions:
@@ -119,8 +119,6 @@ int t_main (){
 
 /////////////////////////////////////// Auxiliary functions
 
-
-
 int sayWelcome(){
    int fd;
    char c;
@@ -145,25 +143,19 @@ int sayWelcome(){
    return 0;
 }
 
-int initialize(){
-
+int initialize()
+{
    init_dirs();
-
    execute_script(gameDirs[SCRT].name, "createGameDirectory y");
 
    if(chdir(gameDirs[GAME].name) < 0){
       error("There was an error initializing the game");
    };
-  
-  //For primite debugging.
-  /*
-  int i;
-  for(i = 0; i<NUMDIR; i++ ){
-     printf("Directory: %s | %d \n", gameDirs[i].name, gameDirs[i].length);
-
-  }
-  */
-  //
+   //For primite debugging.
+   //   int i;
+   //   for(i = 0; i<NUMDIR; i++ ){
+   //      printf("Directory: %s | %d \n", gameDirs[i].name, gameDirs[i].length);
+   //   }
 
   return 0;
 }
@@ -174,6 +166,8 @@ int execute(int argc, char *argv[])
       //We change directory. This function is a built-in of the 
       //shell, so we don't call execute_cmd() to fork and exec.
       cd(argv[1]); 
+   }else if((strcmp(argv[0], "exit")) == 0 || (strcmp(argv[0], "logout") == 0)){
+      finalize();
    }else{
       execute_cmd(argc, argv);
    }
@@ -181,7 +175,8 @@ int execute(int argc, char *argv[])
    return 0;
 }
 
-int finalize(){
+int finalize()
+{
    write(STDOUT,"\nExiting...\n", 12);
 
    if(chdir(gameDirs[DATA].name) < 0){
@@ -193,11 +188,11 @@ int finalize(){
    strcat(deleteCommand, gameDirs[GAME].name);
    execute_script(gameDirs[SCRT].name, deleteCommand);
 
-   return 0;
+   exit(0);
 }
 
 int is_state_dependend(char* command){
-   char* cmds[4] = {"cat","concat","mv","rm"};
+   char* cmds[4] = {"cat","less","mv","rm"};
    	int i;
    	for(i=0;i<4;i++){
     	   if(strcmp(command, cmds[i]) == 0){
