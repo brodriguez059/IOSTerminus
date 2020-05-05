@@ -74,7 +74,6 @@ int t_main (){
    int argc;
    char *args[MAXARGS];
 
-   sayWelcome();
    initialize();
    
    while (1) {
@@ -83,25 +82,10 @@ int t_main (){
          //We first check for the state-dependend commands.
          if(is_state_dependend(args[0])){
             //We need to specify the path to the event directory and the current state.
-            char* argv[argc+2];
-            int i;
-            for(i=0; i<argc; i++){
-               strcpy(argv[i],args[i]);
-            }
-            strcpy(argv[argc-2], gameDirs[EVTS].name);
-            char string_state = (char)(game_state+'0');
-            strcpy(argv[argc-1], &string_state);
-            argc += 2;
-            execute(argc, argv);
+            execute(argc, args);
          }else{
             //We need to check if man is the command to be executed to prepare the doc directory.
             if(strcmp(args[0],"man") == 0){
-               char* argv[argc+1];
-               int i;
-               for(i=0; i<argc; i++){
-                  strcpy(argv[i],args[i]);
-               }
-               strcpy(argv[argc-1], gameDirs[DOCS].name);
                execute(argc, args);
             }else{
                //We don't need to keep checking, the command doesn't depend on anything initialized in the main.
@@ -147,6 +131,7 @@ int initialize()
 {
    init_dirs();
    execute_script(gameDirs[SCRT].name, "createGameDirectory y");
+   sayWelcome();
 
    if(chdir(gameDirs[GAME].name) < 0){
       error("There was an error initializing the game");
@@ -192,7 +177,7 @@ int finalize()
 }
 
 int is_state_dependend(char* command){
-   char* cmds[4] = {"cat","less","mv","rm"};
+   char* cmds[5] = {"cat","less","mv","rm","touch"};
    	int i;
    	for(i=0;i<4;i++){
     	   if(strcmp(command, cmds[i]) == 0){

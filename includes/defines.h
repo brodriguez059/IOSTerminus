@@ -48,26 +48,3 @@ typedef struct {
 typedef int(*t_func_event)(int, char**);
 
 typedef struct { char *key; t_func_event ev; } t_mapfunc;
-
-/*
-switch(game_state){
-               case E_TUTORIAL:
-                  if( (strcmp(args[0], "mv") == 0) || (strcmp(args[0],"rm") == 0) ){
-                     int n;
-                     n = write(STDOUT, "Hmmm...?, what are you trying to do?, maybe you should learn", 61);
-                     if(n<0) error("There was an error writing on state E_TUTORIAL");
-                     n = write(STDOUT, " how to use that spell first.\n", 30);
-                     if(n<0) error("There was an error writing on state E_TUTORIAL");
-                  }
-                  break;
-               case E_GAME:
-                  break;
-               case E_MV:
-                  break;
-               case E_RM:
-                  break;
-               case E_END:
-               default:
-                  break;
-               }
-*/
