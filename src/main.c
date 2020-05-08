@@ -153,6 +153,7 @@ int execute(int argc, char *argv[])
       cd(argv[1]); 
    }else if((strcmp(argv[0], "exit")) == 0 || (strcmp(argv[0], "logout") == 0)){
       finalize();
+      logout();
    }else{
       execute_cmd(argc, argv);
    }
@@ -173,7 +174,7 @@ int finalize()
    strcat(deleteCommand, gameDirs[GAME].name);
    execute_script(gameDirs[SCRT].name, deleteCommand);
 
-   exit(0);
+   return 0;
 }
 
 int is_state_dependend(char* command){
