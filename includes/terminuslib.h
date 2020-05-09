@@ -31,3 +31,13 @@ extern int execute_script(char* path, char* script);
  * information to the player.
  */
 extern int execute_ev(int argc, char *argv[]);
+
+/**
+ * 
+ */ 
+extern int fifo_read(int* argc, int* state, dir_t dirs[]);
+
+/**
+ * 
+ */ 
+extern int fifo_write(int argc, int state, dir_t dirs[]);

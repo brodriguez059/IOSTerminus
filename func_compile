@@ -11,7 +11,7 @@ then
     DSTDIR="bin/commands" #Destination directory
     #Instructions
     echo "Compiling terminus shell command $FILE"
-    if [ "$FILE" = "rm" ] || [ "$FILE" = "less" ] || [ "$FILE" = "mv" ] || [ "$FILE" = "cat" ] || [ "$FILE" = "touch" ]
+    if [ "$FILE" = "rm" ] || [ "$FILE" = "less" ] || [ "$FILE" = "mv" ] || [ "$FILE" = "cat" ] || [ "$FILE" = "touch" ] || [ "$FILE" = "man" ]
     then
         COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes ./obj/terminuslib.o"
         COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
@@ -24,7 +24,7 @@ then
         mv $FILE.o $OBJDIR
 
         gcc $COMPILATIONFLAGS $COMPILATIONARGS
-    elif [ "$FILE" = "cd" ]
+    elif [ "$FILE" = "cd" ] || [ "$FILE" = "logout" ]
     then
         COMPILATIONFLAGS="-g -Wall -Wextra -I../../includes"
         COMPILATIONARGS="-c ../../$SRCDIR/$FILE.c"
@@ -99,7 +99,7 @@ else
     elif [ "$FILE" = "main" ]
     then
         #COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes -nostartfiles $OBJDIR/commands/cat.o $OBJDIR/commands/cd.o $OBJDIR/commands/man.o $OBJDIR/commands/mv.o $OBJDIR/commands/rm.o obj/init_dirs.o -et_main"
-        COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes -nostartfiles $OBJDIR/commands/cd.o obj/terminuslib.o -et_main"
+        COMPILATIONFLAGS="-g -Wall -Wextra -Iincludes -nostartfiles $OBJDIR/commands/cd.o $OBJDIR/commands/logout.o obj/terminuslib.o -et_main"
         COMPILATIONARGS="$SRCDIR/$FILE.c -o $DSTDIR/$FILE"
 
         echo "Compiling the $FILE shell executable"

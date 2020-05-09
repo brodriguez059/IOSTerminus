@@ -85,7 +85,7 @@ int t_main (){
             execute(argc, args);
          }else{
             //We need to check if man is the command to be executed to prepare the doc directory.
-            if(strcmp(args[0],"man") == 0){
+            if(strcmp(args[0], "man") == 0){
                execute(argc, args);
             }else{
                //We don't need to keep checking, the command doesn't depend on anything initialized in the main.
@@ -133,9 +133,9 @@ int initialize()
    execute_script(gameDirs[SCRT].name, "createGameDirectory y");
    sayWelcome();
 
-   if(chdir(gameDirs[GAME].name) < 0){
-      error("There was an error initializing the game");
-   };
+  if(chdir(gameDirs[GAME].name) < 0){
+     error("There was an error initializing the game");
+  };
    //For primite debugging.
    //   int i;
    //   for(i = 0; i<NUMDIR; i++ ){

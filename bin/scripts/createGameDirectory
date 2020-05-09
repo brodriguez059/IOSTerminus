@@ -14,7 +14,8 @@ createGameDirectory() {
     #echo "Recreating..."
     mkdir -p $basePath
     cd $basePath
-    echo "TODO Home" > $descriptionFile
+    echo "This small house looks very old-fashioned and is in average condition. " > $descriptionFile
+    echo "Wait... this is my house!" >> $descriptionFile
 
     # >bed
     echo "Seems comfy but I have rest enough for today... Maybe I should explore the surroundings" > "bed"
