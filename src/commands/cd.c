@@ -3,12 +3,12 @@
 #include <errno.h>
 #include <sys/mman.h>
 #include <fcntl.h>
-
-#include "built-ins.h"
+#include <stdio.h>
 
 #define BUF_SIZE 1024
 #define PATH_LIMIT 512
 #define NO_SUCH_DIRECTORY "There is no room called "
+#define NO_ACCESS_PERMISIONS "There is a strange force preventing you from going there"
 #define OUTPUT 1
 #define ERR_OUTPUT 2
 
@@ -16,7 +16,7 @@ void cd(char *path);
 
 int main(int argc, char *argv[]) //test run 
 {
-	//char buf[BUF_SIZE] = { 0 };
+	char buf[BUF_SIZE] = { 0 };
 	char currentPath[PATH_LIMIT];
 	getcwd(currentPath, PATH_LIMIT);
 	write(OUTPUT, "Current directory:", 18);
@@ -45,22 +45,27 @@ void cd(char *path) { // function to be used by parent process
 		if (errno == ENOENT || errno == ENOTDIR) { // if no such file or is not a directory
 			strcpy(buf, NO_SUCH_DIRECTORY);
 			strcat(buf, path);
-			write(ERR_OUTPUT, buf, strlen(buf));
-			write(ERR_OUTPUT, "\n", 1);
+			write(OUTPUT, buf, strlen(buf));
+			write(OUTPUT, "\n", 1);
+		}
+		else if (errno == EACCES || errno == EPERM) { // if no permissions for the directory
+			strcpy(buf, NO_ACCESS_PERMISIONS);
+			write(OUTPUT, buf, strlen(buf));
+			write(OUTPUT, "\n", 1);
 		} else {
 			strcpy(buf, strerror(errno));
 			write(ERR_OUTPUT, buf, strlen(buf));
-			write(ERR_OUTPUT, "\n", 1);
+			write(OUTPUT, "\n", 1);
 		}
 	}
 	munmap(currentPath, PATH_LIMIT); // system call to release memory allocated by getcwd
 	memset(buf, '\0', BUF_SIZE); // clean the buffer for file reading and writing, unsure if allowed
-	int fd = open(".description", O_RDONLY);
+	int fd = open(".cd", O_RDONLY);
 	if (fd == -1) {
-		write(ERR_OUTPUT, "Error opening File .description in the folder: ", 38);
+		write(OUTPUT, "Error opening File .cd in the folder: ", 38);
 		strcpy(buf, strerror(errno));
 		write(ERR_OUTPUT, buf, strlen(buf));
-		write(ERR_OUTPUT, "\n", 1);
+		write(OUTPUT, "\n", 1);
 		return;
 	}
 	for(;;) {
@@ -70,7 +75,7 @@ void cd(char *path) { // function to be used by parent process
 		} else if (res == -1) {
 			strcpy(buf, strerror(errno));
 			write(ERR_OUTPUT, buf, strlen(buf));
-			write(ERR_OUTPUT, "\n", 1);
+			write(OUTPUT, "\n", 1);
 		} else {
 			break;
 		}
