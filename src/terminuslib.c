@@ -72,15 +72,16 @@ int execute_cmd(int argc, char *argv[])
    }else{
       //If fork returned a positive number, then we are in the parent process
       //and pid is the process id of the child.
-      int b = strcmp(argv[0], "man");
-      int num;
+      int b = strcmp(argv[0], "man"); // The command "man" requires info from a FIFO, that's why we do this comprobation.
       if(b == 0){
-         num = 2 + NUMDIR;
+         int num;
+         num = 2 + NUMDIR; // The number of arguments will always be NUMDIR + 2
          fifo_write(num, game_state, gameDirs);
+         //We don't use wait here but rather inside the function fifo_write as it
+         //needs to know it the other end of the FIFO has already finished reading
       }else{
          wait(NULL);
       }
-
    }
 
    return 0;
@@ -106,15 +107,14 @@ int execute_ev(int argc, char *argv[])
       strcat(path, argv[0]);
       //printf("Command to be executed: %s\n", path);
 
-      //close(p[PIPE_READ_END]);
       if(execv(path, argv) < 0){
          error("There was an error during the execution of the generation command");
       }
 
    }else{
-      int num_info = 2;
+      //We will always use FIFOs for the events.
+      int num_info = 2 + NUMDIR;
       fifo_write(num_info, game_state, gameDirs);
-
    }
    return 0;
 }

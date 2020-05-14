@@ -60,9 +60,9 @@ void cd(char *path) { // function to be used by parent process
 	}
 	munmap(currentPath, PATH_LIMIT); // system call to release memory allocated by getcwd
 	memset(buf, '\0', BUF_SIZE); // clean the buffer for file reading and writing, unsure if allowed
-	int fd = open(".cd", O_RDONLY);
+	int fd = open(".description", O_RDONLY);
 	if (fd == -1) {
-		write(OUTPUT, "Error opening File .cd in the folder: ", 38);
+		write(OUTPUT, "Error opening File .description in the folder: ", 38);
 		strcpy(buf, strerror(errno));
 		write(ERR_OUTPUT, buf, strlen(buf));
 		write(OUTPUT, "\n", 1);

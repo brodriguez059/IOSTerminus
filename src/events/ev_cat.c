@@ -1,10 +1,15 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-#include "defines.h"
+#include "terminuslib.h"
 
 #define NKEYS (sizeof(lookuptable)/sizeof(t_mapfunc))
+
+/////////////////////////////////////// Global variables
+
+int game_state;
+
+dir_t gameDirs[NUMDIR];
+
+/////////////////////////////////////// Event functions
+
 /**
  * 
  */
@@ -82,7 +87,7 @@ static t_mapfunc lookuptable[] = {
 t_func_event keyfromstring(char *key)
 {
     int i;
-    for (i=0; i < NKEYS; i++) {
+    for (i=0; (long unsigned int) i < NKEYS; i++) {
         t_mapfunc *map = &(lookuptable[i]);
         if (strcmp(map->key, key) == 0)
             return map->ev;
@@ -92,6 +97,11 @@ t_func_event keyfromstring(char *key)
 
 int main(int argc, char* argv[])
 {
+    int nArgFifo;
+    fifo_read(&nArgFifo, &game_state, gameDirs);
+
     t_func_event func = keyfromstring(argv[1]);
-    func(argc, argv);
+    int result = func(argc, argv);
+
+    exit(result);
 }
