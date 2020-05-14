@@ -14,12 +14,23 @@ dir_t gameDirs[NUMDIR];
  * 
  */
 int big_orc(int argc, char* argv[]){
-    if(strcmp("Big_hole", argv[2])==0){
-        printf("Now the orc is stuck");
-    } else {
-        printf("Oh no!, the orc has escaped!");
-        game_state = S_END;
+    switch (game_state)
+    {
+    case S_MV:
+    case S_RM:
+        if(strcmp("Big_hole", argv[2])==0){
+            printf("Now the orc is stuck");
+        } else {
+            printf("Oh no!, the orc has escaped!");
+            game_state = S_END;
+        }
+        break;
+    case S_TUTORIAL:
+    case S_GAME:
+    default:
+        break;
     }
+
     return game_state;
 }
 
@@ -27,6 +38,23 @@ int big_orc(int argc, char* argv[]){
  * 
  */
 int boulder(int argc, char* argv[]){
+    switch (game_state)
+    {
+    case S_RM:
+        if(strcmp("Cliff", argv[2])==0){
+            printf("Bye bye rock");
+        } else {
+            printf("Where you moving it?");
+            game_state = S_END;
+        }
+        break;
+    case S_MV:
+    case S_TUTORIAL:
+    case S_GAME:
+    default:
+        break;
+    }
+
     return game_state;
 }
 
@@ -34,15 +62,28 @@ int boulder(int argc, char* argv[]){
  * 
  */
 int planks(int argc, char* argv[]){
-    if(strcmp("Small_lake", argv[2])==0){
-        printf("I could use these to repair the boat!");
+    switch (game_state)
+    {
+    case S_MV:
+        if(strcmp("Small_lake", argv[2])==0){
+            printf("Moved to the right place");
+        } else {
+            printf("Not the right place");
+        }
+        break;
+    case S_TUTORIAL:
+    case S_GAME:
+    case S_RM:
+    default:
+        break;
     }
+
     return game_state;
 }
 /////////////////////////////////////// Main executable
 
 static t_mapfunc lookuptable[] = {
-    { "big_orc", big_orc }
+    { "big_orc", big_orc}, {"boulder", boulder}, {"planks", planks}
 };
 
 t_func_event keyfromstring(char *key)

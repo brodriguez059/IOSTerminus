@@ -100,10 +100,11 @@ int execute_ev(int argc, char *argv[])
    }else if(pid == 0){
       //If fork returned 0, then we are in the child process.
 
-      int plen = gameDirs[CMDS].length + strlen(argv[0]);
+      int plen = gameDirs[EVTS].length + 3 + strlen(argv[0]);
       char path[plen];
 
-      strcpy(path, gameDirs[CMDS].name);
+      strcpy(path, gameDirs[EVTS].name);
+      strcat(path, "ev_");
       strcat(path, argv[0]);
       //printf("Command to be executed: %s\n", path);
 

@@ -155,9 +155,9 @@ int execute(int argc, char *argv[])
       finalize();
       logout();
    }else{
-      execute_cmd(argc, argv);
+      int success = execute_cmd(argc, argv);
       // We check to see if this command executes an event
-      if(is_state_dependend(argv[0])){
+      if(success && is_state_dependend(argv[0])){
          execute_ev(argc, argv);
       }
    }
