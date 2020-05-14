@@ -1,13 +1,15 @@
-#include <fcntl.h>
-
-#include "defines.h"
+#include "terminuslib.h"
 
 dir_t gameDirs[NUMDIR];
 
-int main (int argc, char *argv[]) {
+int game_state;
 
+int main (int argc, char *argv[]) {
 	int fd;
 	char c;
+	int nArg;
+	
+	fifo_read(&nArg, &game_state, gameDirs);
 
     char path[512];
 
@@ -21,8 +23,8 @@ int main (int argc, char *argv[]) {
 		error("There was an error opening the file")
 	}
 
-	while(read(fd, &c, 1) > 0){
-		if(write(STDOUT, &c, 1) < 0){
+	while(read(fd, &c, 1)>0){
+		if(write(STDOUT, &c, 1) < 1){
 			error("There was an error reading the file")
 		}
 	}

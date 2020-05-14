@@ -164,7 +164,7 @@ int fifo_read(int* argc, int* state, dir_t dirs[]){
    int i;
    for (i = 0; i < MaxLoops; i++) {
       n = read(fd, &(dirs[i]), sizeof(dir_t));
-      printf("Read: %s %d\n", gameDirs[i].name, gameDirs[i].length);
+      //printf("Read: %s %d\n", gameDirs[i].name, gameDirs[i].length);
       if (n == 0) break;  
    }
 
@@ -180,16 +180,16 @@ int fifo_write(int argc, int state, dir_t dirs[]){
 	int fd = open(pipeName, O_CREAT | O_WRONLY); /* open as write-only */
 	if (fd < 0) return -1;                       /* can't go on */
 
-   printf("Writing: %d\n", argc);
+   //printf("Writing: %d\n", argc);
    write(fd, &argc, sizeof(int));
-   printf("Writing: %d\n", state);
+   //printf("Writing: %d\n", state);
    write(fd, &state, sizeof(int));
 
    int MaxLoops = argc - 2;
 
 	int i;
 	for (i = 0; i < MaxLoops; i++) {
-      printf("Writing: %s %d\n", gameDirs[i].name, gameDirs[i].length);
+      //printf("Writing: %s %d\n", gameDirs[i].name, gameDirs[i].length);
       write(fd, &(dirs[i]), sizeof(dir_t));
    }
 	close(fd);           /* close pipe: generates an end-of-stream marker */
