@@ -14,14 +14,20 @@ dir_t gameDirs[NUMDIR];
  * 
  */
 int big_orc(int argc, char* argv[]){
-
+    if(strcmp("Big_hole", argv[2])==0){
+        printf("Now the orc is stuck");
+    } else {
+        printf("Oh no!, the orc has escaped!");
+        game_state = S_END;
+    }
+    return game_state;
 }
 
 /**
  * 
  */
 int boulder(int argc, char* argv[]){
-
+    return game_state;
 }
 
 /**
@@ -31,6 +37,7 @@ int planks(int argc, char* argv[]){
     if(strcmp("Small_lake", argv[2])==0){
         printf("I could use these to repair the boat!");
     }
+    return game_state;
 }
 /////////////////////////////////////// Main executable
 
