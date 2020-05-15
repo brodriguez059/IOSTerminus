@@ -1,22 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <unistd.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-#define error(a) {perror(a); exit(1);};
+#include "defines.h"
 
 int main (int argc, char *argv[]) {
-   //int fd;
-
-   //fd = open(argv[1], O_RDONLY);
-   //close(fd);
-
-   //remove(argv[1])
+   if (argc < 2) {
+       write(STDOUT, "Hmm... you should try to use more arguments, yes?\n", 51);
+       exit(1);
+    }
 
    char* parentPath = getcwd(NULL, 0); 
    char path[512];

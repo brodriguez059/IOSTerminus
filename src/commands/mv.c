@@ -1,16 +1,13 @@
-#include <fcntl.h>
-#include <sys/stat.h>
-
 #include "defines.h"
 
 int main(int argc, char const *argv[])
 {
     /* Check for insufficient parameters */
 
-    //if (argc < 3) {
-    //    write(2, "There is not enough information for this command\n", 49);
-    //    exit(1);
-    //}
+    if (argc < 3) {
+       write(STDOUT, "Hmm... you should try to use more arguments, yes?\n", 51);
+       exit(1);
+    }
 
     //First we copy the file to the directory
     char buffer[512];
