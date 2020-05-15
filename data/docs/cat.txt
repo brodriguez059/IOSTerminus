@@ -1,1 +1,8 @@
-TODO cat
+A strange voice says:
+"cat, it concatenates two items into a new one
+
+This spell concatenates the information of the two items passed as parameters into a 	new one and shows the contents of that new item.
+
+To use it just write: 'cat [ITEM_1] [ITEM_2]' and a new file will be created right in front of you."
+
+The voice talks with a weird jargon, but you think you understood.

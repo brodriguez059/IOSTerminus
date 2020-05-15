@@ -1,1 +1,8 @@
-TODO whoami
+A strange voice says:
+"whoami, it displays your name.
+
+This command just shows your name.
+
+To use it just write: 'whoami' and you will see your name".
+
+The voice talks with a weird jargon, but you think you understood.

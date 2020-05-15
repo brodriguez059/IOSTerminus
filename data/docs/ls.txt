@@ -1,1 +1,8 @@
-TODO ls
+A strange voice says:
+"ls, it shows items and locations accessible from the current location.
+
+This command shows the locations and items accessible from your current location in a list.
+
+To use it just write: 'ls' and you will see that list".
+
+The voice talks with a weird jargon, but you think you understood.

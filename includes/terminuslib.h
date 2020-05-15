@@ -15,20 +15,16 @@ extern int init_dirs();
 
 /**
  * This function executes one of the commands of the shell.
- * Those commands can be:
- * cat, cd, concat, cp, grep, ls, man, mv, pwd, rm, touch, whoami
  */
 extern int execute_cmd(int argc, char *argv[]);
 
 /**
- * This function prints in STDIN a welcoming message and gives some basic
- * information to the player.
+ * 
  */
 extern int execute_script(char* path, char* script);
 
 /**
- * This function prints in STDIN a welcoming message and gives some basic
- * information to the player.
+ * 
  */
 extern int execute_ev(int argc, char *argv[]);
 

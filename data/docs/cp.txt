@@ -1,1 +1,8 @@
-TODO cp
+A strange voice says:
+"cp, it copies file to given destination
+
+This command create a copy of given item in the given location.
+
+To use it just write: 'cp [ITEM] [LOCATION]' and you will create a copy of the item in that location."
+
+The voice talks with a weird jargon, but you think you understood.

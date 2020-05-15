@@ -1,1 +1,8 @@
-TODO touch
+A strange voice says:
+"touch, it creates a new item.
+
+This spell creates a new item with the given name.
+
+To use it just write: 'touch [ITEM]' and you will create a new item".
+
+The voice talks with a weird jargon, but you think you understood.
