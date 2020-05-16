@@ -52,7 +52,7 @@ int execute_cmd(int argc, char *argv[])
 
    pid = fork();
 
-   int return_code;
+   int return_code = 0;
 
    if(pid < 0){
       //If fork returned a negative number, there was an error.
@@ -95,8 +95,8 @@ int execute_cmd(int argc, char *argv[])
       }
 
       //printf("We will return: %d\n",return_code);
-      return return_code;
    }
+   return return_code;
 }
 
 int execute_ev(int argc, char *argv[])
@@ -105,7 +105,7 @@ int execute_ev(int argc, char *argv[])
 
    pid = fork();
 
-   int return_code = 1;
+   int return_code = game_state;
 
    if(pid < 0){
       //If fork returned a negative number, there was an error.

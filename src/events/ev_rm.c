@@ -16,6 +16,13 @@ dir_t gameDirs[NUMDIR];
 int boulder(int argc, char* argv[]) {
     char *txt = "The boulder has been converted into small rocks, the path is now clear.\n";
     write(STDOUT, txt, strlen(txt));
+
+    char cave_path[512];
+    strcpy(cave_path, gameDirs[GAME].name);
+	strcat(cave_path, "Forest/Town/Mountain/Cave_entrance");
+
+	chmod(cave_path, 0777); //To unlock it
+
     return game_state;
 }
 
@@ -96,5 +103,5 @@ int main(int argc, char* argv[])
             break;
     }
 
-    return game_state;
+    return result;
 }

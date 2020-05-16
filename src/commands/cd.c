@@ -16,7 +16,7 @@ void cd(char *path);
 
 int main(int argc, char *argv[]) //test run 
 {
-	char buf[BUF_SIZE] = { 0 };
+	//char buf[BUF_SIZE] = { 0 };
 	char currentPath[PATH_LIMIT];
 	getcwd(currentPath, PATH_LIMIT);
 	write(OUTPUT, "Current directory:", 18);

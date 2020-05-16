@@ -165,7 +165,7 @@ int execute(int argc, char *argv[])
          }
       }else{
          //We just execute the event without problems, they don't depend on the current state.
-         int success_cmd = execute_cmd(argc, argv);
+         execute_cmd(argc, argv);
       }
    }
    return 0;
