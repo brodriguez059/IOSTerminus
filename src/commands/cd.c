@@ -39,6 +39,26 @@ void cd(char *path) { // function to be used by parent process
 	char currentPath[PATH_LIMIT];
 	getcwd(currentPath, PATH_LIMIT); //system call which sets current path with current path
 	strcpy(buf, currentPath); // put the path to buffer
+	if (strcmp(path, "..") == 0)
+	{
+		char currentPathTokenized[PATH_LIMIT];
+		strcpy(currentPathTokenized, currentPath);
+		char *token;
+		char *lastToken;
+		token = strtok(currentPathTokenized, "/");
+		while (token != NULL)
+		{
+			lastToken = token;
+			token = strtok(NULL, "/");
+		}
+		if (strcmp(lastToken, "Home") == 0)
+		{
+			strcpy(buf, NO_ACCESS_PERMISIONS);
+			write(OUTPUT, buf, strlen(buf));
+			write(OUTPUT, "\n", 1);
+			return;
+		}
+	}
 	strcat(buf, "/");
 	strcat(buf, path); // add the path we want to go to
 	if (chdir(buf) == -1) { // system call which changes process directory
