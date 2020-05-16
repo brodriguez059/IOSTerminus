@@ -17,7 +17,6 @@ int big_orc(int argc, char* argv[]){
     int res = game_state;
     switch (game_state)
     {
-    case S_MV:
     case S_RM:
         if(strcmp("Big_hole", argv[2])==0){
             printf("Now the orc is stuck");
@@ -26,8 +25,6 @@ int big_orc(int argc, char* argv[]){
             res = S_END;
         }
         break;
-    case S_TUTORIAL:
-    case S_GAME:
     default:
         break;
     }
@@ -50,9 +47,6 @@ int boulder(int argc, char* argv[]){
             res = S_END;
         }
         break;
-    case S_MV:
-    case S_TUTORIAL:
-    case S_GAME:
     default:
         break;
     }
@@ -74,9 +68,6 @@ int planks(int argc, char* argv[]){
             printf("Not the right place");
         }
         break;
-    case S_TUTORIAL:
-    case S_GAME:
-    case S_RM:
     default:
         break;
     }

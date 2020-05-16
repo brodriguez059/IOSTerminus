@@ -17,7 +17,7 @@
 
 ### How to compile the files
 
-In order to compile the files, you can make use of the `compile` executable. This file expects the name of the files to be compiled (found under the `src` folder) or the keyword `main` (to compile the main file).
+In order to compile the files, you can make use of the `compile` executable. This file expects the name of the files to be compiled (found under the `src` folder).
 
 ```bash
 # compile only the main file
@@ -25,4 +25,7 @@ $ compile main
 
 # compile cd ls and rm files
 $ compile cd ls rm
+
+# compile everything
+$ make
 ```

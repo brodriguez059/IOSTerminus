@@ -74,21 +74,10 @@ int t_main (){
    while (1) {
       write(0,Prompt, strlen(Prompt));
       if (read_args(&argc, args, MAXARGS, &eof) && argc > 0) {
-         //We first check for the state-dependend commands.
-         if(is_state_dependend(args[0])){
-            //We need to specify the path to the event directory and the current state.
-            execute(argc, args);
-         }else{
-            //We need to check if man is the command to be executed to prepare the doc directory.
-            if(strcmp(args[0], "man") == 0){
-               execute(argc, args);
-            }else{
-               //We don't need to keep checking, the command doesn't depend on anything initialized in the main.
-               execute(argc, args);
-            }
-         }
+         //We leave this to the execute function.
+         execute(argc, args);
       }
-      if (eof){
+      if (eof || (game_state == S_END)){
          finalize();
          break;
       }
