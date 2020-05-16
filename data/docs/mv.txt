@@ -1,1 +1,9 @@
-TODO mv
+A strange voice says:
+"mv, it moves an item to another location
+
+This spell moves the item [ITEM] to another directory specified in [LOCATION]. The player must always write two arguments, never less and never more.
+
+To use it just write: 'mv [ITEM] [LOCATION]' and you will move the item".
+
+The voice talks with a weird jargon, but you think you understood.
+       

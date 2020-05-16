@@ -1,0 +1,8 @@
+A strange voice says:
+"less, it lets you interact with items and read its contents.
+
+This command lets you interact with the item passed and read its contents. If no item is specified, it prints a message stating that error. If the item could not be read, it would print an error message stating the reason.
+
+To use it just write: 'less [ITEM]' and you will interact with that item."
+
+The voice talks with a weird jargon, but you think you understood.

@@ -1,9 +1,3 @@
-// less.c
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
 #include "defines.h"
 
 int main(int argc, char* argv[])
@@ -12,7 +6,7 @@ int main(int argc, char* argv[])
    char c;
 
    if (argc != 2) {
-      write(2, "Usage: cat output_file\n", 24);
+      write(2, "Usage: less [file name]\n", 24);
       exit(1);
    }
 
