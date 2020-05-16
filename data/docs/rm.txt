@@ -1,1 +1,8 @@
-TODO rm
+A strange voice says:
+"rm, it removes files or directories
+
+This spell is used to delete or remove items.
+
+To use it just write: 'rm [ITEM]' and you will remove the item".
+
+The voice talks with a weird jargon, but you think you understood.

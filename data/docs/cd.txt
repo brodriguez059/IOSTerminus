@@ -1,1 +1,8 @@
-TODO cd
+A strange voice says:
+"cd, it changes your location
+
+This command changes current directory to the location given, if the location doesn‘t exit, a custom error message is displayed. If any other errors happen unix standard error messages are shown.
+
+To use it just write: 'cd [LOCATION]' and you will move from location."
+
+The voice talks with a weird jargon, but you think you understood.

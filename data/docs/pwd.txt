@@ -1,1 +1,8 @@
-TODO pwd
+A strange voice says:
+"pwd, it shows the current location.
+
+This commands shows in the console the name of your current location.
+
+To use it just write: 'pwd' and you will see that name".
+
+The voice talks with a weird jargon, but you think you understood.

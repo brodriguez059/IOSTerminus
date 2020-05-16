@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     
     strcpy(buf, "Locations:\n");
     write(1, buf, strlen(buf));
-    for (int i = 0; i < dir_quant - 2; i++) {
+    for (int i = 0; i < dir_quant; i++) {
         strcpy(buf, directories[i]->d_name);
 	if (buf[0] != '.') {
 		write(1, "  ", 2);
