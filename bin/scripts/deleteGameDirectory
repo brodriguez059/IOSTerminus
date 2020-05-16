@@ -2,4 +2,5 @@
 
 DIR=$1
 #We need to change the permission of the unlockable directories just to make sure that the deletion process will go on smoothly.
+chmod -R 0777 "$DIR"
 rm -r "$DIR"
