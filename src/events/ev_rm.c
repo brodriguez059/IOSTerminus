@@ -11,85 +11,61 @@ dir_t gameDirs[NUMDIR];
 /////////////////////////////////////// Event functions
 
 /**
- * 
+ *
  */
-int big_orc(int argc, char* argv[]){
-
+int boulder(int argc, char* argv[]) {
+    char *txt = "The boulder has been converted into small rocks, the path is now clear.\n"
+    write(STDOUT, txt, strlen(txt));
+    return game_state;
 }
 
 /**
- * 
+ *
  */
-int boulder(int argc, char* argv[]){
-
+int spirit(int argc, char* argv[]) {
+    return game_state;
 }
 
 /**
- * 
+ *
  */
-int foul_goblin(int argc, char* argv[]){
-
+int torch(int argc, char* argv[]) {
+    return game_state;
 }
 
-/**
- * 
- */
-int hidi(int argc, char* argv[]){
+int killNpc(int argc, char* argv[]) {
 
-}
+    switch (argv[0]) {
+        case "foul_goblin":
+            char *txt = "You have vaporized the foul goblin.\n";
+            write(STDOUT, txt, strlen(txt));
+            break;
+        case "big_orc":
+            char *txt = "This orc seems inmune to my magic.\n";
+            write(STDOUT, txt, strlen(txt));
+            break;
+        // end game
+        default:
+            char *txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
+            write(STDOUT, txt, strlen(txt));
+            return S_END;
+            break;
+    }
 
-/**
- * 
- */
-int hronar(int argc, char* argv[]){
-
-}
-/**
- * 
- */
-int secretary(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int siraye_arazana(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int spirit(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int teacher(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int torch(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int zemra(int argc, char* argv[]){
-
+    return game_state;
 }
 
 /////////////////////////////////////// Main executable
 
 static t_mapfunc lookuptable[] = {
-    { "big_orc", big_orc }
+    { "foul_goblin", killNpc },
+    { "big_orc", killNpc },
+    { "hidi", killNpc },
+    { "hronar", killNpc },
+    { "siraye_arazana", killNpc },
+    { "zemra", killNpc },
+    { "secretary", killNpc },
+    { "teacher", killNpc }
 };
 
 t_func_event keyfromstring(char *key)
@@ -109,7 +85,17 @@ int main(int argc, char* argv[])
     fifo_read(&nArgFifo, &game_state, gameDirs);
 
     t_func_event func = keyfromstring(argv[1]);
-    int result = func(argc, argv);
+    int result = game_state;
 
-    exit(result);
+    switch (game_state) {
+        case S_RM:
+            result = func(argc, argv);
+            break;
+        default:
+            char *txt = "You have not obtained this spell yet.\n"
+            write(STDOUT, txt, strlen(txt));
+            break;
+    }
+
+    exit(game_state);
 }
