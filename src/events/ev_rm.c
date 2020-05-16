@@ -34,32 +34,20 @@ int torch(int argc, char* argv[]) {
 }
 
 int killNpc(int argc, char* argv[]) {
-    switch (item) {
+    switch (argv[0]) {
         case "foul_goblin":
-<<<<<<< HEAD
             ;//C doesn't let us declare variables after a label.
-=======
-            ; //C doesn't allow the declaration of variables directly after a case.
->>>>>>> 0511f9280beeb2d498a666fcc36e97819746ff64
             char *txt = "You have vaporized the foul goblin.\n";
             write(STDOUT, txt, strlen(txt));
             break;
         case "big_orc":
-<<<<<<< HEAD
             ;//C doesn't let us declare variables after a label.
-=======
-            ; //C doesn't allow the declaration of variables directly after a case.
->>>>>>> 0511f9280beeb2d498a666fcc36e97819746ff64
             char *txt = "This orc seems inmune to my magic.\n";
             write(STDOUT, txt, strlen(txt));
             break;
         // end game
         default:
-<<<<<<< HEAD
             ;//C doesn't let us declare variables after a label.
-=======
-            ; //C doesn't allow the declaration of variables directly after a case.
->>>>>>> 0511f9280beeb2d498a666fcc36e97819746ff64
             char *txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
             write(STDOUT, txt, strlen(txt));
             return S_END;
@@ -95,10 +83,6 @@ t_func_event keyfromstring(char *key)
 
 int main(int argc, char* argv[])
 {
-<<<<<<< HEAD
-=======
-    int nArgFifo;
->>>>>>> 0511f9280beeb2d498a666fcc36e97819746ff64
     fifo_read(&game_state, gameDirs);
 
     t_func_event func = keyfromstring(argv[1]);
@@ -110,10 +94,7 @@ int main(int argc, char* argv[])
             result = func(argc, argv);
             break;
         default:
-<<<<<<< HEAD
             ;//C doesn't let us declare variables after a label.
-=======
->>>>>>> 0511f9280beeb2d498a666fcc36e97819746ff64
             char *txt = "You have not obtained this spell yet.\n";
             write(STDOUT, txt, strlen(txt));
             break;
