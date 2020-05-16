@@ -47,6 +47,12 @@ int finalize();
 int is_state_dependend(char* command);
 
 /**
+ * Checks whether the command written by the player can execute in the current 
+ * state of the game.
+ */
+int can_execute(char* command);
+
+/**
  * This function separates the arguments written in a line and puts them inside
  * a vector of char*
  */
@@ -140,17 +146,28 @@ int execute(int argc, char *argv[])
       finalize();
       logout();
    }else{
-      int success_cmd = execute_cmd(argc, argv);
-      int success_ev = is_state_dependend(argv[0]);
-      // We check to see if this command executes an event
-      //printf("_cmd: %d and _ev: %d \n", success_cmd, success_ev);
 
-      if((success_cmd == 0) && (success_ev == 1)){
+      //We will check here that the command can execute.
+
+      // We check to see if this command executes an event
+      int launches_ev = is_state_dependend(argv[0]);
+      if(launches_ev == 1){
+         int b = can_execute(argv[0]);
+         if(b){
+            int success_cmd = execute_cmd(argc, argv);
+            //printf("_cmd: %d and _ev: %d \n", success_cmd, launches_ev);
+            if(success_cmd == 0){
             game_state = execute_ev(argc, argv);
             //printf("New game_state: %d\n", game_state);
+            }
+         }else{
+            write(STDOUT, "What?, is that a spell am I trying to use?, maybe I should find information about how to use it\n",97);
          }
+      }else{
+         //We just execute the event without problems, they don't depend on the current state.
+         int success_cmd = execute_cmd(argc, argv);
       }
-
+   }
    return 0;
 }
 
@@ -183,6 +200,30 @@ int is_state_dependend(char* command){
 	return 0;
 }
 
+int can_execute(char* command){
+   int res = 1;
+   int b;
+   switch (game_state)
+   {
+   case S_TUTORIAL:
+   case S_GAME:
+      b = strcmp(command,"mv") || strcmp(command,"rm") || strcmp(command,"touch");
+      if(b){
+         res = 0;
+      }
+      break;
+   case S_MV:
+      b = strcmp(command,"rm");
+      if(b){
+         res = 0;
+      }
+      break;
+   default:
+      break;
+   }
+   return res;
+}
+
 int read_args(int* argcp, char* args[], int max, int* eofp)
 {
    static char cmd[MAXLINE];
@@ -200,8 +241,7 @@ int read_args(int* argcp, char* args[], int max, int* eofp)
          break;
       }
    }
-   switch (ret)
-   {
+   switch (ret){
      case 1 : cmd[i+1]='\0';    // correct reading
               break;
      case 0 : *eofp = 1;        // end of file

@@ -21,7 +21,7 @@ int big_orc(int argc, char* argv[]){
         if(strcmp("Big_hole", argv[2])==0){
             write(STDOUT, "HA HA!, I have move the big orc to the big hole and now it is stuck\n", 69);
             write(STDOUT, "By defeating the big orc, I have brought peace to this place and now I can do as I wish.\n", 90);
-            write(STDOUT, "'Well done!, my player. You adventure ends here, but you can keep exploring', says a strange voice.", 10);
+            write(STDOUT, "'Well done!, my player. You adventure ends here, but you can keep exploring', says a strange voice.", 100);
         } else {
             write(STDOUT,"Oh no!, by moving the orc to another place I have let it escape and now it is heading to the town!\n",100);
             res = S_END;
@@ -51,9 +51,6 @@ int boulder(int argc, char* argv[]){
 		    chmod(cave_path, 0777); //To unlock it
 
             write(STDOUT, "I think I managed to move the boulder to the cliff, now the entrance is clear\n",79);
-        } else {
-            printf("Where you moving it?");
-            res = S_END;
         }
         break;
     default:

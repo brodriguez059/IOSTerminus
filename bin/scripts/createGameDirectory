@@ -8,6 +8,7 @@ descriptionFile=".description"
 
 createGameDirectory() {
     #echo "Deleting $basePath and all its content..."
+    chmod -R 777 "$basePath" > /dev/null 2>&1
     rm -R $basePath > /dev/null 2>&1
 
     # Home
@@ -192,6 +193,20 @@ createGameDirectory() {
     #echo "Done!"
 
     #After everything has been generated, we lock the unlockable directories:
+    
+    #Big hole
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole"
+    #Cave(east)
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)"
+    #Cave(west)
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(west)"
+    #Cave entrance
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance"
+    #Cliff
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cliff"
+    #Small island
+    chmod 0666 "$basePath/Forest/Small_lake/Small_island"
+    #Forest
     chmod 0666 "$basePath/Forest"
 
 }
