@@ -58,11 +58,29 @@ int main(int argc, char* argv[])
    strcat(f2_path,"/");
    strcat(f2_path, argv[2]);
 
+   char rollbackPath1[512]; //We prepare a special path in order to rollback the concatenated file and
+   char rollbackPath2[512]; //we prepare another special path in order to rollback the concatenated file
+   strcpy(rollbackPath1, cwd); //in case it fails to delete one of the originals.
+   strcat(rollbackPath1,"/");
+
+   strcpy(rollbackPath2, rollbackPath1);
+
+   strcat(rollbackPath1, filename);
+
+   printf("Our cwd: %s\n",cwd);
+   printf("The file to rollback: %s\n", rollbackPath1);
+
    if(unlink(f1_path) < 0){
+      strcat(rollbackPath2,argv[2]);
+      printf("The new name is: %s\n", rollbackPath2);
+      rename(rollbackPath1, rollbackPath2);
       error("There were problems to fuse the first file");
    };
    if(unlink(f2_path) < 0){
-      error("There were problems to fuse the first file");
+      strcat(rollbackPath2,argv[1]);
+      printf("The new name is: %s\n", rollbackPath2);
+      rename(rollbackPath1, rollbackPath2);
+      error("There were problems to fuse the second file");
    }
    
    return 0;
