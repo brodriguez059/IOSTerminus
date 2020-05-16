@@ -34,25 +34,21 @@ int torch(int argc, char* argv[]) {
 }
 
 int killNpc(int argc, char* argv[]) {
-    switch (argv[0]) {
-        case "foul_goblin":
-            ;//C doesn't let us declare variables after a label.
-            char *txt = "You have vaporized the foul goblin.\n";
-            write(STDOUT, txt, strlen(txt));
-            break;
-        case "big_orc":
-            ;//C doesn't let us declare variables after a label.
-            char *txt = "This orc seems inmune to my magic.\n";
-            write(STDOUT, txt, strlen(txt));
-            break;
-        // end game
-        default:
-            ;//C doesn't let us declare variables after a label.
-            char *txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
-            write(STDOUT, txt, strlen(txt));
-            return S_END;
-            break;
+    char *txt;
+    char *item = argv[0];
+
+    if (strcmp(item, "foul_globin") == 0) {
+        txt = "You have vaporized the foul goblin.\n";
+
+    } else if (strcmp(item, "big_orc") == 0) {
+        txt = "This orc seems inmune to my magic.\n";
+
+    } else {
+        txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
+        game_state = S_END;
     }
+
+    write(STDOUT, txt, strlen(txt));
 
     return game_state;
 }
