@@ -14,13 +14,7 @@ dir_t gameDirs[NUMDIR];
  * 
  */
 int big_orc(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int broken_boat(int argc, char* argv[]){
+    //I suppose concatenating the big orc with another thing should count as killing it.
 
 }
 
@@ -28,61 +22,56 @@ int broken_boat(int argc, char* argv[]){
  * 
  */
 int foul_goblin(int argc, char* argv[]){
-
+    //I suppose concatenating another thing with the foul goblin could count as killing it.
 }
 
 /**
- * 
+ * This handles the events for all sentient creatures. (Hidi, Hronar, Secretary, Siraye_Arazana, Teacher, Zemra)
  */
-int hidi(int argc, char* argv[]){
-
+int sentient(int argc, char* argv[]){
+    int res = game_state;
+    switch (game_state)
+    {
+    default:
+        //Using the cat on another sentient creature causes a game over.
+        res = S_END;
+        break;
+    }
+    return res;
 }
 
 /**
- * 
+ * This will get called by either using cat on the planks and the broken boat.
  */
-int hronar(int argc, char* argv[]){
+int repair_boat(int argc, char* argv[]){
+    //First check that the arguments are correct:
+    int boat = ( ( strcmp("broken_boat", argv[1])==0 ) || ( strcmp("broken_boat", argv[2] == 0) ) );
+    int planks = ( ( strcmp("planks", argv[1])==0 ) || ( strcmp("planks", argv[2] == 0) ) );
+    if(boat && planks){
+        switch (game_state)
+        {
+        case S_MV:
+            //You managed to repair the broken boat, then:
 
-}
+            //We modify the description file of the small lake.
 
-/**
- * 
- */
-int planks(int argc, char* argv[]){
+            //We delete the planks and the boat.
+
+            //We unlock the small island.
+            break;
+        default:
+            break;
+        }
+    }else{
+        //You concatenated the planks or the broken boat with other things, this stops the player from actually progressing. Game over.
+    }
     
 }
-
-/**
- * 
- */
-int secretary(int argc, char* argv[]){
-    
-}
-
-/**
- * 
- */
-int siraye_arazana(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int teacher(int argc, char* argv[]){
-
-}
-
-/**
- * 
- */
-int zemra(int argc, char* argv[]){
-
-}
-
 
 t_mapfunc lookuptable[] = {
-    
+    {"big_orc", big_orc}, {"broken_boat", repair_boat}, {"foul_globlin", foul_goblin}, {"planks", repair_boat},
+    {"hidi", sentient}, {"hronar", sentient}, {"secretary", sentient}, {"siraye_arazana", sentient}, {"teacher", sentient},
+    {"zemra", sentient}
 };
 
 t_func_event keyfromstring(char *key)
