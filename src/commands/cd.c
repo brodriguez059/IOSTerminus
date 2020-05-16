@@ -8,7 +8,7 @@
 #define BUF_SIZE 1024
 #define PATH_LIMIT 512
 #define NO_SUCH_DIRECTORY "There is no room called "
-#define NO_ACCESS_PERMISIONS "There is a strange force preventing you from going there"
+#define NO_ACCESS_PERMISIONS "There is a strange force preventing you from going there\n"
 #define OUTPUT 1
 #define ERR_OUTPUT 2
 

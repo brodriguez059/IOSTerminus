@@ -22,11 +22,22 @@ int main(int argc, char const *argv[])
 
     /* Check if file opened */
     char dpath[512];
+
+    char newPath[512]; //We need to change the permissions of the place where we are moving the file.
+
     strcpy(dpath, cpath);
     strcat(dpath, "/");
     strcat(dpath, argv[2]);
+
+    if((strcmp(argv[2], "Cliff") == 0) || (strcmp(argv[2], "Big_hole")==0)){
+        strcpy(newPath, dpath);
+        chmod(newPath, 0777); //We change the permissions of this special directories to forbid the use of mv.
+    }
+
     strcat(dpath, "/");
     strcat(dpath, argv[1]);
+
+
 
     if((destF = open(dpath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)) < 0){
         close(srcF);
@@ -38,7 +49,12 @@ int main(int argc, char const *argv[])
         write(destF, buffer, count);
     }
 
+    if((strcmp(argv[2], "Cliff") == 0) || (strcmp(argv[2], "Big_hole")==0)){
+        chmod(newPath, 0666); //We return this special directories to their normal permissions.
+    }
+
     //Then, we delete the original file
+    
 
     char fpath[512];
     strcpy(fpath, cpath);

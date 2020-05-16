@@ -41,12 +41,15 @@ int boulder(int argc, char* argv[]){
     int res = game_state;
     switch (game_state)
     {
+    case S_MV:
     case S_RM:;
         if(strcmp("Cliff", argv[2])==0){
             char cave_path[512];
 
 		    strcpy(cave_path, gameDirs[GAME].name);
 		    strcat(cave_path, "Forest/Town/Mountain/Cave_entrance");
+
+            printf("The path to unlock is %s\n", cave_path);
 
 		    chmod(cave_path, 0777); //To unlock it
 
@@ -109,18 +112,18 @@ int main(int argc, char* argv[])
 
     fifo_read(&game_state, gameDirs);
 
-    // printf("(Event) My current state is: %d\n",game_state);
-    // int j;
-    // for(j=0;j<NUMDIR;j++){
-    //     printf("gameDirs[%d]: %s\n",j,gameDirs[j].name);
-    // }
+    printf("(Event) My current state is: %d\n",game_state);
+    int j;
+    for(j=0;j<NUMDIR;j++){
+        printf("gameDirs[%d]: %s\n",j,gameDirs[j].name);
+    }
 
-    // printf("We are going to launch a mv event\n");
-    // printf("My arguments are:\n");
-    // int i;
-    // for(i = 0; i < argc; i++){
-    //     printf("%s\n", argv[i]);
-    // }
+    printf("We are going to launch a mv event\n");
+    printf("My arguments are:\n");
+    int i;
+    for(i = 0; i < argc; i++){
+        printf("%s\n", argv[i]);
+    }
 
     t_func_event func = keyfromstring(argv[1]);
 

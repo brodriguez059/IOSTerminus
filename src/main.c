@@ -44,7 +44,7 @@ int finalize();
  * Checks whether the command written by the player depends on the current state
  * of the game or not.
  */
-int is_state_dependend(char* command);
+int launches_events(char* command);
 
 /**
  * Checks whether the command written by the player can execute in the current 
@@ -146,23 +146,25 @@ int execute(int argc, char *argv[])
       finalize();
       logout();
    }else{
-
       //We will check here that the command can execute.
 
       // We check to see if this command executes an event
-      int launches_ev = is_state_dependend(argv[0]);
+      int launches_ev = launches_events(argv[0]);
+
       if(launches_ev == 1){
+
          int b = can_execute(argv[0]);
-         if(b){
+         if(b == 1){
             int success_cmd = execute_cmd(argc, argv);
-            //printf("_cmd: %d and _ev: %d \n", success_cmd, launches_ev);
+            //printf("success_cmd: %d\n", success_cmd);
             if(success_cmd == 0){
-            game_state = execute_ev(argc, argv);
-            //printf("New game_state: %d\n", game_state);
+               game_state = execute_ev(argc, argv);
+               //printf("New game_state: %d\n", game_state);
             }
          }else{
             write(STDOUT, "What?, is that a spell am I trying to use?, maybe I should find information about how to use it\n",97);
          }
+
       }else{
          //We just execute the event without problems, they don't depend on the current state.
          execute_cmd(argc, argv);
@@ -187,7 +189,7 @@ int finalize()
    return 0;
 }
 
-int is_state_dependend(char* command){
+int launches_events(char* command){
    char* cmds[5] = {"cat","less","mv","rm","touch"};
    	int i;
    	for(i=0;i<4;i++){
@@ -207,13 +209,14 @@ int can_execute(char* command){
    {
    case S_TUTORIAL:
    case S_GAME:
-      b = strcmp(command,"mv") || strcmp(command,"rm") || strcmp(command,"touch");
-      if(b){
+      b =  (strcmp(command,"mv") == 0 ) || (strcmp(command,"rm") == 0 )|| (strcmp(command,"touch") == 0 );
+      if(b == 1){
+         //If b == 1, it means that all of the verifications done above are true.
          res = 0;
       }
       break;
    case S_MV:
-      b = strcmp(command,"rm");
+      b = (strcmp(command,"rm") == 0);
       if(b){
          res = 0;
       }
@@ -221,6 +224,7 @@ int can_execute(char* command){
    default:
       break;
    }
+   //printf("Can it launch?: %d\n",res);
    return res;
 }
 

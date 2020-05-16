@@ -48,8 +48,8 @@ int killNpc(int argc, char* argv[]) {
         txt = "You have vaporized the foul goblin.\n";
 
     } else if (strcmp(item, "big_orc") == 0) {
-        txt = "This orc seems inmune to my magic.\n";
-
+        txt = "Looks like I zombified the orc!\n";
+        //Create a new big_orc but with another description.
     } else {
         txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
         game_state = S_END;
@@ -70,7 +70,10 @@ static t_mapfunc lookuptable[] = {
     { "siraye_arazana", killNpc },
     { "zemra", killNpc },
     { "secretary", killNpc },
-    { "teacher", killNpc }
+    { "teacher", killNpc },
+    { "boulder", boulder},
+    { "spirit", spirit},
+    { "torch", torch}
 };
 
 t_func_event keyfromstring(char *key)
@@ -91,12 +94,29 @@ int main(int argc, char* argv[])
     t_func_event func = keyfromstring(argv[1]);
     int result = game_state;
 
+    // printf("(Event) My current state is: %d\n",game_state);
+    // int j;
+    // for(j=0;j<NUMDIR;j++){
+    //     printf("gameDirs[%d]: %s\n",j,gameDirs[j].name);
+    // }
+
+    // printf("We are going to launch a mv event\n");
+    // printf("My arguments are:\n");
+    // int i;
+    // for(i = 0; i < argc; i++){
+    //     printf("%s\n", argv[i]);
+    // }
+
     switch (game_state) {
         case S_RM:
             ;//C doesn't let us declare variables after a label.
-            result = func(argc, argv);
+            printf("We have entered to the case state: %d\n",game_state);
+            if(func != NULL){
+                result = func(argc, argv);
+            }
             break;
         default:
+            printf("We have entered to the case state: %d\n",game_state);
             ;//C doesn't let us declare variables after a label.
             char *txt = "You have not obtained this spell yet.\n";
             write(STDOUT, txt, strlen(txt));
