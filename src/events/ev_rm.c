@@ -14,7 +14,7 @@ dir_t gameDirs[NUMDIR];
  *
  */
 int boulder(int argc, char* argv[]) {
-    char *txt = "The boulder has been converted into small rocks, the path is now clear.\n"
+    char *txt = "The boulder has been converted into small rocks, the path is now clear.\n";
     write(STDOUT, txt, strlen(txt));
     return game_state;
 }
@@ -34,18 +34,20 @@ int torch(int argc, char* argv[]) {
 }
 
 int killNpc(int argc, char* argv[]) {
-
-    switch (argv[0]) {
+    switch (item) {
         case "foul_goblin":
+            ; //C doesn't allow the declaration of variables directly after a case.
             char *txt = "You have vaporized the foul goblin.\n";
             write(STDOUT, txt, strlen(txt));
             break;
         case "big_orc":
+            ; //C doesn't allow the declaration of variables directly after a case.
             char *txt = "This orc seems inmune to my magic.\n";
             write(STDOUT, txt, strlen(txt));
             break;
         // end game
         default:
+            ; //C doesn't allow the declaration of variables directly after a case.
             char *txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
             write(STDOUT, txt, strlen(txt));
             return S_END;
@@ -82,7 +84,7 @@ t_func_event keyfromstring(char *key)
 int main(int argc, char* argv[])
 {
     int nArgFifo;
-    fifo_read(&nArgFifo, &game_state, gameDirs);
+    fifo_read(&game_state, gameDirs);
 
     t_func_event func = keyfromstring(argv[1]);
     int result = game_state;
@@ -92,10 +94,10 @@ int main(int argc, char* argv[])
             result = func(argc, argv);
             break;
         default:
-            char *txt = "You have not obtained this spell yet.\n"
+            char *txt = "You have not obtained this spell yet.\n";
             write(STDOUT, txt, strlen(txt));
             break;
     }
 
-    exit(game_state);
+    return game_state;
 }
