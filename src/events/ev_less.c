@@ -18,6 +18,14 @@ int ancient_sign(int argc, char* argv[]){
 	switch(game_state)
 	{
 	case S_TUTORIAL:
+		;//If we don't add this ; then the compiler refuses to compile this file.
+		char forest_path[512];
+
+		strcpy(forest_path, gameDirs[GAME].name);
+		strcat(forest_path, "Forest");
+
+		chmod(forest_path, 0777); //To unlock it
+		
 		res = S_GAME;
 	default:
 		break;
@@ -63,16 +71,16 @@ int spell_book(int argc, char* argv[]){
 	case S_MV:
 		; //If we don't add this ; then the compiler refuses to compile this file.
 		//We unhide the desk
-		char desk_hidden[512];
+		char forest_path[512];
 		char desk_unhidden[512];
 
-		strcpy(desk_hidden, gameDirs[GAME].name);
-		strcat(desk_hidden, "Forest/Town/Magic_tower/Study_room/");
-		strcpy(desk_unhidden, desk_hidden);
-		strcat(desk_hidden, ".desk");
+		strcpy(forest_path, gameDirs[GAME].name);
+		strcat(forest_path, "Forest/Town/Magic_tower/Study_room/");
+		strcpy(desk_unhidden, forest_path);
+		strcat(forest_path, ".desk");
 		strcat(desk_unhidden, "desk");
 
-		rename(desk_hidden, desk_unhidden);
+		rename(forest_path, desk_unhidden);
 
 		//We delete the spell_book
 		char* cwd = getcwd(NULL, 0); 
