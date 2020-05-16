@@ -19,9 +19,11 @@ int big_orc(int argc, char* argv[]){
     {
     case S_RM:
         if(strcmp("Big_hole", argv[2])==0){
-            printf("Now the orc is stuck");
+            write(STDOUT, "HA HA!, I have move the big orc to the big hole and now it is stuck\n", 69);
+            write(STDOUT, "By defeating the big orc, I have brought peace to this place and now I can do as I wish.\n", 90);
+            write(STDOUT, "'Well done!, my player. You adventure ends here, but you can keep exploring', says a strange voice.", 10);
         } else {
-            printf("Oh no!, the orc has escaped!");
+            write(STDOUT,"Oh no!, by moving the orc to another place I have let it escape and now it is heading to the town!\n",100);
             res = S_END;
         }
         break;
@@ -39,9 +41,16 @@ int boulder(int argc, char* argv[]){
     int res = game_state;
     switch (game_state)
     {
-    case S_RM:
+    case S_RM:;
         if(strcmp("Cliff", argv[2])==0){
-            printf("Bye bye rock");
+            char cave_path[512];
+
+		    strcpy(cave_path, gameDirs[GAME].name);
+		    strcat(cave_path, "Forest/Town/Mountain/Cave_entrance");
+
+		    chmod(cave_path, 0777); //To unlock it
+
+            write(STDOUT, "I think I managed to move the boulder to the cliff, now the entrance is clear\n",79);
         } else {
             printf("Where you moving it?");
             res = S_END;
@@ -63,9 +72,7 @@ int planks(int argc, char* argv[]){
     {
     case S_MV:
         if(strcmp("Small_lake", argv[2])==0){
-            printf("Moved to the right place");
-        } else {
-            printf("Not the right place");
+            write(STDOUT,"I think I have moved them to the right place.\n",47);
         }
         break;
     default:
