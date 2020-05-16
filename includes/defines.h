@@ -9,7 +9,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <signal.h>
 
 /////////////////////////////////////// Macros
 
@@ -30,11 +29,11 @@
 #define PIPE_READ_END 0
 #define PIPE_WRITE_END 1
 
-#define S_TUTORIAL 0
-#define S_GAME 1
-#define S_MV 2
-#define S_RM 3
-#define S_END 4
+#define S_TUTORIAL 10
+#define S_GAME 11
+#define S_MV 12
+#define S_RM 13
+#define S_END 14
 
 #define error(a) {perror(a); exit(1);};
 

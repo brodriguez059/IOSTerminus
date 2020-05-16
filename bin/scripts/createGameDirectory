@@ -183,9 +183,9 @@ createGameDirectory() {
     echo "One hour later, the session finishes and you decide to move on. You have learned about two new spells at least! What were their names?... 'mv' and 'cat'?" >> "teacher"
     echo "Yes, those were their names. Now you can move items from locations to locations and concatenate two items into one" >> "teacher"
 
-    # Home/Forest/Town/Magic_tower/Study_Room
-    mkdir "$basePath/Forest/Town/Magic_tower/Study_Room"
-    cd "$basePath/Forest/Town/Magic_tower/Study_Room"
+    # Home/Forest/Town/Magic_tower/Study_room
+    mkdir "$basePath/Forest/Town/Magic_tower/Study_room"
+    cd "$basePath/Forest/Town/Magic_tower/Study_room"
     echo "You enter a small, square shaped study room has mismatched wooden and metal furniture.  The floor is carpeted and the walls are painted and decorated with a wallpaper border.  Light is provided by wall lamps and a ceiling light.  The room is done in warm light colors and overall looks very old-fashioned.  Among the first things one notices walking in are a sturdy old wooden desk and mysterious scroll on it." > $descriptionFile
 
     echo "You approach the wooden desk and unroll the mysterious scroll on it. There are various cryptic symbols displayed on it and instructions about how to use them. At the bottom there is a message: 'Use it for the removal of objects created by students'. You have learned the 'rm' spell." > ".desk"

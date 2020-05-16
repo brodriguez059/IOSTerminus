@@ -81,7 +81,8 @@ int zemra(int argc, char* argv[]){
 }
 
 
-static t_mapfunc lookuptable[] = {
+t_mapfunc lookuptable[] = {
+    
 };
 
 t_func_event keyfromstring(char *key)
@@ -97,11 +98,13 @@ t_func_event keyfromstring(char *key)
 
 int main(int argc, char* argv[])
 {
-    int nArgFifo;
-    fifo_read(&nArgFifo, &game_state, gameDirs);
+    fifo_read(&game_state, gameDirs);
 
     t_func_event func = keyfromstring(argv[1]);
-    int result = func(argc, argv);
 
-    exit(result);
+    if(func != NULL){
+        game_state = func(argc, argv);
+    }
+
+    return game_state;
 }

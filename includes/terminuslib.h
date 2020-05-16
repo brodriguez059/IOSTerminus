@@ -31,9 +31,9 @@ extern int execute_ev(int argc, char *argv[]);
 /**
  * 
  */ 
-extern int fifo_read(int* argc, int* state, dir_t dirs[]);
+extern int fifo_read(int* state, dir_t dirs[]);
 
 /**
  * 
  */ 
-extern int fifo_write(int argc, int state, dir_t dirs[]);
+extern int fifo_write(int state, dir_t dirs[]);

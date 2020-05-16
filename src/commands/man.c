@@ -7,9 +7,8 @@ int game_state;
 int main (int argc, char *argv[]) {
 	int fd;
 	char c;
-	int nArg;
 	
-	fifo_read(&nArg, &game_state, gameDirs);
+	fifo_read(&game_state, gameDirs);
 
     char path[512];
 

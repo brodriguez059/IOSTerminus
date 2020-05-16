@@ -5,8 +5,8 @@ int main(int argc, char* argv[])
    int fd;
    char c;
 
-   if (argc != 2) {
-      write(2, "Usage: less [file name]\n", 24);
+   if (argc < 2) {
+      write(STDOUT, "Hmm... you should try to use more arguments, yes?\n", 51);
       exit(1);
    }
 

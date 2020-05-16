@@ -1,10 +1,5 @@
 // Terminus - myShell0 modification - IOS G4
 //////////////////////////////////////////////////
-
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-
 #include "built-ins.h"
 #include "terminuslib.h"
 
@@ -128,7 +123,8 @@ int sayWelcome(){
 }
 
 int initialize()
-{
+{  
+   game_state = S_TUTORIAL;
    init_dirs();
    execute_script(gameDirs[SCRT].name, "createGameDirectory y");
    sayWelcome();
@@ -155,12 +151,16 @@ int execute(int argc, char *argv[])
       finalize();
       logout();
    }else{
-      int success = execute_cmd(argc, argv);
+      int success_cmd = execute_cmd(argc, argv);
+      int success_ev = is_state_dependend(argv[0]);
       // We check to see if this command executes an event
-      if(success && is_state_dependend(argv[0])){
-         execute_ev(argc, argv);
+      //printf("_cmd: %d and _ev: %d \n", success_cmd, success_ev);
+
+      if((success_cmd == 0) && (success_ev == 1)){
+            game_state = execute_ev(argc, argv);
+            //printf("New game_state: %d\n", game_state);
+         }
       }
-   }
 
    return 0;
 }
@@ -185,7 +185,9 @@ int is_state_dependend(char* command){
    char* cmds[5] = {"cat","less","mv","rm","touch"};
    	int i;
    	for(i=0;i<4;i++){
+         //printf("We are checking %s against %s \n", command, cmds[i]);
     	   if(strcmp(command, cmds[i]) == 0){
+            //printf("We found it!\n");
            	return 1;
          }
       }

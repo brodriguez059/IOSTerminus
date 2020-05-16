@@ -1,6 +1,6 @@
 #include "terminuslib.h"
 
-int game_state = S_TUTORIAL;
+int game_state;
 
 dir_t gameDirs[NUMDIR];
 char welcomePath[512];
@@ -52,6 +52,8 @@ int execute_cmd(int argc, char *argv[])
 
    pid = fork();
 
+   int return_code;
+
    if(pid < 0){
       //If fork returned a negative number, there was an error.
       error("There was an error during the fork");
@@ -66,25 +68,35 @@ int execute_cmd(int argc, char *argv[])
       //printf("Command to be executed: %s\n", path);
 
       if(execv(path, argv) < 0){
-         error("There was an error during the execution of the generation command");
+         error("There was an error during the execution of the command");
       }
 
    }else{
       //If fork returned a positive number, then we are in the parent process
       //and pid is the process id of the child.
+
       int b = strcmp(argv[0], "man"); // The command "man" requires info from a FIFO, that's why we do this comprobation.
+
       if(b == 0){
-         int num;
-         num = 2 + NUMDIR; // The number of arguments will always be NUMDIR + 2
-         fifo_write(num, game_state, gameDirs);
+         return_code = fifo_write(game_state, gameDirs);
          //We don't use wait here but rather inside the function fifo_write as it
          //needs to know it the other end of the FIFO has already finished reading
       }else{
-         wait(NULL);
-      }
-   }
+         int wstate;
 
-   return 0;
+         wait(&wstate);
+
+         if (WIFEXITED(wstate)){
+            return_code = WEXITSTATUS(wstate);
+            //printf("exit status = %d\n", return_code);
+         }else{
+            return_code = 1;
+         }
+      }
+
+      //printf("We will return: %d\n",return_code);
+      return return_code;
+   }
 }
 
 int execute_ev(int argc, char *argv[])
@@ -92,6 +104,8 @@ int execute_ev(int argc, char *argv[])
    pid_t pid;
 
    pid = fork();
+
+   int return_code = 1;
 
    if(pid < 0){
       //If fork returned a negative number, there was an error.
@@ -109,15 +123,14 @@ int execute_ev(int argc, char *argv[])
       //printf("Command to be executed: %s\n", path);
 
       if(execv(path, argv) < 0){
-         error("There was an error during the execution of the generation command");
+         error("There was an error during the execution of the event");
       }
 
    }else{
       //We will always use FIFOs for the events.
-      int num_info = 2 + NUMDIR;
-      fifo_write(num_info, game_state, gameDirs);
+      return_code = fifo_write(game_state, gameDirs);
    }
-   return 0;
+   return return_code;
 }
 
 int execute_script(char* path, char* script)
@@ -137,7 +150,7 @@ int execute_script(char* path, char* script)
       strcat(command, script);
 
       if(execl("/bin/sh", "sh", "-c", command, (char *) NULL)){
-         error("There was an error during the execution of the command");
+         error("There was an error during the execution of the script");
       }
    }else{
       //If fork returned a positive number, then we are in the parent process
@@ -148,21 +161,18 @@ int execute_script(char* path, char* script)
    return 0;
 }
 
-int fifo_read(int* argc, int* state, dir_t dirs[]){
+int fifo_read(int* state, dir_t dirs[]){
    sleep(1); //We need to give the parent some time.
    const char* file = "./fifoChannel";
 	int fd = open(file, O_RDONLY);
 	if (fd < 0) return -1; /* no point in continuing */
 
-   read(fd, argc, sizeof(int));
    read(fd, state, sizeof(int));
-
-   int MaxLoops = *argc - 2;
 
    int n;
 
    int i;
-   for (i = 0; i < MaxLoops; i++) {
+   for (i = 0; i < NUMDIR; i++) {
       n = read(fd, &(dirs[i]), sizeof(dir_t));
       //printf("Read: %s %d\n", gameDirs[i].name, gameDirs[i].length);
       if (n == 0) break;  
@@ -174,29 +184,33 @@ int fifo_read(int* argc, int* state, dir_t dirs[]){
 	return 0;
 }
 
-int fifo_write(int argc, int state, dir_t dirs[]){
+int fifo_write(int state, dir_t dirs[]){
 	const char* pipeName = "./fifoChannel";
 	mkfifo(pipeName, 0666);                      /* read/write for user/group/others */
 	int fd = open(pipeName, O_CREAT | O_WRONLY); /* open as write-only */
 	if (fd < 0) return -1;                       /* can't go on */
 
-   //printf("Writing: %d\n", argc);
-   write(fd, &argc, sizeof(int));
    //printf("Writing: %d\n", state);
    write(fd, &state, sizeof(int));
 
-   int MaxLoops = argc - 2;
-
 	int i;
-	for (i = 0; i < MaxLoops; i++) {
+	for (i = 0; i < NUMDIR; i++) {
       //printf("Writing: %s %d\n", gameDirs[i].name, gameDirs[i].length);
       write(fd, &(dirs[i]), sizeof(dir_t));
    }
 	close(fd);           /* close pipe: generates an end-of-stream marker */
 
-   wait(NULL); /*We must first wait until all the info has been read */
+   int wstate;
+   
+   wait(&wstate); /*We must first wait until all the info has been read */
+   int return_code;
+   if (WIFEXITED(wstate)){
+      return_code = WEXITSTATUS(wstate);
+   }else{
+      return_code = 1;
+   }
 
 	unlink(pipeName);    /* unlink from the implementing file */
 
-	return 0;
+	return return_code;
 }

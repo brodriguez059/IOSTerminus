@@ -14,6 +14,7 @@ dir_t gameDirs[NUMDIR];
  * 
  */
 int big_orc(int argc, char* argv[]){
+    int res = game_state;
     switch (game_state)
     {
     case S_MV:
@@ -22,7 +23,7 @@ int big_orc(int argc, char* argv[]){
             printf("Now the orc is stuck");
         } else {
             printf("Oh no!, the orc has escaped!");
-            game_state = S_END;
+            res = S_END;
         }
         break;
     case S_TUTORIAL:
@@ -31,13 +32,14 @@ int big_orc(int argc, char* argv[]){
         break;
     }
 
-    return game_state;
+    return res;
 }
 
 /**
  * 
  */
 int boulder(int argc, char* argv[]){
+    int res = game_state;
     switch (game_state)
     {
     case S_RM:
@@ -45,7 +47,7 @@ int boulder(int argc, char* argv[]){
             printf("Bye bye rock");
         } else {
             printf("Where you moving it?");
-            game_state = S_END;
+            res = S_END;
         }
         break;
     case S_MV:
@@ -55,13 +57,14 @@ int boulder(int argc, char* argv[]){
         break;
     }
 
-    return game_state;
+    return res;
 }
 
 /**
  * 
  */
 int planks(int argc, char* argv[]){
+    int res = game_state;
     switch (game_state)
     {
     case S_MV:
@@ -78,32 +81,57 @@ int planks(int argc, char* argv[]){
         break;
     }
 
-    return game_state;
+    return res;
 }
-/////////////////////////////////////// Main executable
+// /////////////////////////////////////// Main executable
 
-static t_mapfunc lookuptable[] = {
+t_mapfunc lookuptable[] = {
     { "big_orc", big_orc}, {"boulder", boulder}, {"planks", planks}
 };
 
 t_func_event keyfromstring(char *key)
 {
+    //printf("The key is: %s\n", key);
+
     int i;
     for (i=0; (long unsigned int) i < NKEYS; i++) {
         t_mapfunc *map = &(lookuptable[i]);
+
+        //printf("We will compare %s with %s\n", key, map->key);
+
         if (strcmp(map->key, key) == 0)
             return map->ev;
     }
     return NULL;
 }
 
+/**
+ * This is the first event file that we created to test everything, that's why there is a lot of commented code.
+ */
 int main(int argc, char* argv[])
 {
-    int nArgFifo;
-    fifo_read(&nArgFifo, &game_state, gameDirs);
+    // printf("We are going to launch a mv event, we start reading\n");
+
+    fifo_read(&game_state, gameDirs);
+
+    // printf("(Event) My current state is: %d\n",game_state);
+    // int j;
+    // for(j=0;j<NUMDIR;j++){
+    //     printf("gameDirs[%d]: %s\n",j,gameDirs[j].name);
+    // }
+
+    // printf("We are going to launch a mv event\n");
+    // printf("My arguments are:\n");
+    // int i;
+    // for(i = 0; i < argc; i++){
+    //     printf("%s\n", argv[i]);
+    // }
 
     t_func_event func = keyfromstring(argv[1]);
-    int result = func(argc, argv);
 
-    exit(result);
+    if(func != NULL){
+        game_state = func(argc, argv);
+    }
+
+    return game_state;
 }
