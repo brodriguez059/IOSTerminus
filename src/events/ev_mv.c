@@ -120,10 +120,10 @@ int main(int argc, char* argv[])
 
     // printf("We are going to launch a mv event\n");
     // printf("My arguments are:\n");
-    int i;
-    for(i = 0; i < argc; i++){
-        printf("%s\n", argv[i]);
-    }
+    // int i;
+    // for(i = 0; i < argc; i++){
+    //     printf("%s\n", argv[i]);
+    // }
 
     t_func_event func = keyfromstring(argv[1]);
 

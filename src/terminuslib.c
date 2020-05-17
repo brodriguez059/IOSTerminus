@@ -186,8 +186,9 @@ int fifo_read(int* state, dir_t dirs[]){
 
 int fifo_write(int state, dir_t dirs[]){
 	const char* pipeName = "./fifoChannel";
-	mkfifo(pipeName, 0666);                      /* read/write for user/group/others */
-	int fd = open(pipeName, O_CREAT | O_WRONLY); /* open as write-only */
+   mknod(pipeName, S_IFIFO | 0666, 0); /* read/write for user/group/others */
+	//mkfifo(pipeName, 0666);
+   int fd = open(pipeName, O_CREAT | O_WRONLY); /* open as write-only */
 	if (fd < 0) return -1;                       /* can't go on */
 
    //printf("Writing: %d\n", state);

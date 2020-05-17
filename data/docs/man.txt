@@ -1,1 +1,8 @@
-TODO man
+A strange voice says:
+"man, it displays the whole manual of the commands
+
+This command displays information about all the commands of the game.
+
+To use it just write: 'man [command name]' and you will interact with that item."
+
+The voice talks with a weird jargon, but you think you understood.

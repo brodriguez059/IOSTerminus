@@ -1,5 +1,6 @@
 #include <dirent.h>     /* Defines DT_* constants */
-#include <fcntl.h>
+#include <linux/fcntl.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
 #include <sys/syscall.h>

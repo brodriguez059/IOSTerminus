@@ -142,7 +142,7 @@ int execute(int argc, char *argv[])
       //We change directory. This function is a built-in of the 
       //shell, so we don't call execute_cmd() to fork and exec.
       cd(argv[1]); 
-   }else if((strcmp(argv[0], "exit")) == 0 || (strcmp(argv[0], "logout") == 0)){
+   }else if(strcmp(argv[0], "exit") == 0 ){
       finalize();
       logout();
    }else{
