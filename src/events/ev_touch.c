@@ -13,7 +13,36 @@ dir_t gameDirs[NUMDIR];
 /**
  * 
  */
+int boulder(int argc, char* argv[]){
+    char *txt = "The boulder has been caught. \n"
+    write(STDOUT, txt, strlen(txt));
+    return game_state;
+}
+
+/**
+ * 
+ */
 int torch(int argc, char* argv[]){
+    char *txt = "Nice torch, now I can see some roads. \n"
+    write(STDOUT, txt, strlen(txt));
+    return game_state;
+}
+
+/**
+ * 
+ */
+int NewCabes(int argc, char* argv[]){
+    
+        char cavewest_path[512];
+
+        strcpy(cavewest_path, gameDirs[GAME].name);
+        strcat(cavewest_path, "Forest/Town/Mountain/Caveentrance/Cave(west)");
+        
+
+        char caveeast_path[512];
+
+        strcpy(caveeast_path, gameDirs[GAME].name);
+        strcat(caveeast_path, "Forest/Town/Mountain/Caveentrance/Cave(east)");    
 
 }
 
