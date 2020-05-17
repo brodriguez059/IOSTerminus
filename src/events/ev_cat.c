@@ -64,10 +64,29 @@ int repair_boat(int argc, char* argv[]){
         {
         case S_MV:
             //You managed to repair the broken boat, then:
-
-            //We modify the description file of the small lake.
             write(STDOUT,"Using the spell and the planks that you found, you manage to repair the boat.\n",79);
             write(STDOUT,"'Great!, now I can go to the small island', you say\n",53);
+
+            //We modify the description file of the small lake.
+            int fd_lake;
+            if((fd_lake = open(".description", O_WRONLY)) < 0){
+                error("There were magical problems");
+            }
+            int length;
+            if((length = lseek(fd_lake, 0, SEEK_END)) < 0){
+                error("There were magical errors changing the cursors");
+            }
+            char *text = "Finally!, the boat is repaired and now I can go to the small island\n\n";
+            int n = strlen(text);
+            int i;
+            char c;
+            for(i = 0; i < n; i++){
+                c = text[i];
+                if(write(fd_lake, &c, 1) < 0){
+                    error("There were some fatal magical problems");
+                }
+            }
+            close(fd_lake);
 
             //We unlock the small island.
             char island_path[512];

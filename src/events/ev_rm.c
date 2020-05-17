@@ -56,7 +56,21 @@ int killNpc(int argc, char* argv[]) {
     } else if (strcmp(item, "big_orc") == 0) {
         txt = "Looks like I zombified the orc!\n";
         //Create a new big_orc but with another description.
-        creat("big_orc", 0666);
+        int fd_orc;
+        if((fd_orc = creat("big_orc", 0666)) < 0){
+            error("There were fatal magical problems");
+        }
+        char *text = "The big_orc now looks zombified, what a conumdrum! I need to destroy it fast\n";
+        int n = strlen(text);
+        int i;
+        char c;
+        for(i = 0; i < n; i++){
+            c = text[i];
+            if(write(fd_orc, &c, 1) < 0){
+                error("There were some fatal magical problems");
+            }
+        }
+        close(fd_orc);
     } else {
         txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
         game_state = S_END;
