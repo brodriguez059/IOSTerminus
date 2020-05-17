@@ -14,8 +14,15 @@ dir_t gameDirs[NUMDIR];
  *
  */
 int boulder(int argc, char* argv[]) {
-    char *txt = "The boulder has been converted into small rocks, the path is now clear.\n"
+    char *txt = "The boulder has been converted into small rocks, the path is now clear.\n";
     write(STDOUT, txt, strlen(txt));
+
+    char cave_path[512];
+    strcpy(cave_path, gameDirs[GAME].name);
+	strcat(cave_path, "Forest/Town/Mountain/Cave_entrance");
+
+	chmod(cave_path, 0777); //To unlock it
+
     return game_state;
 }
 
@@ -34,23 +41,21 @@ int torch(int argc, char* argv[]) {
 }
 
 int killNpc(int argc, char* argv[]) {
+    char *txt;
+    char *item = argv[0];
 
-    switch (argv[0]) {
-        case "foul_goblin":
-            char *txt = "You have vaporized the foul goblin.\n";
-            write(STDOUT, txt, strlen(txt));
-            break;
-        case "big_orc":
-            char *txt = "This orc seems inmune to my magic.\n";
-            write(STDOUT, txt, strlen(txt));
-            break;
-        // end game
-        default:
-            char *txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
-            write(STDOUT, txt, strlen(txt));
-            return S_END;
-            break;
+    if (strcmp(item, "foul_globin") == 0) {
+        txt = "You have vaporized the foul goblin.\n";
+
+    } else if (strcmp(item, "big_orc") == 0) {
+        txt = "Looks like I zombified the orc!\n";
+        //Create a new big_orc but with another description.
+    } else {
+        txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
+        game_state = S_END;
     }
+
+    write(STDOUT, txt, strlen(txt));
 
     return game_state;
 }
@@ -65,7 +70,10 @@ static t_mapfunc lookuptable[] = {
     { "siraye_arazana", killNpc },
     { "zemra", killNpc },
     { "secretary", killNpc },
-    { "teacher", killNpc }
+    { "teacher", killNpc },
+    { "boulder", boulder},
+    { "spirit", spirit},
+    { "torch", torch}
 };
 
 t_func_event keyfromstring(char *key)
@@ -81,21 +89,39 @@ t_func_event keyfromstring(char *key)
 
 int main(int argc, char* argv[])
 {
-    int nArgFifo;
-    fifo_read(&nArgFifo, &game_state, gameDirs);
+    fifo_read(&game_state, gameDirs);
 
     t_func_event func = keyfromstring(argv[1]);
     int result = game_state;
 
+    // printf("(Event) My current state is: %d\n",game_state);
+    // int j;
+    // for(j=0;j<NUMDIR;j++){
+    //     printf("gameDirs[%d]: %s\n",j,gameDirs[j].name);
+    // }
+
+    // printf("We are going to launch a mv event\n");
+    // printf("My arguments are:\n");
+    // int i;
+    // for(i = 0; i < argc; i++){
+    //     printf("%s\n", argv[i]);
+    // }
+
     switch (game_state) {
         case S_RM:
-            result = func(argc, argv);
+            ;//C doesn't let us declare variables after a label.
+            printf("We have entered to the case state: %d\n",game_state);
+            if(func != NULL){
+                result = func(argc, argv);
+            }
             break;
         default:
-            char *txt = "You have not obtained this spell yet.\n"
+            printf("We have entered to the case state: %d\n",game_state);
+            ;//C doesn't let us declare variables after a label.
+            char *txt = "You have not obtained this spell yet.\n";
             write(STDOUT, txt, strlen(txt));
             break;
     }
 
-    exit(game_state);
+    return result;
 }

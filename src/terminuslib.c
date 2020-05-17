@@ -52,7 +52,7 @@ int execute_cmd(int argc, char *argv[])
 
    pid = fork();
 
-   int return_code;
+   int return_code = 0;
 
    if(pid < 0){
       //If fork returned a negative number, there was an error.
@@ -95,8 +95,8 @@ int execute_cmd(int argc, char *argv[])
       }
 
       //printf("We will return: %d\n",return_code);
-      return return_code;
    }
+   return return_code;
 }
 
 int execute_ev(int argc, char *argv[])
@@ -105,7 +105,7 @@ int execute_ev(int argc, char *argv[])
 
    pid = fork();
 
-   int return_code = 1;
+   int return_code = game_state;
 
    if(pid < 0){
       //If fork returned a negative number, there was an error.
@@ -186,8 +186,9 @@ int fifo_read(int* state, dir_t dirs[]){
 
 int fifo_write(int state, dir_t dirs[]){
 	const char* pipeName = "./fifoChannel";
-	mkfifo(pipeName, 0666);                      /* read/write for user/group/others */
-	int fd = open(pipeName, O_CREAT | O_WRONLY); /* open as write-only */
+   mknod(pipeName, S_IFIFO | 0666, 0); /* read/write for user/group/others */
+	//mkfifo(pipeName, 0666);
+   int fd = open(pipeName, O_CREAT | O_WRONLY); /* open as write-only */
 	if (fd < 0) return -1;                       /* can't go on */
 
    //printf("Writing: %d\n", state);

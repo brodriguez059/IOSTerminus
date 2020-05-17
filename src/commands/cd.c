@@ -8,7 +8,7 @@
 #define BUF_SIZE 1024
 #define PATH_LIMIT 512
 #define NO_SUCH_DIRECTORY "There is no room called "
-#define NO_ACCESS_PERMISIONS "There is a strange force preventing you from going there"
+#define NO_ACCESS_PERMISIONS "There is a strange force preventing you from going there\n"
 #define OUTPUT 1
 #define ERR_OUTPUT 2
 
@@ -16,7 +16,7 @@ void cd(char *path);
 
 int main(int argc, char *argv[]) //test run 
 {
-	char buf[BUF_SIZE] = { 0 };
+	//char buf[BUF_SIZE] = { 0 };
 	char currentPath[PATH_LIMIT];
 	getcwd(currentPath, PATH_LIMIT);
 	write(OUTPUT, "Current directory:", 18);

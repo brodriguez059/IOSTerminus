@@ -1,1 +1,8 @@
-TODO grep
+A strange voice says:
+"grep, it finds text on a file.
+
+This commands searches the occurrence of the [needle] in each line of [item]; if a occurrence is found all the line starting on [needle] will be printed.
+
+To use it just write: 'grep [item] [needle]' and you will interact with that item."
+
+The voice talks with a weird jargon, but you think you understood.

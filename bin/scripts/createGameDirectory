@@ -8,6 +8,7 @@ descriptionFile=".description"
 
 createGameDirectory() {
     #echo "Deleting $basePath and all its content..."
+    chmod -R 777 "$basePath" > /dev/null 2>&1
     rm -R $basePath > /dev/null 2>&1
 
     # Home
@@ -16,20 +17,24 @@ createGameDirectory() {
     cd $basePath
     echo "This small house looks very old-fashioned and is in average condition. " > $descriptionFile
     echo "This is the place where I wake up every day. It does not matter where do I rest, I always end up waking up here." >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >bed
-    echo "My bed, or as I prefer to call it, the comfy one. Soft as the hay of the stable and warm as the fireplace. It needs some restorations as the wood is starting to lose its color, I will have to varnish it some day near..." > "bed"
-    echo "It seems comfy but I have rest enough for today... Maybe I should explore the surroundings" >> "bed"
-    # >diary
-    echo "`date --date="yesterday" +"%A, %dth %B %Y"`:" >> "diary"
-    echo "It's been some days since the last entry..." >> "diary"
-    echo "`date --date="7 days ago" +"%A, %dth %B %Y"`:" >> "diary"
-    echo "Today is my birthday! Grandma has done a cheese cake specially for me it tasted tremendously good. I have to ask her the recipe and learn to make it as she makes, best cake ever!!!" >> "diary"
-    echo "`date --date="8 days ago" +"%A, %dth %B %Y"`:" >> "diary"
-    echo "Tomorrow is my birthday, I'm so excited! Grandma told me that she has prepared a special present for the occasion. Worst thing is she has not given me any clue. I don't have any idea what could it be. Also it's been long since the last time I saw her, I think it's been over a month ago..." >> "diary"
-    echo "" >> "diary"
-    echo "* Closes the diary... *" >> "diary"
-    echo "It continues several pages, I don't feel to know more about myself now." >> "diary"
+        # >bed
+        echo "My bed, or as I prefer to call it, the comfy one. Soft as the hay of the stable and warm as the fireplace. It needs some restorations as the wood is starting to lose its color, I will have to varnish it some day near..." > "bed"
+        echo "It seems comfy but I have rest enough for today... Maybe I should explore the surroundings" >> "bed"
+        echo " " >> "bed"
+
+        # >diary
+        echo "`date --date="yesterday" +"%A, %dth %B %Y"`:" >> "diary"
+        echo "It's been some days since the last entry..." >> "diary"
+        echo "`date --date="7 days ago" +"%A, %dth %B %Y"`:" >> "diary"
+        echo "Today is my birthday! Grandma has done a cheese cake specially for me it tasted tremendously good. I have to ask her the recipe and learn to make it as she makes, best cake ever!!!" >> "diary"
+        echo "`date --date="8 days ago" +"%A, %dth %B %Y"`:" >> "diary"
+        echo "Tomorrow is my birthday, I'm so excited! Grandma told me that she has prepared a special present for the occasion. Worst thing is she has not given me any clue. I don't have any idea what could it be. Also it's been long since the last time I saw her, I think it's been over a month ago..." >> "diary"
+        echo "" >> "diary"
+        echo "* Closes the diary... *" >> "diary"
+        echo "It continues several pages, I don't feel to know more about myself now." >> "diary"
+        echo " " >> "diary"
 
     # Home/Valley
     mkdir "$basePath/Valley"
@@ -37,13 +42,17 @@ createGameDirectory() {
     echo "You arrive to a peaceful place where you can relax for a moment." > $descriptionFile
     echo " " > $descriptionFile
     echo "'There is not much I can do here but nothing will vanish my explorer spirit. Let's see what can I found here!', you say as you set to explore the area." >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >ancient_sign
-    echo "You notice that there is still legible text written on it. You proceed to read it:" > "ancient_sign"
-    echo " " >> "ancient_sign"
-    echo "'Legend says that there is a cave where the last monsters live, past the town near the mountain. Beware of the surrounding of the mountain as it is said that the mountain is alive and throws big rocks to visitors from time to time'" >> "ancient_sign"
-    # >flower
-    echo "There are a lot of bees collecting pollen from all this flowers. I should better not take the flower as the last time or I will have to fight the whole honeycomb. I do not know how these bees communicate so fast." > "flower"
+        # >ancient_sign
+        echo "You notice that there is still legible text written on it. You proceed to read it:" > "ancient_sign"
+        echo " " >> "ancient_sign"
+        echo "'Legend says that there is a cave where the last monsters live, past the town near the mountain. Beware of the surrounding of the mountain as it is said that the mountain is alive and throws big rocks to visitors from time to time'" >> "ancient_sign"
+        echo " " >> "ancient_sign"
+
+        # >flower
+        echo "There are a lot of bees collecting pollen from all this flowers. I should better not take the flower as the last time or I will have to fight the whole honeycomb. I do not know how these bees communicate so fast." > "flower"
+        echo " " >> "flower"
 
     # Home/Forest
     mkdir "$basePath/Forest"
@@ -51,12 +60,14 @@ createGameDirectory() {
     echo "You arrive at the forest after walking some minutes." > $descriptionFile
     echo " " >> $descriptionFile
     echo "'What a wonderful place, my favourite season to walk in here where the leaves are all orange, red and those colors. Lets walk peacefully and enjoy this moment', you say." >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >sign
-    echo "Lost? This is your lucky day, you have found the only sign of the whole kingdom!" > "sign"
-    echo "* Bog: 0.7 km, go west on the crossing" >> "sign"
-    echo "* Small lake: 0.5 km, on the crossing keep south" >> "sign"
-    echo "* Magic Town: 2.3 km, go east on the first crossing, then keep east" >> "sign"
+        # >sign
+        echo "Lost? This is your lucky day, you have found the only sign of the whole kingdom!" > "sign"
+        echo "* Bog: 0.7 km, go west on the crossing" >> "sign"
+        echo "* Small lake: 0.5 km, on the crossing keep south" >> "sign"
+        echo "* Magic Town: 2.3 km, go east on the first crossing, then keep east" >> "sign"
+        echo " " >> "sign"
 
     # Home/Forest/Bog
     mkdir "$basePath/Forest/Bog"
@@ -64,32 +75,39 @@ createGameDirectory() {
     echo "You arrive at the bog." > $descriptionFile
     echo " " >> $descriptionFile
     echo "'Too much water and mud, I do not enjoy this type of places. At least it does not smell bad as usually happens in this places', you say." >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >planks
-    echo "There seems to be a bulk of some sort of material lying near you. After approaching it you noticed that it is actually a bunch of planks. They seem to be in good condition, maybe you can use them to repair something" > "planks"
+        # >planks
+        echo "There seems to be a bulk of some sort of material lying near you. After approaching it you noticed that it is actually a bunch of planks. They seem to be in good condition, maybe you can use them to repair something" > "planks"
+        echo " " >> "planks"
 
     # Home/Forest/Small_lake
     mkdir "$basePath/Forest/Small_lake"
     cd "$basePath/Forest/Small_lake"
     echo "You arrive at what appears to be a small lake. You can see what appears to be a small island on the distance, but the water seems a little bit to deep to just simply swim." > $descriptionFile
     echo "You find a bulk that looks like a small boat, maybe you can use it?" >> $descriptionFile
-    # >broken boat
-    echo "You get closer to the boat. Upon sight, it looks severely damaged, and some planks appear to be rotting." > "broken_boat"
-    echo "Maybe you could repair it with some spare wood. But where could you find them for free?" >> "broken_boat"
+    echo " " >> $descriptionFile
+
+        # >broken boat
+        echo "You get closer to the boat. Upon sight, it looks severely damaged, and some planks appear to be rotting." > "broken_boat"
+        echo "Maybe you could repair it with some spare wood. But where could you find them for free?" >> "broken_boat"
+        echo " " >> "broken_boat"
 
     # Home/Forest/Small_lake/Small_island
     mkdir "$basePath/Forest/Small_lake/Small_island"
     cd "$basePath/Forest/Small_lake/Small_island"
     echo "At last!, after a full ordeal you reach the small island. There does not seem to be too much here but a simple book" > $descriptionFile
     echo "Let's hope it is something good" >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >spell_book
-    echo "The book glitters with a special light. It seems to be a spell book!" > "spell_book"
-    echo "Upon touching it, the book flies to the sky and disappears." >> "spell_book"
-    echo " " >> "spell_book"
-    echo "'So much work for nothing', you say." >> "spell_book"
-    echo " " >> "spell_book"
-    echo "Maybe it has gone to another place?" >> "spell_book"
+        # >spell_book
+        echo "The book glitters with a special light. It seems to be a spell book!" > "spell_book"
+        echo "Upon touching it, the book flies to the sky and disappears." >> "spell_book"
+        echo " " >> "spell_book"
+        echo "'So much work for nothing', you say." >> "spell_book"
+        echo " " >> "spell_book"
+        echo "Maybe it has gone to another place?" >> "spell_book"
+        echo " " >> "spell_book"
 
     # Home/Forest/town
     mkdir "$basePath/Forest/Town"
@@ -97,31 +115,47 @@ createGameDirectory() {
     echo "You reach the main town. From there, you can see in the distance the mounstains and what appears to be a big tower." > $descriptionFile
     echo "The town itself is relatively small and filled with small houses and some food shops." >> $descriptionFile
     echo "There seems to be some people wearing ropes, maybe they are wizards or something similar?" >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >sign
-    echo "Welcome to Blisey: where everyone knows magic but no one will admit it." > "sign"
-    echo "You must be surprised that there is another sign in this kingdom. After all, for some reason everybody reads the sign of the forest first." >> "sign"
-    echo "Well I can really say that that little and cruel sign in the forest is lying! Look at me, I am obviously another sign!" >> "sign"
-    echo "I will tell you useful information, you will see: ">> "sign"
-    echo "" >> "sign"
-    echo "* Forest: 0.3 km, go north of the town" >> "sign"
-    echo "* Mountain: 1.6 km, keep walking in west direction" >> "sign"
-    echo "* Magic Tower: 2 km, go east on the first crossing" >> "sign"
-    echo " " >> "sign"
-    echo "'Useful information, indeed', you say" >> "sign"
+        # >sign
+        echo "Welcome to Blisey: where everyone knows magic but no one will admit it." > "sign"
+        echo "You must be surprised that there is another sign in this kingdom. After all, for some reason everybody reads the sign of the forest first." >> "sign"
+        echo "Well I can really say that that little and cruel sign in the forest is lying! Look at me, I am obviously another sign!" >> "sign"
+        echo "I will tell you useful information, you will see: ">> "sign"
+        echo "" >> "sign"
+        echo "* Forest: 0.3 km, go north of the town" >> "sign"
+        echo "* Mountain: 1.6 km, keep walking in west direction" >> "sign"
+        echo "* Magic Tower: 2 km, go east on the first crossing" >> "sign"
+        echo " " >> "sign"
+        echo "'Useful information, indeed', you say" >> "sign"
+        echo " " >> "sign"
 
-    # >Townspeople, each file is a different person
-    echo "He's the village gunsmith. A giant man with a bulging, strong body, with a large beard. He's very nice and good man, I always come to him when I have a problem or to have a good time. He's a good friend, even if he's older than me." > "Hronar"
-    echo "She's the most beautiful girl in town. Blonde with a clear eyes, they say you can be mesmerized just by looking at her deeply. Always with her long beautiful dresses, walking through nature. It's like a princess, I'm really in love with her." > "Hidi"
-    echo "He's the village salesman, he's older and he knows of everything. It has all kinds of objects and gadgets that you couldn't even imagine. Whenever I need information or any object I go to it. You can find him at his object store." > "Siraye_Arazana"
-    echo "She's a bounty hunter or monster hunter, in the village she has a reputation for being a strong person. She always wears a black cape and hat, like everything else, and if she's in town she's always in the bar. She's got a lost look and charcoal-black eyes. Legend has it that she's been the only one to face a hydra and get out alive from there." > "Zemra"
+        # >Townspeople, each file is a different person
+        #Hronar
+        echo "He's the village gunsmith. A giant man with a bulging, strong body, with a large beard. He's very nice and good man, I always come to him when I have a problem or to have a good time. He's a good friend, even if he's older than me." > "Hronar"
+        echo " " >> "Hronar"
+
+        #Hidi
+        echo "She's the most beautiful girl in town. Blonde with a clear eyes, they say you can be mesmerized just by looking at her deeply. Always with her long beautiful dresses, walking through nature. It's like a princess, I'm really in love with her." > "Hidi"
+        echo " " >> "Hidi"
+
+        #Siraye_Arazana
+        echo "He's the village salesman, he's older and he knows of everything. It has all kinds of objects and gadgets that you couldn't even imagine. Whenever I need information or any object I go to it. You can find him at his object store." > "Siraye_Arazana"
+        echo " " >> "Siraye_Arazana"
+
+        #Zemra
+        echo "She's a bounty hunter or monster hunter, in the village she has a reputation for being a strong person. She always wears a black cape and hat, like everything else, and if she's in town she's always in the bar. She's got a lost look and charcoal-black eyes. Legend has it that she's been the only one to face a hydra and get out alive from there." > "Zemra"
+        echo " " >> "Zemra"
 
     # Home/Forest/Town/Mountain
     mkdir "$basePath/Forest/Town/Mountain"
     cd "$basePath/Forest/Town/Mountain"
     echo "You've arrived to the mountain. It´s very high (about 9000 meters), so high that looking down you can only see clouds and mist. You've lost sights of the town and be careful because you can fall off the cliff. It seems that you have reached a cave, but the entrance is blocked by a boulder (you can move the stone learning the correct spells)" > $descriptionFile
-    # >boulder
-    echo "You observe a large moldy boulder. You feel an easy gush of wind coming out around it's edges. There's something behind it, yet no human could push it with it's muscles." > "boulder"
+    echo " " >> $descriptionFile
+
+        # >boulder
+        echo "You observe a large moldy boulder. You feel an easy gush of wind coming out around it's edges. There's something behind it, yet no human could push it with it's muscles." > "boulder"
+        echo " " >> "boulder"
 
     # Home/Forest/Town/Mountain/Cliff
     mkdir "$basePath/Forest/Town/Mountain/Cliff"
@@ -132,24 +166,32 @@ createGameDirectory() {
     mkdir "$basePath/Forest/Town/Mountain/Cave_entrance"
     cd "$basePath/Forest/Town/Mountain/Cave_entrance"
     echo "You've achieved getting into the cave. It's very dark but from as little as you see, there are two ways to be able to move forward west and east. Has a scary appearance and there's like a shadow constantly moving, apparently it's a spirit! But you can't choose either of those two ways because can't see anything, you've to create a torch (with the correct spell)." > $descriptionFile
-    # >spirit
-    echo "You approach a ghastly blueish spirit entity. It's form doesn't really resemble anything to you, yet you feel an aura of might and divinity. You hear an echo saying 'The cave is dark and full of terrors'" > "spirit"
+    echo " " >> $descriptionFile
+
+        # >spirit
+        echo "You approach a ghastly blueish spirit entity. It's form doesn't really resemble anything to you, yet you feel an aura of might and divinity. You hear an echo saying 'The cave is dark and full of terrors'" > "spirit"
+        echo " " >> "spirit"
 
     # Home/Forest/Town/Mountain/Cave_entrance/Cave(west)
     mkdir "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(west)"
     cd "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(west)"
     echo "Following this tunnel you have reached another cave (west cave). There are some pots with gold inside them and a strange table with weird powders. You hear a strange sharp laugh...Ouh no! It's a foul globling, he is going to attack me! (Maybe you need a spell to finist with him)." > $descriptionFile
-    # >foul_goblin
-    echo "It's very small and has an ugly face, like very wrinkled and full of wounds. A grey skin with a set of clothes as worn with a beanie, all dark green. Very long and sharp nails, just like their teeth and a strange sharp voice." > "foul_goblin"
-    echo " " >> "foul_goblin"
-    echo "'You will not get out alive, traveler', the creature says" >> "foul_goblin"
+    echo " " >> $descriptionFile
+
+        # >foul_goblin
+        echo "It's very small and has an ugly face, like very wrinkled and full of wounds. A grey skin with a set of clothes as worn with a beanie, all dark green. Very long and sharp nails, just like their teeth and a strange sharp voice." > "foul_goblin"
+        echo " " >> "foul_goblin"
+        echo "'You will not get out alive, traveler', the creature says" >> "foul_goblin"
+        echo " " >> "foul_goblin"
 
     # Home/Forest/Town/Mountain/Cave_entrance/Cave(east)
     mkdir "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)"
     cd "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)"
     echo "Following this tunnel you have reached another cave (east cave). Smells really bad, it's all full of viscous liquids and spiderwebs. There are many rocks, columns... all over the cave and a big hole at the middle of all the cave, and on the ground a lot of combat material (swords, shields...) with some other corpse. At the end of it, you can see like an big orc sitting on a throne. So be careful and don't make too much noise (Maybe you need a spell to throwing him into the big hole)" > $descriptionFile
-    # >big_orc
-    echo "You observe a foul beast standing in the cave. Three meters tall, veiny green mountain of muscles with sharp fangs and saliva running down the chin." > "big_orc"
+
+        # >big_orc
+        echo "You observe a foul beast standing in the cave. Three meters tall, veiny green mountain of muscles with sharp fangs and saliva running down the chin." > "big_orc"
+        echo " " >> "big_orc"
 
     # Home/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole
     mkdir "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole"
@@ -162,36 +204,52 @@ createGameDirectory() {
     echo "You head to the magic tower to discover a tall, old yet well-looking building. The magic tower seems to be some sort of academy for wizards on training and the like. It sure looks mystical and magical!" > $descriptionFile
     echo " " >> $descriptionFile
     echo "You proceed to enter and glance over the big room that is the entrance. To your right there seems to be someone, looks like a secretary. Well, it apppears that not even magical towers are free from paperwork" >> $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >secretary
-    echo "You approach the figure. Welcome to the magic tower! Where all your desires come true, that is if your desire is to get the master knowledge in magic. You can go to the lesson room whenever you want and ask the teacher any doubt you might have or to the study room to master those spells." > "secretary"
+        # >secretary
+        echo "You approach the figure. Welcome to the magic tower! Where all your desires come true, that is if your desire is to get the master knowledge in magic. You can go to the lesson room whenever you want and ask the teacher any doubt you might have or to the study room to master those spells." > "secretary"
+        echo " " >> "secretary"
 
     # Home/Forest/Town/Magic_tower/Lesson_room
     mkdir "$basePath/Forest/Town/Magic_tower/Lesson_room"
     cd "$basePath/Forest/Town/Magic_tower/Lesson_room"
     echo "You enter a spacious, rectangular room which has coordinating wooden furniture.  The floor is made out of stone and the walls are painted.  Light is provided by wall and floor lamps.  The room is done in a magical theme in warm bright colors and overall almost looks extraterrestrial. There is a person standing in the middle." > $descriptionFile
+    echo " " >> $descriptionFile
 
-    # >teacher
-    echo "At the end of the room you can glance at a tall and old figure. She looks like a wizard, maybe she is the teacher?" > "teacher"
-    echo "You approach her and try to talk but you are inmediatly interumpted" >> "teacher"
-    echo "'Welcome, I hope you can excuse me, but I can not talk right now. The class is starting right now and I can let my students lose this lesson. If you wish, you can sit somewhere in the room and attend our session'" >> "teacher"
-    echo " " >> "teacher"
-    echo "You decide to take a seat, after all, you are not even a student of this place and yet you have been invited. Maybe you will learn something new." >> "teacher"
-    echo " " >> "teacher"
-    echo "..." >> "teacher"
-    echo " " >> "teacher"
-    echo "One hour later, the session finishes and you decide to move on. You have learned about two new spells at least! What were their names?... 'mv' and 'cat'?" >> "teacher"
-    echo "Yes, those were their names. Now you can move items from locations to locations and concatenate two items into one" >> "teacher"
+        # >teacher
+        echo "At the end of the room you can glance at a tall and old figure. She looks like a wizard, maybe she is the teacher?" > "teacher"
+        echo "You approach her and try to talk but you are inmediatly interumpted" >> "teacher"
+        echo "'Welcome, I hope you can excuse me, but I can not talk right now. The class is starting right now and I can let my students lose this lesson. If you wish, you can sit somewhere in the room and attend our session'" >> "teacher"
+        echo " " >> "teacher"
+        echo "You decide to take a seat, after all, you are not even a student of this place and yet you have been invited. Maybe you will learn something new." >> "teacher"
+        echo " " >> "teacher"
 
     # Home/Forest/Town/Magic_tower/Study_room
     mkdir "$basePath/Forest/Town/Magic_tower/Study_room"
     cd "$basePath/Forest/Town/Magic_tower/Study_room"
-    echo "You enter a small, square shaped study room has mismatched wooden and metal furniture.  The floor is carpeted and the walls are painted and decorated with a wallpaper border.  Light is provided by wall lamps and a ceiling light.  The room is done in warm light colors and overall looks very old-fashioned.  Among the first things one notices walking in are a sturdy old wooden desk and mysterious scroll on it." > $descriptionFile
+    echo "You enter a small, square shaped study room has mismatched wooden and metal furniture. The floor is carpeted and the walls are painted and decorated with a wallpaper border.  Light is provided by wall lamps and a ceiling light.  The room is done in warm light colors and overall looks very old-fashioned.  Among the first things one notices walking in are a sturdy old wooden desk and mysterious scroll on it." > $descriptionFile
+    echo " " >> $descriptionFile
 
-    echo "You approach the wooden desk and unroll the mysterious scroll on it. There are various cryptic symbols displayed on it and instructions about how to use them. At the bottom there is a message: 'Use it for the removal of objects created by students'. You have learned the 'rm' spell." > ".desk"
+        # >desk
+        echo "You approach the wooden desk and unroll the mysterious scroll on it. There are various cryptic symbols displayed on it and instructions about how to use them. At the bottom there is a message: 'Use it for the removal of objects created by students'. You have learned the 'rm' spell." > ".desk"
+        echo " " >> ".desk"
     #echo "Done!"
 
     #After everything has been generated, we lock the unlockable directories:
+    
+    #Big hole
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)/Big_hole"
+    #Cave(east)
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(east)"
+    #Cave(west)
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance/Cave(west)"
+    #Cave entrance
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cave_entrance"
+    #Cliff
+    chmod 0666 "$basePath/Forest/Town/Mountain/Cliff"
+    #Small island
+    chmod 0666 "$basePath/Forest/Small_lake/Small_island"
+    #Forest
     chmod 0666 "$basePath/Forest"
 
 }

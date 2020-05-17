@@ -104,10 +104,18 @@ int spell_book(int argc, char* argv[]){
  */
 int teacher(int argc, char* argv[]){
 	int res = game_state;
+		write(STDOUT,"\n \n...\n \n",10);
 	switch(game_state)
 	{
 	case S_GAME:
 		res = S_MV;
+		write(STDOUT,"One hour later, the session finishes and you decide to move on. You have learned about two new spells at least! What were their names?... 'mv' and 'touch'?\n", 157);
+		write(STDOUT, "Yes, those were their names. Now you can move items from locations to locations and create lesser version of items\n", 116);
+		break;
+	case S_MV:
+	case S_RM:
+		write(STDOUT,"One hour later, the session finishes and you decide to move... on? Wait, the session has been the same as before. You have learnt nothing new.\n", 144);
+		break;
 	default:
 		break;
 	}

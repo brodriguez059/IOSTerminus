@@ -44,7 +44,13 @@ int finalize();
  * Checks whether the command written by the player depends on the current state
  * of the game or not.
  */
-int is_state_dependend(char* command);
+int launches_events(char* command);
+
+/**
+ * Checks whether the command written by the player can execute in the current 
+ * state of the game.
+ */
+int can_execute(char* command);
 
 /**
  * This function separates the arguments written in a line and puts them inside
@@ -136,21 +142,34 @@ int execute(int argc, char *argv[])
       //We change directory. This function is a built-in of the 
       //shell, so we don't call execute_cmd() to fork and exec.
       cd(argv[1]); 
-   }else if((strcmp(argv[0], "exit")) == 0 || (strcmp(argv[0], "logout") == 0)){
+   }else if(strcmp(argv[0], "exit") == 0 ){
       finalize();
       logout();
    }else{
-      int success_cmd = execute_cmd(argc, argv);
-      int success_ev = is_state_dependend(argv[0]);
+      //We will check here that the command can execute.
+
       // We check to see if this command executes an event
-      //printf("_cmd: %d and _ev: %d \n", success_cmd, success_ev);
+      int launches_ev = launches_events(argv[0]);
 
-      if((success_cmd == 0) && (success_ev == 1)){
-            game_state = execute_ev(argc, argv);
-            //printf("New game_state: %d\n", game_state);
+      if(launches_ev == 1){
+
+         int b = can_execute(argv[0]);
+         if(b == 1){
+            int success_cmd = execute_cmd(argc, argv);
+            //printf("success_cmd: %d\n", success_cmd);
+            if(success_cmd == 0){
+               game_state = execute_ev(argc, argv);
+               //printf("New game_state: %d\n", game_state);
+            }
+         }else{
+            write(STDOUT, "What?, is that a spell am I trying to use?, maybe I should find information about how to use it\n",97);
          }
-      }
 
+      }else{
+         //We just execute the event without problems, they don't depend on the current state.
+         execute_cmd(argc, argv);
+      }
+   }
    return 0;
 }
 
@@ -170,7 +189,7 @@ int finalize()
    return 0;
 }
 
-int is_state_dependend(char* command){
+int launches_events(char* command){
    char* cmds[5] = {"cat","less","mv","rm","touch"};
    	int i;
    	for(i=0;i<4;i++){
@@ -181,6 +200,32 @@ int is_state_dependend(char* command){
          }
       }
 	return 0;
+}
+
+int can_execute(char* command){
+   int res = 1;
+   int b;
+   switch (game_state)
+   {
+   case S_TUTORIAL:
+   case S_GAME:
+      b =  (strcmp(command,"mv") == 0 ) || (strcmp(command,"rm") == 0 )|| (strcmp(command,"touch") == 0 );
+      if(b == 1){
+         //If b == 1, it means that all of the verifications done above are true.
+         res = 0;
+      }
+      break;
+   case S_MV:
+      b = (strcmp(command,"rm") == 0);
+      if(b){
+         res = 0;
+      }
+      break;
+   default:
+      break;
+   }
+   //printf("Can it launch?: %d\n",res);
+   return res;
 }
 
 int read_args(int* argcp, char* args[], int max, int* eofp)
@@ -200,8 +245,7 @@ int read_args(int* argcp, char* args[], int max, int* eofp)
          break;
       }
    }
-   switch (ret)
-   {
+   switch (ret){
      case 1 : cmd[i+1]='\0';    // correct reading
               break;
      case 0 : *eofp = 1;        // end of file
