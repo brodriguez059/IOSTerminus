@@ -42,14 +42,21 @@ int torch(int argc, char* argv[]) {
 
 int killNpc(int argc, char* argv[]) {
     char *txt;
-    char *item = argv[0];
+    char *item = argv[1];
 
-    if (strcmp(item, "foul_globin") == 0) {
+    if (strcmp(item, "foul_goblin") == 0) {
         txt = "You have vaporized the foul goblin.\n";
+        //We have to unlock the other cave
+        char caveeast_path[512];
+
+        strcpy(caveeast_path, gameDirs[GAME].name);
+        strcat(caveeast_path, "Forest/Town/Mountain/Cave_entrance/Cave(east)");
+        chmod(caveeast_path, 0777);
 
     } else if (strcmp(item, "big_orc") == 0) {
         txt = "Looks like I zombified the orc!\n";
         //Create a new big_orc but with another description.
+        creat("big_orc", 0666);
     } else {
         txt = "You have killed a inocent character.\nYou regret it too much and execute a spell to go back into a time where you did not have any magic powers.\n";
         game_state = S_END;
@@ -110,13 +117,13 @@ int main(int argc, char* argv[])
     switch (game_state) {
         case S_RM:
             ;//C doesn't let us declare variables after a label.
-            printf("We have entered to the case state: %d\n",game_state);
+            //printf("We have entered to the case state: %d\n",game_state);
             if(func != NULL){
                 result = func(argc, argv);
             }
             break;
         default:
-            printf("We have entered to the case state: %d\n",game_state);
+            //printf("We have entered to the case state: %d\n",game_state);
             ;//C doesn't let us declare variables after a label.
             char *txt = "You have not obtained this spell yet.\n";
             write(STDOUT, txt, strlen(txt));

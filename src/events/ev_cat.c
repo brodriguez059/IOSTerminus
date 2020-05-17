@@ -30,6 +30,12 @@ int foul_goblin(int argc, char* argv[]){
     //I suppose concatenating another thing with the foul goblin could count as killing it.
     int res = game_state;
     write(STDOUT, "You have morfed the foul goblin into something that can do no harm. Though, I would not approach it if I were you, it looks a bit... bad.\n",139);
+    //We have to unlock the other cave
+    char caveeast_path[512];
+
+    strcpy(caveeast_path, gameDirs[GAME].name);
+    strcat(caveeast_path, "Forest/Town/Mountain/Cave_entrance/Cave(east)");
+    chmod(caveeast_path, 0777);
     return res;
 }
 

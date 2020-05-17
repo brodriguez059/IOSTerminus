@@ -67,8 +67,8 @@ int main(int argc, char* argv[])
 
    strcat(rollbackPath1, filename);
 
-   printf("Our cwd: %s\n",cwd);
-   printf("The file to rollback: %s\n", rollbackPath1);
+   //printf("Our cwd: %s\n",cwd);
+   //printf("The file to rollback: %s\n", rollbackPath1);
 
    if(unlink(f1_path) < 0){
       strcat(rollbackPath2,argv[2]);

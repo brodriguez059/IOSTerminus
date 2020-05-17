@@ -119,8 +119,8 @@ int main(int argc, char* argv[]) {
     }
     */
 
-    char *buf = "File created\n";
-    write(STDOUT, buf, strlen(buf));
+    //char *buf = "File created\n";
+    //write(STDOUT, buf, strlen(buf));
 
     return 0;
 }

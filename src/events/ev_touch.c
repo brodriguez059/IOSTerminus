@@ -11,39 +11,19 @@ dir_t gameDirs[NUMDIR];
 /////////////////////////////////////// Event functions
 
 /**
- *
- */
-int boulder(int argc, char* argv[]){
-    char *txt = "The boulder has been caught. \n"
-    write(STDOUT, txt, strlen(txt));
-    return game_state;
-}
-
-/**
  * 
  */
 int torch(int argc, char* argv[]){
-    char *txt = "Nice torch, now I can see some roads. \n"
+    char *txt = "Nice torch, now I can see some roads. \n";
     write(STDOUT, txt, strlen(txt));
+
+    char cavewest_path[512];
+
+    strcpy(cavewest_path, gameDirs[GAME].name);
+    strcat(cavewest_path, "Forest/Town/Mountain/Cave_entrance/Cave(west)");
+    chmod(cavewest_path, 0777);
+
     return game_state;
-}
-
-/**
- * 
- */
-int NewCabes(int argc, char* argv[]){
-    
-        char cavewest_path[512];
-
-        strcpy(cavewest_path, gameDirs[GAME].name);
-        strcat(cavewest_path, "Forest/Town/Mountain/Caveentrance/Cave(west)");
-        
-
-        char caveeast_path[512];
-
-        strcpy(caveeast_path, gameDirs[GAME].name);
-        strcat(caveeast_path, "Forest/Town/Mountain/Caveentrance/Cave(east)");    
-
 }
 
 /////////////////////////////////////// Main executable
@@ -65,8 +45,20 @@ t_func_event keyfromstring(char *key)
 
 int main(int argc, char* argv[])
 {
-    int nArgFifo;
     fifo_read(&game_state, gameDirs);
+
+    // printf("(Event) My current state is: %d\n",game_state);
+    // int j;
+    // for(j=0;j<NUMDIR;j++){
+    //     printf("gameDirs[%d]: %s\n",j,gameDirs[j].name);
+    // }
+
+    // printf("We are going to launch a mv event\n");
+    // printf("My arguments are:\n");
+    // int i;
+    // for(i = 0; i < argc; i++){
+    //     printf("%s\n", argv[i]);
+    // }
 
     t_func_event func = keyfromstring(argv[1]);
     int result = func(argc, argv);

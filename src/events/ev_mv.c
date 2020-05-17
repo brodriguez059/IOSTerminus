@@ -21,7 +21,7 @@ int big_orc(int argc, char* argv[]){
         if(strcmp("Big_hole", argv[2])==0){
             write(STDOUT, "HA HA!, I have move the big orc to the big hole and now it is stuck\n", 69);
             write(STDOUT, "By defeating the big orc, I have brought peace to this place and now I can do as I wish.\n", 90);
-            write(STDOUT, "'Well done!, my player. You adventure ends here, but you can keep exploring', says a strange voice.", 100);
+            write(STDOUT, "'Well done!, my player. You adventure ends here, but you can keep exploring', says a strange voice.\n", 101);
         } else {
             write(STDOUT,"Oh no!, by moving the orc to another place I have let it escape and now it is heading to the town!\n",100);
             res = S_END;

@@ -192,7 +192,7 @@ int finalize()
 int launches_events(char* command){
    char* cmds[5] = {"cat","less","mv","rm","touch"};
    	int i;
-   	for(i=0;i<4;i++){
+   	for(i=0;i<5;i++){
          //printf("We are checking %s against %s \n", command, cmds[i]);
     	   if(strcmp(command, cmds[i]) == 0){
             //printf("We found it!\n");
@@ -205,6 +205,7 @@ int launches_events(char* command){
 int can_execute(char* command){
    int res = 1;
    int b;
+   //printf("The command is: %s\n", command);
    switch (game_state)
    {
    case S_TUTORIAL:
