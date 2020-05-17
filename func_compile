@@ -77,6 +77,9 @@ then
     echo "Compilation arguments: $COMPILATIONARGS"
 
     gcc $COMPILATIONFLAGS $COMPILATIONARGS
+
+    gcc $COMPILATIONFLAGS -c $SRCDIR/$FILE.c
+    mv $FILE.o $OBJDIR
 else
     #Variables
     FILE=$1
